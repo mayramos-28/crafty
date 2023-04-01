@@ -1,0 +1,31 @@
+
+services:
+  php:
+    build: ./docker/php
+    depends_on:
+      - db
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "8080:8000"
+    networks:
+      - fct
+    command: "php artisan serve --host 0.0.0.0"
+
+  db:
+    image: mysql
+    restart: always
+    ports:
+      - "8081:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: crafty
+      MYSQL_DATABASE: crafty
+      MYSQL_USER: crafty
+      MYSQL_PASSWORD: crafty
+    volumes:
+      - "./docker/db/data:/var/lib/mysql"
+    networks:
+      - fct
+
+networks:
+  fct:
