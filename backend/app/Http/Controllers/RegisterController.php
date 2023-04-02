@@ -12,12 +12,14 @@ class RegisterController extends Controller
 
     public function register(RegisterRequest $request)
     {
+        
         $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
         $user = User::create($data);
         $user->save();
         auth()->login($user);
         $res = $user->save();
+                                                                                                                                                                                                                                                             
         if ($res) {
             return response()->json(['message' => 'Usuario registrado correctamente'], 200);
             //pendiente de verificar y corregir cuando modifique api.php y el front para probar
