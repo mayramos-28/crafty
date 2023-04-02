@@ -2,6 +2,7 @@
 services:
   php:
     build: ./docker/php
+    user: 1000:1000
     depends_on:
       - db
     volumes:
