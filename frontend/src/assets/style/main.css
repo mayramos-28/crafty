@@ -40,3 +40,9 @@ html,
     padding: 10px;
     cursor: pointer;   
 }
+
+.crafty{
+  color:rgb(0, 170, 255);
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
