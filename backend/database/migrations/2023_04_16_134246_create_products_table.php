@@ -14,11 +14,19 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->string('description');        
             $table->string('imageUrl');
             $table->integer('price');
             $table->integer('stock')->nullable();
-            $table->timestamps();
+            $table->unsignedBigInteger('categoryId')
+            ->references('id')
+            ->on('categories')
+            ->onDelete('cascade');
+            $table->unsignedBigInteger('sellerId')
+            ->references('id')
+            ->on('sellers')
+            ->onDelete('cascade');
+
         });
     }
 
