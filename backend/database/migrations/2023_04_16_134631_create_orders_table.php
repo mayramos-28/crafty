@@ -20,7 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('sellerId')
                 ->references('id')            
                 ->on('sellers')->onDelete('cascade');    
-            $table->string('type');
+            $table->unsignedBigInteger('TypeId')
+                ->references('id')
+                ->on('order_types')->onDelete('cascade');
             $table->date('date');
             $table->integer('total');
             $table->integer('invoiceNumber');
