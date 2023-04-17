@@ -26,8 +26,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-                $product = new Product([
+       
+            $product = new Product([
             'name' => $request->get('name'),
             'description' => $request->get('description'),
             'price' => $request->get('price'),
@@ -43,13 +43,7 @@ class ProductController extends Controller
                 'message' => 'Producto creado correctamente',
                 'data' => $product]
         );
-        }catch(\Exception $e){
-            return response()->json(
-                [
-                    'status' => 'error',                    
-                    'message' => $e->getMessage()],200
-            );
-        }
+        
     
         
     }
@@ -60,6 +54,13 @@ class ProductController extends Controller
     public function show(Product $productId)
     {
         $product = Product::find($productId);
+        if(!$product){
+            return response()->json(
+                [
+                    'status' => 'error',
+                    'message' => 'Producto no encontrado'],404
+            );
+        }
         return response()->json(
             [
                 'status' => 'success',

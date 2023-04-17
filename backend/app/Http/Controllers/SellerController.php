@@ -30,7 +30,7 @@ class SellerController extends Controller
     public function store(Request $request)
     {
 
-        try {
+       
             $seller = new Seller([
                 'bussinessId' => $request->get('bussinessId'),
                 'bussinessName' => $request->get('bussinessName'),
@@ -51,15 +51,7 @@ class SellerController extends Controller
                     'data' => $seller
                 ]
             );
-        } catch (\Exception $e) {
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => $e->getMessage()
-                ],
-                200
-            );
-        }
+        
     }
 
     /**
@@ -68,6 +60,15 @@ class SellerController extends Controller
     public function show(int $id)
     {
         $seller = Seller::find($id);
+        if(!$seller){
+            return response()->json(
+                [
+                    'status' => 'error',
+                    'message' => 'Vendedor no encontrado'
+                ],
+                404
+            );
+        }
         return response()->json(
             [
                 'status' => 'success',
