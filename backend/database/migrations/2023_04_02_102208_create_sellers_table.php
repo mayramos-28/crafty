@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('bussnessId');
             $table->string('bussnessName');
-            $table->string('bussnessType');
-            $table->string('bussnessAddress');
+            $table->string('bussnessType');        
             $table->string('bussnessPhone');
             $table->string('bussnessEmail');
             $table->string('bussnessWebsite');
-            $table->string('bussnessLogo');
-            $table->string('bussnessDescription');
+            $table->string('bussnessLogo')->nullable();
+            $table->text('bussnessDescription');
             $table->unsignedBigInteger('userId')
                 ->references('id')
                 ->on('users')->onDelete('cascade');
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vendors');
+        Schema::dropIfExists('sellers');
     }
 };
