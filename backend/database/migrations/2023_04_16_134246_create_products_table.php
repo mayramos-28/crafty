@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');        
-            $table->string('imageUrl');
+            $table->string('description');       
             $table->integer('price');
             $table->integer('stock')->nullable();
             $table->unsignedBigInteger('categoryId')
@@ -26,6 +25,11 @@ return new class extends Migration
             ->references('id')
             ->on('sellers')
             ->onDelete('cascade');
+            $table->unsignedInteger('imageId')
+            ->reference('product_files')
+            ->on('id')
+            ->onDelete('cascade');
+            $table->timestamps();
 
         });
     }
