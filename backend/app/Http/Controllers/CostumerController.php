@@ -28,9 +28,7 @@ class CostumerController extends Controller
      */
     public function store(Request $request)
     {
-
-      
-        try {
+       
             $costumer = new Costumer([
                 'name' => $request->get('name'),        
                 'phone' => $request->get('phone'),
@@ -46,24 +44,25 @@ class CostumerController extends Controller
                     'data' => $costumer
                 ],200
             );
-        } catch (\Exception $e) {
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => $e->getMessage()
-                ],
-                400
-            );
-        }
+       
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Costumer $costumer)
+    public function show($id)
     {
-        try{
-            $costumer = Costumer::find($costumer->id);
+        $costumer = Costumer::find($id);
+        if(!$costumer){
+            return response()->json(
+                [
+                    'status' => 'error',
+                    'message' => 'Cliente no encontrado'
+                ],
+                400
+            );
+        }
+       
         return response()->json(
             [
                 'status' => 'success',
@@ -71,23 +70,14 @@ class CostumerController extends Controller
             ],
             200
         );
-        }catch(\Exception $e){
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => $e->getMessage()
-                ],
-                400
-            );
-        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Costumer $costumerId)
+    public function update(Request $request, int $id)
     {
-        $costumer= Costumer::find($costumerId);
+        $costumer= Costumer::find($id);
         if(!$costumer){
             return response()->json(
                 [
@@ -116,9 +106,9 @@ class CostumerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Costumer $costumerId)
+    public function destroy(int $id)
     {
-        $costumer= Costumer::find($costumerId);
+        $costumer= Costumer::find($id);
         if(!$costumer){
             return response()->json(
                 [
