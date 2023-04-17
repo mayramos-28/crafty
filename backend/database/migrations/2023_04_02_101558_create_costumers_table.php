@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('costumers', function (Blueprint $table) {
-            $table->id();            
+            $table->id();    
+            $table->string('phone')->nullable();
+            $table->string('genero')->nullable();
+            $table->string('interests')->nullable();
+            $table->string('frequencyOfPurchase')->nullable();
             $table->unsignedBigInteger('userId')
                 ->references('id')
                 ->on('users')->onDelete('cascade');
