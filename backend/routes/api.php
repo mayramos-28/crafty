@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\FileProductController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +43,11 @@ Route::group(['prefix'=> 'category'], function(){
     Route::put('/update/{id}', [CategoryController::class, 'update']);
     Route::delete('/delete/{id}', [CategoryController::class, 'destroy']);
 });
+
+Route::group(['prefix' => 'file'], function () {
+    Route::get('/show/{id}', [FileController::class, 'show']);
+});
+
+Route::group(['prefix' => 'product-file'], function () {
+    Route::get('/show/{id}', [FileProductController::class, 'show']);
+}
