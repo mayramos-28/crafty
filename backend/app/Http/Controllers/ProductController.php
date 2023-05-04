@@ -11,13 +11,22 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $product = Product::all();
+        $where = [];
+
+        if($request->has('categoryId') && $request->get('categoryId') != ''){
+            $where[] = ['categoryId', '=', $request->get('categoryId')];
+        }
+        if($request->has('sellerId') && $request->get('sellerId') != ''){
+            $where[] = ['sellerId', '=', $request->get('sellerId')];
+        }
+        
+        $products = Product::where($where)->get();
         return response()->json(
             [
                 'status' => 'success',
-                'data' => $product],200
+                'data' => $products],200
         );
     }
 
@@ -51,7 +60,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $productId)
+    public function show(int $productId)
     {
         $product = Product::find($productId);
         if(!$product){
@@ -61,6 +70,7 @@ class ProductController extends Controller
                     'message' => 'Producto no encontrado'],404
             );
         }
+       
         return response()->json(
             [
                 'status' => 'success',
@@ -101,7 +111,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $productId)
+    public function destroy(int $productId)
     {
         $product = Product::find($productId);
         if(!$product){
@@ -118,4 +128,5 @@ class ProductController extends Controller
                 'message' => 'Producto eliminado correctamente'],200
         );
     }
+
 }
