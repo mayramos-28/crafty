@@ -17,7 +17,7 @@ class ExceptionMiddleware
     {
         try {
             return $next($request);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return response()->json(
                 [
                     'status' => 'error',
