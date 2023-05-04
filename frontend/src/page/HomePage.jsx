@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { CategoryCard } from "../components/CategoryCard";
+import { CardComponent as CategoryCard } from "../components/Card";
 import { useEffect, useState } from "react";
 import { fetchCategories, selectAllCategories, selectCategoryError, selectCategoryLoading } from "../store/slices/categorySlice";
-import { MainCarousel } from "../components/main/MainCarousel";
+import { MainCarousel } from "../components/MainCarousel";
+
 
 export const HomePage = () => {
     const categories = useSelector(selectAllCategories);
@@ -10,7 +11,8 @@ export const HomePage = () => {
     const isLoading = useSelector(selectCategoryLoading);
     const dispatch = useDispatch();
     const [firstExecution, setFirstExecution] = useState(true);
-
+    
+  
     useEffect(() => {
         const init = async () => dispatch(fetchCategories());
         const isFirst = firstExecution;
@@ -19,18 +21,20 @@ export const HomePage = () => {
 
     }, [dispatch, firstExecution]);
 
+
+
     return (
-        <div className="mainPage  ">
+        <div className="mainPage flex-grow-1 ">
             <div className="mainPage__carousel">
                 <MainCarousel />
                 
             </div>
-            <div className="homePage">
-                
-                <div className="mainProducts d-flex justify-content-around py-4 px-4 row gap-2">
-                    
+            <div className="homePage">                
+                <div className="mainProducts d-flex justify-content-around py-4 px-4 row gap-2">                    
                     {
-                        categories.map((category) => (<CategoryCard key={category.id} category={category}></CategoryCard>))
+                        categories.map((category) => (
+                            <CategoryCard key={category.id} props={category} linkTo={`/products?categoryId=${category.id}`}></CategoryCard>
+                            ))
                     }
                 </div>
             </div>
