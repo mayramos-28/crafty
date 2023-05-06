@@ -1,11 +1,11 @@
 import { craftyApi } from "./craftyApi";
 
 
-export const getProducts = async(categoryId) => {
+export const getProducts = async(filter) => {
      const response = await craftyApi({
         method: 'GET',
         uri: 'product/index',
-        query: {categoryId}
+        query: filter
     });
 
     return response.data;
@@ -26,4 +26,5 @@ export const createProduct = async(newProduct) => {
         uri: 'product/store',
         body: newProduct
     });
+    return response.data;
 }
