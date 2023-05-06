@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('description');       
             $table->integer('price');
             $table->integer('stock')->nullable();
+            $table->integer('rating')->nullable();
             $table->unsignedBigInteger('categoryId')
             ->references('id')
             ->on('categories')
