@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
-use App\Models\Costumer;
 use App\Models\Seller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -53,22 +52,12 @@ class AuthController extends Controller
     public function getUser()
     {
         $user = Auth::User();
-        $costumer = Costumer::where('userId', $user->id)->first();
         $seller = Seller::where('userId', $user->id)->first();
-       if($seller == null){
-              $SellerRole = false;
-       }
-       else{
-              $SellerRole = true;
-       }
-        $details =['costumer' => $costumer, 'seller'=>$seller];
 
         return response()->json([
             'status' => 'success',
             'user' => $user,            
-            'details' => $details,
-            'SellerRole' => $SellerRole 
-
+            'seller' => $seller,
         ], 200);
     }
 }
