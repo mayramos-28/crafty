@@ -11,9 +11,10 @@ class FileController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $id)
     {
-        //
+        $file = File::find($id);
+        return response()->redirectTo($file->attached);
     }
 
     /**
@@ -21,7 +22,26 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data = $request->validate([
+            'attached' => 'required',
+            'description' => 'required',
+        ]);
+
+
+        $fileProduct = new File([
+            'attached' => $data['attached'],
+            'description' => $data['description'],
+        ]);
+
+        $fileProduct->save();
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Archivo creado correctamente',
+                'data' => $fileProduct
+            ]
+        );
     }
 
     /**
@@ -30,7 +50,21 @@ class FileController extends Controller
     public function show(string $id)
     {
         $file = File::find($id);
-        return response()->redirectTo($file->attached);
+        return response()->json(
+            [
+                'status' => 'success',
+                'data' => $file
+            ]
+        );
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function print(string $id)
+    {
+        $file = File::find($id);
+        return redirect($file->attached);
     }
 
     /**
