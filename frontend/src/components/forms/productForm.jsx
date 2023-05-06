@@ -1,12 +1,13 @@
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { Input } from "./Input";
-import { createProduct } from "../../api/productsApi";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { createFileProduct } from "../../store/slices/FIleProductSlice";
+import { createProduct } from "../../store/slices/ProductSlice";
 
 
 
-export const ProductForms = (seller) => {
+export const ProductForms = ({sellerId}) => {
     const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({
@@ -15,29 +16,36 @@ export const ProductForms = (seller) => {
         price: '',
         stock: '',
         categoryId: '',
-        sellerId: seller,
         imageId: '',
     });
 
 
+    const [imageData, setImageData] = useState({
+        attached: '',
+        description: '',
+    });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(createProduct(formData));
+        const file = (await dispatch(createFileProduct(imageData))).payload;
+        dispatch(createProduct({ ...formData, imageId: file.id, sellerId }));
     };
 
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
+    const handleChangeImage = (event) => {
+        setImageData({ ...imageData, [event.target.name]: event.target.value });
+    }
 
     return (
         <>
             <div className="container-fluid d-flex justify-content-center h-100 flex-grow-1">
                 <div className="form-center-container">
                     <Form name="form" onSubmit={handleSubmit} className="form-display">
-                        <Form.Label>Producto</Form.Label>
+                        <Form.Label>Nuevo Producto</Form.Label>
                         <Input
-                            key="name"
+                            key="formData.name"
                             label="Nombre de producto"
                             type="text"
                             name="name"
@@ -45,8 +53,9 @@ export const ProductForms = (seller) => {
                             onChange={handleChange}
                         >
                         </Input>
+
                         <Input
-                            key="description"
+                            key="formData.description"
                             label="Descripción"
                             type="text"
                             name="description"
@@ -55,7 +64,7 @@ export const ProductForms = (seller) => {
                         >
                         </Input>
                         <Input
-                            key="price"
+                            key="formData.price"
                             label="Precio"
                             type="number"
                             name="price"
@@ -64,15 +73,15 @@ export const ProductForms = (seller) => {
 
                         </Input>
                         <Input
-                            key="stock"
+                            key="formData.stock"
                             label="Stock"
                             type="number"
-                            name="Stock"
+                            name="stock"
                             value={formData.stock}
                             onChange={handleChange}>
                         </Input>
                         <Input
-                            key="categoryId"
+                            key="formData.categoryId"
                             label="Categoría de Producto"
                             type="text"
                             name="categoryId"
@@ -80,16 +89,26 @@ export const ProductForms = (seller) => {
                             onChange={handleChange}>
                         </Input>
                         <Input
-                            key="imagen"
-                            label="Imagen de Producto"
-                            type="image"
-                            name="imagen"
-                            value={formData.categoryId}
-                            onChange={handleChange}>
+                            key="imageData.attached"
+                            label="url de la imagen de Producto"
+                            type="url"
+                            name="attached"
+                            value={imageData.attached}
+                            onChange={handleChangeImage}>
+                        </Input>
+                        <Input
+                            key="imageData.description"
+                            label="Descripción de la imagen"
+                            type="text"
+                            name="description"
+                            value={imageData.description}
+                            onChange={handleChangeImage}>
                         </Input>
 
 
-                        <Form.Control type={props.type} name={props.name} value={props.value} onChange={props.onChange} className={'form-control' + (props.error ? ' is-invalid' : '')} />
+                        <Button variant="primary" type="submit" className="form-btn">
+                            Guardar Producto
+                        </Button>
 
                     </Form>
                 </div>
