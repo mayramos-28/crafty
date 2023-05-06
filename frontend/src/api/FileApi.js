@@ -1,9 +1,17 @@
-import { CRAFTY_BASE_URL } from "./craftyApi";
+import { CRAFTY_BASE_URL, craftyApi } from "./craftyApi";
 
 export const craftyFileUrl = (fileId) => {
-    return `${CRAFTY_BASE_URL}/file/show/${fileId}`;
+    return `${CRAFTY_BASE_URL}/file/print/${fileId}`;
 }
 
-export const craftyFileProductUrl = (fileId) => {
-    return `${CRAFTY_BASE_URL}/product-file/show/${fileId}`;
+
+export const craftyFileStoreUrl = async(dataFile) => {
+    const response = await craftyApi({
+        method: 'POST',
+        uri: 'file/store',
+        body: dataFile
+    });
+    return response.data;
+
 }
+
