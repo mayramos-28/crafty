@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('sellers', function (Blueprint $table) {
             $table->id();
-            $table->string('bussnessId');
-            $table->string('bussnessName');
+            $table->string('bussnessId');        
             $table->string('bussnessType');        
-            $table->string('bussnessPhone');
-            $table->string('bussnessEmail');
+            $table->string('bussnessPhone');            
             $table->string('bussnessWebsite');
             $table->string('bussnessLogo')->nullable();
             $table->text('bussnessDescription');
