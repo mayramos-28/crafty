@@ -1,12 +1,7 @@
-
-
-export const ConsumerPage  = ()=>{
-
-    return(
-        <>
+export const ConsumerPage = () => {
+    return (
         <div>
-            <h1>Mi area de compras</h1>
+            <h1>ConsumerPage</h1>
         </div>
-        </>
-    );
-}
+    )
+};
