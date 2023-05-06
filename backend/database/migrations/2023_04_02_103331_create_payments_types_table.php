@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('paymentTypes', function (Blueprint $table) {
             $table->id();
             $table->string('type');   
-            $table->unsignedBigInteger('costumerId')
+            $table->unsignedBigInteger('userId')
                 ->references('id')
-                ->on('costumers')->onDelete('cascade');
+                ->on('user')->onDelete('cascade');
             $table->timestamps();
         });
     }
