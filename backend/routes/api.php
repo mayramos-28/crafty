@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FileController;
@@ -46,9 +47,15 @@ Route::group(['prefix'=> 'category'], function(){
 });
 
 Route::group(['prefix' => 'file'], function () {
+    Route::get('/index', [FileController::class, 'index']);
     Route::get('/show/{id}', [FileController::class, 'show']);
+    Route::get('/print/{id}', [FileController::class, 'print']);
+    Route::post('/store', [FileController::class, 'store']);
 });
 
-Route::group(['prefix' => 'product-file'], function () {
-    Route::get('/show/{id}', [FileProductController::class, 'show']);
+Route::group(['prefix' => 'address'], function () {
+    Route::get('/index', [AddressesController::class, 'index']);
+    Route::get('/show/{id}', [AddressesController::class, 'show']);
+    Route::post('/store', [AddressesController::class, 'store']);
+    Route::delete('/delete/{id}', [AddressesController::class, 'destroy']);
 });
