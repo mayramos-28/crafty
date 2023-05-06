@@ -60,9 +60,11 @@ class User extends Authenticatable
     public function seller(){
         return $this->hasOne(Seller::class);
     }
-    public function costumer(){
-        return $this->hasOne(Costumer::class);
-    }
+    
+    public function ChargingMethod()
+{
+    return $this->hasMany(ChargingMethod::class);
+}
 
 
 
