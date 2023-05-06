@@ -13,116 +13,124 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = \Faker\Factory::create();
 
         $products = [
 
             [
                 'name' => 'vestido',
-                'description' => 'vestido de algodón',
+                'description' => $faker->text(100),
                 'price' => 50,
                 'stock' => 10,
                 'categoryId' => 1,
                 'sellerId' => 1,
-                'imageId' => 8,           
+                'imageId' =>15 ,           
             ],
             [
                 'name' => 'vestido',
-                'description' => 'vestido de algodón',
+                'description' => $faker->text(100),
                 'price' => 50,
                 'stock' => 10,
+                'rating'=>3,
                 'categoryId' => 1,
                 'sellerId' => 1,
-                'imageId' => 9,           
+                'imageId' => 16,           
             ],
             [
                 'name' => 'vestido',
-                'description' => 'vestido de algodón',
+                'description' =>$faker->text(100),
                 'price' => 50,
                 'stock' => 10,
                 'categoryId' => 1,
                 'sellerId' => 1,
-                'imageId' => 10,           
+                'imageId' => 17,           
             ],
             [
                 'name' => 'zapatos',
-                'description' => 'zapatos de cuero',
+                'description' => $faker->text(100),
                 'price' => 90,
                 'stock' => 2,
+                'rating'=>3,
                 'categoryId' => 2,
                 'sellerId' => 2,
-                'imageId' => 2,
+                'imageId' => 10,
             ],
             [
                 'name' => 'jabon',
-                'description' => 'jabon natural',
+                'description' => $faker->text(100),
                 'price' => 10,
                 'stock' => 10,
                 'categoryId' => 3,
                 'sellerId' => 3,
-                'imageId' => 4,
+                'imageId' => 11,
             ],
             [
                 'name' => 'sudadera',
-                'description' => 'sudadera de algodón',
+                'description' => $faker->text(100),
                 'price' => 30,
                 'stock' => 5,
                 'categoryId' => 1,
                 'sellerId' => 4,
-                'imageId' => 6,
+                'imageId' => 13,
             ],
             [
                 'name' => 'adornos',
-                'description' => 'adornos pequeños hechos con macrame',
+                'description' => $faker->text(100),
                 'price' => 20,
                 'stock' => 10,
+                'rating'=>4,
                 'categoryId' => 4,
                 'sellerId' => 5,
-                'imageId' => 1,
+                'imageId' => 8,
             ],
             [
                 'name' => 'zapatos',
-                'description' => 'zapatos de cuero',
+                'description' => $faker->text(100),
                 'price' => 90,
                 'stock' => 2,
+                'rating'=>4,
                 'categoryId' => 2,
                 'sellerId' => 3,
-                'imageId' => 3,
+                'imageId' => 10,
             ],
             [
                 'name' => 'bolso',
-                'description' => 'bolso de cuero',
+                'description' => $faker->text(100),
                 'price' => 100,
                 'stock' => 2,
+                'rating'=>2,
                 'categoryId' => 2,
                 'sellerId' => 2,
-                'imageId' => 5,
+                'imageId' => 12,
             ],
             [
                 'name' => 'camiseta',
-                'description' => 'camiseta de algodón',
+                'description' => $faker->text(100),
                 'price' => 50,
                 'stock' => 10,
                 'categoryId' => 1,
                 'sellerId' => 2,
-                'imageId' => 11,
+                'imageId' => 18,
             ],
             [
                 'name'=>'taza',
-                'description'=>'taza de cerámica',
+                'description'=>$faker->text(100),
                 'price'=>10,
                 'stock'=>10,
+                'rating'=>2,
                 'categoryId'=>5,
                 'sellerId'=>5,
-                'imageId'=>7,
+                'imageId'=>14,
             ],
             [
                 'name'=>'jersey',
-                'description'=>'jersey de algodón',
+                'description'=>$faker->text(100),
                 'price'=>90,
                 'stock'=>5,
+                'rating'=>4,
                 'categoryId'=>1,
                 'sellerId'=>4,
-                'imageId'=>7,
+                'imageId'=>14,
             ]
 
 
@@ -134,7 +142,8 @@ class ProductSeeder extends Seeder
             $product->description = $data['description'];
             $product->price = $data['price'];
             $product->stock = $data['stock'];
-            $product->categoryId = $data['categoryId'];
+            $product->rating = $data['rating'] ?? 0;
+            $product->categoryId = $data['categoryId'] ;
             $product->sellerId = $data['sellerId'];
             $product->imageId = $data['imageId'];
             $product->save();
