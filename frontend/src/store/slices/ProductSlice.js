@@ -16,9 +16,7 @@ export const createProduct = createAsyncThunk(
     async (newProduct) =>  createProductApi(newProduct)
 );
 
-const productAdapter = createEntityAdapter({
-    selectId: product => product.id,
-});
+const productAdapter = createEntityAdapter({});
 
 
 
@@ -67,6 +65,7 @@ const ProductSlice = createSlice({
         [createProduct.fulfilled]: (state, action) => {
             state.loading = false;
             state.error = null;
+            
             productAdapter.addOne(state, action.payload);
             return state;
         },

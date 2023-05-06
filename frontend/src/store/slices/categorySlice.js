@@ -2,10 +2,7 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { getCategories } from '../../api/categoryApi';
 
-const categoryAdapter = createEntityAdapter({
-    selectId: category => category.id,
-
-});
+const categoryAdapter = createEntityAdapter({});
 
 export const fetchCategories = createAsyncThunk(
     'category/fetchCategories',
