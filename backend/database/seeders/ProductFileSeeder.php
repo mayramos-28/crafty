@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\File;
 use App\Models\ProductFile;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -92,7 +93,7 @@ class ProductFileSeeder extends Seeder
         ];
 
         foreach ($images as $field) {
-            $file = new ProductFile();
+            $file = new File();
             $file->attached = $field['attached'];
             $file->description = $field['description'];           
             $file->save();
