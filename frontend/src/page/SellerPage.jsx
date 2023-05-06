@@ -4,6 +4,7 @@ import { fetchAuthUser } from "../store/slices/authUserSlice";
 import { CardComponent } from "../components/Card";
 import { fetchProducts, selectAllProducts, selectProductError, selectProductLoading } from "../store/slices/ProductSlice";
 import { Button, Collapse } from "react-bootstrap";
+import { ProductForms } from "../components/forms/productForm";
 
 export const SellerPage = () => {
 
@@ -17,15 +18,21 @@ export const SellerPage = () => {
     const Producterror = useSelector(selectProductError);
     const ProductLoading = useSelector(selectProductLoading);
 
-
+    const sellerId = authUser?.seller?.id;
 
     useEffect(() => {
         if (firstExecution.current) {
+            console.log("wiiii")
             dispatch(fetchAuthUser());
-            dispatch(fetchProducts(authUser?.user?.id))
             firstExecution.current = false;
         }
     }, [dispatch, firstExecution]);
+
+    useEffect(() => {
+        if (open2) {
+            dispatch(fetchProducts({ sellerId }))
+        }
+    }, [dispatch, open2]);
 
     if (authUser?.SellerRole == false) return (
         <>
@@ -39,45 +46,72 @@ export const SellerPage = () => {
         <>
             <div className="container">
                 <div className="d-flex flex-column gap-2 py-2">
-                    <div className="">
-                        <Button 
+                    <div className="d-flex flex-column ">
+
+
+                        <Button className={open ? "d-none" : "d-block"}
                             onClick={() => setOpen(!open)}
                             aria-controls="example-collapse-text"
                             aria-expanded={open}
                             size="lg"
-                            
-                            >
-                            Add Product
+                        >
+                            Desplegar formulario para Añadir Producto
                         </Button>
                         <Collapse in={open}>
                             <div id="example-collapse-text">
-                                <p>aqui va un formulario para crear productos nuevos</p>
-                        
+                                <h2>Añadir nuevo producto en venta</h2>
+                                <ProductForms sellerId={sellerId} />
+
                             </div>
                         </Collapse>
-                    </div>
 
-                    <div className="">
-                        <Button 
+                        <Button
+                            className={open ? "d-block" : "d-none"}
+                            onClick={() => setOpen(!open)}
+                            aria-controls="example-collapse-text"
+                            aria-expanded={open}
+
+                            size="lg"
+                        >
+                            Plegar Formulario
+                        </Button>
+
+                    </div>
+                    <div className="d-flex flex-column ">
+                        <Button
+                        className={open2 ? "d-none" : "d-block"}
                             onClick={() => setOpen2(!open2)}
                             aria-controls="example-collapse-text-2"
                             aria-expanded={open2}
                             size="lg"
-                            
-                            >
+
+                        >
                             Ver mis productos
                         </Button>
+
                         <Collapse in={open2}>
                             <div id="example-collapse-text-2">
-                                <p>aqui va algo mas</p>
-                            <div className="mainProducts d-flex justify-content-around py-4 px-4 row gap-2">
-                        {
-                            Products.map((product) => (<CardComponent key={product.id} props={product} linkTo={`/products/${product.id}`} ></CardComponent>))
-                           
-                        }
-                          </div>
+                                <h2>Mis productos en venta</h2>
+                                <div className="mainProducts d-flex justify-content-around py-4 px-4 row gap-2">
+                                    {
+                                        Products.map((product) => (<CardComponent key={product.id} props={product} linkTo={`/products/${product.id}`} ></CardComponent>))
+
+                                    }
+                                </div>
                             </div>
+
+                            
                         </Collapse>
+                        <Button
+                            className={open2 ? "d-block" : "d-none"}
+                            onClick={() => setOpen2(!open2)}
+                            aria-controls="example-collapse-text"
+                            aria-expanded={open2}
+
+                            size="lg"
+                        >
+                            Ocultar productos
+                        </Button>
                     </div>
 
                 </div>
