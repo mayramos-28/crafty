@@ -20,7 +20,7 @@ export const ProductsPage = () => {
 
     useEffect(() => {
         if (firstExecution.current) {
-            dispatch(fetchProducts(categoryId))
+            dispatch(fetchProducts({categoryId}))
             firstExecution.current = false;
         }
     }, [dispatch, firstExecution]);

@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
 import { selectProductById, fetchShowProduct } from "./../store/slices/ProductSlice";
 import { Card, Container } from "react-bootstrap";
-import { craftyFileProductUrl } from "../api/FileApi";
 import imgByDefault from "./../assets/image/by-default.jpg";
+import { craftyFileUrl } from "../api/FileApi";
 
 export const ProductDetailPage = () => {
     const firstExecution = useRef(true);
@@ -36,7 +36,7 @@ export const ProductDetailPage = () => {
 
                 </div>
                 <div className="col-lg-8 col-md-6 col-sm-12">
-                    <Card.Img variant="top" src={craftyFileProductUrl(product?.imageId)} onError={(e) => { e.target.src = imgByDefault }} style={{}} className="py-2" />
+                    <Card.Img variant="top" src={craftyFileUrl(product?.imageId)} onError={(e) => { e.target.src = imgByDefault }} style={{}} className="py-2" />
                 </div>
                 </div>
            

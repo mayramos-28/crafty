@@ -5,6 +5,7 @@ import { CategoryReducer } from "./slices/categorySlice";
 import logger from 'redux-logger'
 import { ProductReducer } from "./slices/ProductSlice";
 import { authUserSlice } from "./slices/authUserSlice";
+import { AddressReducer } from "./slices/AddressSlice";
 
 export const store = configureStore({
     reducer: {
@@ -12,7 +13,9 @@ export const store = configureStore({
         login: loginUsersSlice.reducer,        
         category: CategoryReducer,
         product: ProductReducer,
-        authUser: authUserSlice.reducer
+        authUser: authUserSlice.reducer,
+        FileProduct: ProductReducer,
+        address: AddressReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

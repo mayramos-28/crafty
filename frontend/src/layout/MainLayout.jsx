@@ -13,7 +13,7 @@ import { ProfilePage } from "../page/ProfilePage";
 import { ProductsPage } from "../components/Products/ProductsPage";
 import { ProductDetailPage } from "../page/ProductDetailPage";
 import { UserInformationPage } from "../page/UserInformationPage";
-import { ConsumerPage } from "../page/ConsumerPage";
+// import { ConsumerPage } from "../page/ConsumerPage";
 import { SellerPage } from "../page/SellerPage";
 import { LogoutLink } from "../components/LogoutComponete";
 
@@ -60,7 +60,7 @@ export const MainLayout = () => {
 
           <Route path="profile" Component={ProfilePage}>
             <Route exact path="my-area" Component={UserInformationPage} />
-            <Route exact path="shopping" Component={ConsumerPage} />
+            {/* <Route exact path="shopping" Component={ConsumerPage} /> */}
             <Route exact path="sales" Component={SellerPage} />
             <Route exact path="inicio" Component={HomePage} />
           </Route>
