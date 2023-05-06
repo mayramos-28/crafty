@@ -74,9 +74,7 @@ class SellerSeeder extends Seeder
             $user->save();
 
             $seller = new Seller();
-            $seller->bussnessId = $data['bussnessId'];
-            $seller->bussnessName = $data['name'];
-            $seller->bussnessEmail = $data['email'];
+            $seller->bussnessId = $data['bussnessId'];      
             $seller->bussnessType = $data['bussnessType'];
             $seller->bussnessPhone = $data['bussnessPhone'];
             $seller->bussnessWebsite = $data['bussnessWebsite'];
