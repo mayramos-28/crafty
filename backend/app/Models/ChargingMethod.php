@@ -11,7 +11,7 @@ class ChargingMethod extends Model
 
     protected $guarded = [];
 
-    public function Costumer()
+    public function User()
     {
         return $this->belongsTo(Costumer::class);
     }
