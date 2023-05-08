@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('paymentTypes', function (Blueprint $table) {
             $table->id();
             $table->string('type');   
+            $table->integer('cardNumber');
+            $table->date('expirationDate');
+            $table->integer('cvv');
             $table->unsignedBigInteger('userId')
                 ->references('id')
                 ->on('user')->onDelete('cascade');
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('charging_methods');
+        Schema::dropIfExists('paymentTypes');
     }
 };
