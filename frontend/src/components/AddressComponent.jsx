@@ -15,10 +15,11 @@ export const AddressComponent = ({userId}) => {
     useEffect(() => {
         if (firstExecution.current) {
         
-            dispatch(fetchAddress(userId));
+            dispatch(fetchAddress({userId}));
             firstExecution.current = false;
         }
     }, [dispatch, firstExecution]);
+    console.log('Address',address,'userId', userId);
 
 console.log('Direcciones',address,'userId', userId);
     return (
