@@ -5,7 +5,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FileProductController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\PaymentTypesController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SellerWithDrawalAccountController;
+use App\Models\OrderType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -58,4 +62,24 @@ Route::group(['prefix' => 'address'], function () {
     Route::get('/show/{id}', [AddressesController::class, 'show']);
     Route::post('/store', [AddressesController::class, 'store']);
     Route::delete('/delete/{id}', [AddressesController::class, 'destroy']);
+});
+Route::group(['prefix' => 'payments-type'], function () {
+    Route::get('/index', [PaymentTypesController::class, 'index']);
+    Route::get('/show/{id}', [PaymentTypesController::class, 'show']);
+    Route::post('/store', [PaymentTypesController::class, 'store']);
+    Route::delete('/delete/{id}', [PaymentTypesController::class, 'destroy']);    
+});
+
+Route::group(['prefix'=>'seller-with-drawal-account'], function (){
+    Route::get('/index', [SellerWithDrawalAccountController::class, 'index']);
+    Route::get('/show/{id}', [SellerWithDrawalAccountController::class, 'show']);
+    Route::post('/store', [SellerWithDrawalAccountController::class, 'store']);
+    Route::delete('/delete/{id}', [SellerWithDrawalAccountController::class, 'destroy']);
+});
+
+Route::group(['prefix'=>'order'], function (){
+    Route::get('/index', [OrdersController::class, 'index']);
+    Route::get('/show/{id}', [OrdersController::class, 'show']);
+    Route::post('/store', [OrdersController::class, 'store']);
+    Route::delete('/delete/{id}', [OrdersController::class, 'destroy']);
 });
