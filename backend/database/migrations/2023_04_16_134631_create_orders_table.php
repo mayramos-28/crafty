@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();            
+            $table->id();    
+            $table->enum('state', ['pending', 'completed', 'cancelled']);     
             $table->timestamps();
             $table->unsignedBigInteger('userId')
                 ->references('id')
