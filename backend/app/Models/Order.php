@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PurchaseOrder extends Model
+class Order extends Model
 {
     use HasFactory;
     protected $guarded = [];
@@ -14,11 +14,14 @@ class PurchaseOrder extends Model
     {
         return $this->hasOne(Seller::class);
     }
-    public function costumer()
+    public function user()
     {
-        return $this->hasOne(Costumer::class);
+        return $this->hasOne(User::class);
     }
     public function address(){
         return $this->hasOne(Address::class);
+    }
+    public function orderDetails(){
+        return $this->hasMany(OrderDetail::class);
     }
 }
