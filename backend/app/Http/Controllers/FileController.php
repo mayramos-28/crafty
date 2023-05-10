@@ -61,7 +61,7 @@ class FileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function print(string $id)
+    public function print(int $id)
     {
         $file = File::find($id);
         return redirect($file->attached);
@@ -70,9 +70,17 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, int $id)
     {
-        //
+        $file = File::find($id);
+        $file->update($request->all());
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Archivo actualizado correctamente',
+                'data' => $file
+            ]
+        );
     }
 
     /**
@@ -80,6 +88,7 @@ class FileController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $file = File::find($id);
+        $file->delete();
     }
 }

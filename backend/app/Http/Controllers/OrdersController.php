@@ -6,9 +6,8 @@ use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redis;
+
 
 class OrdersController extends Controller
 {
@@ -93,18 +92,26 @@ class OrdersController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $order = Order::find($id);
-        if (!$order) {
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => 'No se encontró la orden'
-                ],
-                404
-            );
-        }
-        
-        $order->update($request->all());
+        $order = Order::find($id);    
+        $orderDetails = array_map(static function (array $detail) {
+            return new OrderDetail($detail);
+        }, request()->get('details'));
+
+        $order = new Order([
+            'userId' => $request->get('userId'),
+            'sellerId' => $request->get('sellerId'),
+            'type' => $request->get('type'),
+            'date' => $request->get('date'),
+            'total' => $request->get('total'),
+            'invoiceNumber' => $request->get('invoiceNumber'),
+            'ShippingAddress' => $request->get('ShippingAddress'),
+            'details' => new OrderDetail($request->get('details')),
+        ]);
+
+
+        $order->save();
+        $order->details()->saveMany($orderDetails);
+
         return response()->json(
             [
                 'status' => 'success',
