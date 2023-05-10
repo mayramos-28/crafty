@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_details', function (Blueprint $table) {           
+        Schema::create('order_details', function (Blueprint $table) {
             $table->unsignedBigInteger('OrderId')
                 ->references('id')
                 ->on('orders')->onDelete('cascade');
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('productId')
                 ->references('id')
                 ->on('products')->onDelete('cascade');
-                
+
             $table->integer('quantity');
             $table->integer('initePrice');
             $table->integer('subTotal');
