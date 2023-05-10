@@ -124,6 +124,5 @@ class SellerWithDrawalAccountController extends Controller
                 'message' => 'Cuenta eliminado correctamente'
             ]
         );
-
     }
 }

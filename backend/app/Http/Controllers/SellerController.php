@@ -21,16 +21,13 @@ class SellerController extends Controller
             ],
             200
         );
-        
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-
-       
+    {      
             $seller = new Seller([
                 'bussinessId' => $request->get('bussinessId'),
                 'bussinessName' => $request->get('bussinessName'),
@@ -51,7 +48,6 @@ class SellerController extends Controller
                     'data' => $seller
                 ]
             );
-        
     }
 
     /**
@@ -110,7 +106,6 @@ class SellerController extends Controller
                 'data' => $seller
             ]
         );
-
     }
 
     /**
