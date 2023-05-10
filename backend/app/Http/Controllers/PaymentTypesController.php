@@ -31,7 +31,7 @@ class PaymentTypesController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {.
+    {
         $paymentTypes = new PaymentTypes([
             'type' => $request->get('type'),
             'cardNumber' => $request->get('cardNumber'),
