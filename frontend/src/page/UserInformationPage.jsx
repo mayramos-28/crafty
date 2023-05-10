@@ -66,8 +66,9 @@ export const UserInformationPage = () => {
                             <div id="example-collapse-text">
                                 <h2>Mis direcciones guardadas</h2>
                               
-                                <AddressComponent userId={userId}></AddressComponent>
-
+                                {
+                                    userId && <AddressComponent userId={userId}></AddressComponent>
+                                }
 
                             </div>
                         </Collapse>
