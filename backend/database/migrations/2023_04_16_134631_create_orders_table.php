@@ -14,15 +14,13 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();            
             $table->timestamps();
-            $table->unsignedBigInteger('costumerId')
+            $table->unsignedBigInteger('userId')
                 ->references('id')
-                ->on('costumers')->onDelete('cascade');
+                ->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('sellerId')
                 ->references('id')            
                 ->on('sellers')->onDelete('cascade');    
-            $table->unsignedBigInteger('TypeId')
-                ->references('id')
-                ->on('order_types')->onDelete('cascade');
+            $table->enum('type', ['sell', 'buy']);              
             $table->date('date');
             $table->integer('total');
             $table->integer('invoiceNumber');
