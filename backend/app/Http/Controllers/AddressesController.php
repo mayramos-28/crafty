@@ -18,7 +18,7 @@ class AddressesController extends Controller
         $where = [];
 
         if ($request->has('userId') && $request->get('userId') != '') {
-            $where[] = ['userId', '=', $request->get('userId')];
+            $where['userId'] = $request->get('userId');
         }
 
 
