@@ -42,30 +42,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function Seller()
-    // {
-    //     return $this->hasOne(Seller::class);
-    // }
 
-    // public function Costumer()
-    // {
-    //     return $this->hasOne(Costumer::class);
-    // }
 
     public function Address()
     {
         return $this->hasMany(Address::class);
     }
 
-    public function seller(){
+    public function seller()
+    {
         return $this->hasOne(Seller::class);
     }
-    
-    public function ChargingMethod()
-{
-    return $this->hasMany(ChargingMethod::class);
-}
 
-
-
+    public function PaymentTypes()
+    {
+        return $this->hasMany(PaymentTypes::class);
+    }
+    public function Orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
