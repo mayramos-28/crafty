@@ -23,9 +23,9 @@ export const RegistrationPage = () => {
 
   return (
     <div className="container-fluid d-flex justify-content-center h-100">
-      <div className="form-center-container">
-        <h2>Registro</h2>
-        <Form name="form" onSubmit={handleSubmit} className="form-display">
+      <div className="form-center-container">       
+        <Form name="form" onSubmit={handleSubmit} className="form-display container-login">
+        <Form.Label>Formulario de Registro</Form.Label>
           <Input
             key="registerName"
             label="Nombre completo"
@@ -67,7 +67,7 @@ export const RegistrationPage = () => {
             onChange={handleInputChange}
           />
 
-          <Button variant="primary" type="submit" className="form-btn">
+          <Button  type="submit" className="btn-login">
             Registrarme
           </Button>
         </Form>

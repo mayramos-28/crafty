@@ -31,11 +31,11 @@ export const LoginPage = () => {
     return <Navigate to="/profile/my-area" />;
   }
   return (
-    <div className="container-fluid d-flex justify-content-center h-100">
-      <div className="form-center-container">
+    <div className="container-fluid d-flex justify-content-center">
+      <div className="form-center-container ">
 
-        <Form name="form" onSubmit={handleSubmit} className="form-display">
-          <Form.Label>Iniciar sesión</Form.Label>
+        <Form name="form" onSubmit={handleSubmit} className="form-display container-login">
+          <Form.Label>Inicio de sesión</Form.Label>
           <Input
             label="Email"
             type="email"
@@ -50,7 +50,7 @@ export const LoginPage = () => {
             value={user.password}
             onChange={handleInputChange}
           />
-          <Button variant="primary" type="submit" className="form-btn">
+          <Button variant="primary" type="submit" className="btn-login">
             Iniciar sesión
           </Button>
         </Form>

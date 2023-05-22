@@ -9,6 +9,8 @@ import { AddressReducer } from "./slices/AddressSlice";
 import { PaymentTypeReducer } from "./slices/PaymentType";
 import { OrderReducer } from "./slices/OrderSlice";
 import { SellerAccountReducer } from "./slices/SellerAccountSlice";
+import { CartSlice } from "./slices/CartSlice";
+
 
 export const store = configureStore({
     reducer: {
@@ -21,7 +23,8 @@ export const store = configureStore({
         address: AddressReducer,
         paymentType: PaymentTypeReducer,
         order: OrderReducer,
-        sellerAccount:SellerAccountReducer
+        sellerAccount:SellerAccountReducer,
+        cart: CartSlice.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

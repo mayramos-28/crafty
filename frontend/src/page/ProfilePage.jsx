@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthUser } from "../store/slices/authUserSlice";
-import { ConsumerPage } from "./ConsumerPage";
+import { ConsumerPage } from "./CostumerPage";
 
 import Nav from 'react-bootstrap/Nav';
 import { NavLink, Navigate, Outlet, Route } from "react-router-dom";
@@ -13,7 +13,7 @@ export const ProfilePage = () => {
 
     if(!isLogged) return (
         
-           <Navigate to="/" />
+           <Navigate to="/login" />
         
     )
   
@@ -25,7 +25,7 @@ export const ProfilePage = () => {
                     <Nav.Link as={NavLink} to="/profile/my-area">Mi informacion</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link as={NavLink} to="/profile/shopping">Mi area de compras</Nav.Link>
+                    <Nav.Link as={NavLink} to="/profile/purchases">Mi area de compras</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link as={NavLink} to="/profile/sales">Mi area de ventas

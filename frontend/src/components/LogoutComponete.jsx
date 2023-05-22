@@ -14,7 +14,7 @@ export const LogoutLink = () => {
     return (
        
         <NavDropdown.Item to="#" onClick={handleLogout}>
-            Cerras sesion
+            <i class="bi bi-box-arrow-left"></i>
         </NavDropdown.Item>
     );
 

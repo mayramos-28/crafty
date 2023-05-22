@@ -1,11 +1,13 @@
+import { Button } from "react-bootstrap";
 import { craftyFileUrl } from "../api/FileApi";
 import FirsetImage from "./../assets/image/carousel/modelado-alta-vista-arcilla-torno-alfarero.jpg";
 import Card from 'react-bootstrap/Card';
 
 
 
-export const CardComponent = ({ props, linkTo }) => {
-
+export const CardComponent = ({ props, linkTo}) => {
+   
+    
     return (        
         <>
         <Card style={{ width: '18rem' }} className=" col-lg-4 col-md-2 col-sm-12 my-2">
@@ -15,7 +17,8 @@ export const CardComponent = ({ props, linkTo }) => {
                 <Card.Text>
                 {props.description}
                 </Card.Text>
-                <Card.Link href={linkTo}  className="d-flex justify-content-center fs-4" >Ver {props.name}</Card.Link>                
+                <Card.Link href={linkTo}  className="d-flex justify-content-center fs-4" >Ver {props.name}</Card.Link> 
+                           
             </Card.Body>
         </Card>
 
