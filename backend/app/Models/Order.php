@@ -18,9 +18,7 @@ class Order extends Model
     {
         return $this->hasOne(User::class);
     }
-    public function address(){
-        return $this->hasOne(Address::class);
-    }
+   
     public function orderDetails(){
         return $this->hasMany(OrderDetail::class);
     }

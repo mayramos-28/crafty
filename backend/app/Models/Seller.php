@@ -16,9 +16,12 @@ class Seller extends Model
         return $this->belongsTo(User::class);
     }
 
-   public function selleWithdrawalAccount()
+   public function sellerWithdrawalAccount()
     {
-        return $this->hasOne(selleWithdrawalAccount::class);
+        return $this->hasOne(sellerWithdrawalAccount::class);
+    }
+    public function Order(){
+        return $this->hasMany(Order::class);
     }
    
 }

@@ -21,6 +21,10 @@ class Product extends Model
     public function image(){
         return $this->hasOne(File::class);
     }
+    public function cartItems()
+    {
+        return $this->hasMany(cartItems::class);
+    }
     
 
 }
