@@ -39,15 +39,12 @@ Route::group(['prefix'=> 'product'], function(){
     Route::get('/show/{id}', [ProductController::class, 'show']);
     Route::post('/store', [ProductController::class, 'store']);
     Route::put('/update/{id}', [ProductController::class, 'update']);
-    Route::delete('/delete/{id}', [ProductController::class, 'destroy']);
+    Route::delete('/destroy/{id}', [ProductController::class, 'destroy']);
 });
 
 Route::group(['prefix'=> 'category'], function(){
     Route::get('/index', [CategoryController::class, 'index']);
-    Route::get('/show/{id}', [CategoryController::class, 'show']);
-    Route::post('/store', [CategoryControllerer::class, 'store']);
-    Route::put('/update/{id}', [CategoryController::class, 'update']);
-    Route::delete('/delete/{id}', [CategoryController::class, 'destroy']);
+    Route::get('/show/{id}', [CategoryController::class, 'show']);   
 });
 
 Route::group(['prefix' => 'file'], function () {
@@ -55,31 +52,37 @@ Route::group(['prefix' => 'file'], function () {
     Route::get('/show/{id}', [FileController::class, 'show']);
     Route::get('/print/{id}', [FileController::class, 'print']);
     Route::post('/store', [FileController::class, 'store']);
+    Route::put('/update/{id}', [FileController::class, 'update']);
+    Route::delete('/destroy/{id}', [FileController::class, 'destroy']);
 });
 
 Route::group(['prefix' => 'address'], function () {
     Route::get('/index', [AddressesController::class, 'index']);
     Route::get('/show/{id}', [AddressesController::class, 'show']);
     Route::post('/store', [AddressesController::class, 'store']);
-    Route::delete('/delete/{id}', [AddressesController::class, 'destroy']);
+    Route::put('/update/{id}', [AddressesController::class, 'update']);
+    Route::delete('/destroy/{id}', [AddressesController::class, 'destroy']);
 });
 Route::group(['prefix' => 'payments-type'], function () {
     Route::get('/index', [PaymentTypesController::class, 'index']);
     Route::get('/show/{id}', [PaymentTypesController::class, 'show']);
     Route::post('/store', [PaymentTypesController::class, 'store']);
-    Route::delete('/delete/{id}', [PaymentTypesController::class, 'destroy']);    
+    Route::put('/update/{id}', [PaymentTypesController::class, 'update']);
+    Route::delete('/destroy/{id}', [PaymentTypesController::class, 'destroy']);    
 });
 
 Route::group(['prefix'=>'seller-with-drawal-account'], function (){
     Route::get('/index', [SellerWithDrawalAccountController::class, 'index']);
     Route::get('/show/{id}', [SellerWithDrawalAccountController::class, 'show']);
     Route::post('/store', [SellerWithDrawalAccountController::class, 'store']);
-    Route::delete('/delete/{id}', [SellerWithDrawalAccountController::class, 'destroy']);
+    Route::put('/update/{id}', [SellerWithDrawalAccountController::class, 'update']);
+    Route::delete('/destroy/{id}', [SellerWithDrawalAccountController::class, 'destroy']);
 });
 
 Route::group(['prefix'=>'order'], function (){
     Route::get('/index', [OrdersController::class, 'index']);
     Route::get('/show/{id}', [OrdersController::class, 'show']);
     Route::post('/store', [OrdersController::class, 'store']);
-    Route::delete('/delete/{id}', [OrdersController::class, 'destroy']);
+    Route::put('/update/{id}', [OrdersController::class, 'update']);
+    Route::delete('/destroy/{id}', [OrdersController::class, 'destroy']);
 });
