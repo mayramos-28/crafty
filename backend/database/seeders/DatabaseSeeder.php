@@ -18,13 +18,10 @@ class DatabaseSeeder extends Seeder
             SellerSeeder::class,  
             UserSeeder::class,         
             AddressSeeder::class,
-            CategoriesSeeder::class,     
-           
-            ProductFileSeeder::class,
             FileSeeder::class,
-            ProductSeeder::class,
-            
-                   
+            CategoriesSeeder::class, 
+            ProductFileSeeder::class,
+            ProductSeeder::class,    
         ]);
         
     }

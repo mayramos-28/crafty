@@ -48,7 +48,7 @@ class CategoriesSeeder extends Seeder
             [
                 'name' => 'otros',
                 'description' => 'Imagenes para la web.',
-                'imageId' => 7
+                'imageId' => 6
             ]
 
          

@@ -40,10 +40,6 @@ class FileSeeder extends Seeder
                 'description' => 'dibujo habilidades'
             ],
 
-
-
-
-
         ];
 
         foreach ($images as $image) {
