@@ -1,12 +1,23 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { getAddress } from "../../api/AddressApi";
-
-
+import { getAddress as getAddressApi, createAddress as createAddresApi, updateAddress as updateAddressApi, deleteAddress as deleteAddressApi } from "../../api/AddressApi";
 
 export const fetchAddress = createAsyncThunk(
     'product/fetchAddress',
-    async (filter) =>   getAddress(filter)
+    async (filter) =>   getAddressApi(filter)
 );
+export const createAddress = createAsyncThunk(
+    'product/createAddress',
+    async (newAddress) =>   createAddresApi(newAddress)
+);
+export const updateAddress = createAsyncThunk(
+    'product/updateAddress',
+    async (addressId, address) =>  updateAddressApi(addressId, address)
+);
+export const deleteAddress = createAsyncThunk(
+    'product/deleteAddress',
+    async (addressId) =>   deleteAddressApi(addressId)
+    );
+    
 const AddresAdaptaer = createEntityAdapter({});
 
 export const AddressSlice = createSlice({
@@ -31,9 +42,24 @@ export const AddressSlice = createSlice({
             state.loading = false
             state.error = action.error.message
             return state;
+        },
+        [createAddress.pending]: (state, action) => {
+            state.loading = true;
+            return state;
         }
-
-
+        ,
+        [createAddress.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.error = null;
+            AddresAdaptaer.addOne(state, action.payload);
+            return state;
+        }
+        ,
+        [createAddress.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+            return state;
+        }
     },
 });
 

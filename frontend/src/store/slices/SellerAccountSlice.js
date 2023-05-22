@@ -1,9 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getSellerAccounts } from "../../api/SellerAccountApi";
+import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { getSellerAccounts, createAccountSeller as createAccountSellerApi } from "../../api/SellerAccountApi";
 
 export const fetchSellerAccount = createAsyncThunk(
     'product/fetchSellerAccount',
     async (filter) => getSellerAccounts(filter)
+);
+export const createAccountSeller = createAsyncThunk(
+    'product/createAccountSeller',
+    async (newAccountSeller) => createAccountSellerApi(newAccountSeller)
+
 );
 const SellerAccountAdapter = createEntityAdapter({});
 export const SellerAccountSlice = createSlice({
@@ -30,6 +35,21 @@ export const SellerAccountSlice = createSlice({
             state.error = action.error.message
             return state;
         },
+        [createAccountSeller.pending]: (state, action) => {
+            state.loading = true;
+            return state;
+        },
+        [createAccountSeller.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.error = null;
+            SellerAccountAdapter.addOne(state, action.payload);
+            return state;
+        },
+        [createAccountSeller.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+            return state;
+        }   
     },
 });
 
