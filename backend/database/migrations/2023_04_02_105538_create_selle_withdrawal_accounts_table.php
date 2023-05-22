@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('selle_withdrawal_accounts', function (Blueprint $table) {
+        Schema::create('seller_withdrawal_accounts', function (Blueprint $table) {
             $table->id();
             $table->string('bankName');
             $table->string('bankAccountNumber');
             $table->string('bankaccountOwner');
-            $table->unsignedBigInteger('sellerId')
+            $table->unsignedBigInteger('sellerId');
+            $table->foreign('sellerId')
                 ->references('id')
                 ->on('sellers')->onDelete('cascade');
             $table->timestamps();

@@ -14,24 +14,26 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');       
-            $table->integer('price');
+            $table->string('description');
+            $table->decimal('price');
             $table->integer('stock')->nullable();
             $table->integer('rating')->nullable();
-            $table->unsignedBigInteger('categoryId')
-            ->references('id')
-            ->on('categories')
-            ->onDelete('cascade');
-            $table->unsignedBigInteger('sellerId')
-            ->references('id')
-            ->on('sellers')
-            ->onDelete('cascade');
-            $table->unsignedInteger('imageId')
-            ->reference('product_files')
-            ->on('id')
-            ->onDelete('cascade');
+            $table->unsignedBigInteger('categoryId');
+            $table->foreign('categoryId')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('sellerId');
+            $table->foreign('sellerId')
+                ->references('id')
+                ->on('sellers')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('imageId');
+            $table->foreign('imageId')
+                ->references('id')
+                ->on('files')
+                ->onDelete('cascade');
             $table->timestamps();
-
         });
     }
 

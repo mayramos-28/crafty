@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('state');
             $table->string('country');
             $table->string('zipCode');
-            $table->unsignedBigInteger('userId')
+            $table->unsignedBigInteger('userId');
+            $table->foreign('userId')
                 ->references('id')
                 ->on('users')->onDelete('cascade');
             $table->timestamps();

@@ -15,15 +15,17 @@ return new class extends Migration
             $table->id();    
             $table->enum('state', ['pending', 'completed', 'cancelled']);     
             $table->timestamps();
-            $table->unsignedBigInteger('userId')
+            $table->unsignedBigInteger('userId');
+            $table->foreign('userId')
                 ->references('id')
                 ->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('sellerId')
+            $table->unsignedBigInteger('sellerId');
+            $table->foreign('sellerId')
                 ->references('id')            
                 ->on('sellers')->onDelete('cascade');    
             $table->enum('type', ['sell', 'buy']);              
             $table->date('date');
-            $table->integer('total');
+            $table->decimal('total');
             $table->integer('invoiceNumber');
             $table->string('ShippingAddress');
         });

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('bussnessWebsite');
             $table->string('bussnessLogo')->nullable();
             $table->text('bussnessDescription');
-            $table->unsignedBigInteger('userId')
+            $table->unsignedBigInteger('userId');
+            $table->foreign('userId')
                 ->references('id')
                 ->on('users')->onDelete('cascade');
             $table->timestamps();
