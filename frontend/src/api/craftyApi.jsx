@@ -1,4 +1,7 @@
-
+/**
+ * En este archivo se estandariza las llamdas a la PAI por medio de la función craftyApi.
+ * 
+ */
 export const CRAFTY_BASE_URL = 'http://localhost:8080/api';
 
 

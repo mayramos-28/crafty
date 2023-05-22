@@ -1,5 +1,11 @@
 import { craftyApi } from "./craftyApi";
 
+/**
+ * @description En este archivo se definen las funciones que se encargan de realizar las peticiones a la API de Crafty relacionadas con la entidad User.
+ * @param {*} filter 
+ * @returns 
+ */
+
 const url = 'http://localhost:8080/api/auth';
 
 export const registerUserApi = async (Registerdata) => {

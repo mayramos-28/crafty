@@ -1,5 +1,10 @@
 import { craftyApi } from "./craftyApi";
 
+/**
+ * @description En este archivo se definen las funciones que se encargan de realizar las peticiones a la API de Crafty relacionadas con la entidad Product.
+ * @param {*} filter 
+ * @returns 
+ */
 
 export const getProducts = async(filter) => {
      const response = await craftyApi({

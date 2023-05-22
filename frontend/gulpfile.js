@@ -1,3 +1,14 @@
+/**
+ * @file gulpfile.js
+ * @version 1.0.0
+ * @description Este archivo se encarga de compilar los archivos .scss a .css
+ * @param {Object} gulp
+ * @param {Object} sass
+ * @param {Object} cleanCSS
+ * @returns {Object}
+ * 
+ */
+
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const cleanCSS = require('gulp-clean-css');

@@ -1,5 +1,15 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { getProducts, showProduct, createProduct as createProductApi } from "../../api/productsApi";
+/**
+ * @description La funcion fetchProducts recibe el vaor de la función createAsyncThunk de Redux-Toolkit que recibe
+ * como parametros el nombre de la acción  'product/fetchProducts'  y una función asincrona que recibe como parametro los datos del filtro de busqueda de productos
+ * ejecuta la funcion  'getProducts()' con los datos del filtro de busqueda de productos para enviar una peticion HTTP al servidor y retorna los productos.
+ * Con la funcion productAdapter se podrá acceder al estado de Product. Con los metodos de 'createEntityAdaptar()' se podrá acceder a los productos o modificarlos.
+ *  @param {Object} filter
+ * @returns {Object} data
+ *  
+ * 
+ */
 
 export const fetchProducts = createAsyncThunk(
     'product/fetchProducts',
@@ -18,7 +28,12 @@ export const createProduct = createAsyncThunk(
 
 const productAdapter = createEntityAdapter({});
 
-
+/**
+ * @description La funcion ProductSlice recibe el vaor de la función createSlice de Redux-Toolkit que recibe
+ * como parametros el nombre de la entidad  'product'  y el estado inicial de la entidad.
+ * con el Thunk fetchProducts se puede acceder a la respuesta de la peticion de forma controlado y sencilla.
+ * @param {Object} filter
+ */
 
 const ProductSlice = createSlice({
     name: 'product',

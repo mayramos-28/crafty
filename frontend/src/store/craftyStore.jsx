@@ -11,6 +11,14 @@ import { OrderReducer } from "./slices/OrderSlice";
 import { SellerAccountReducer } from "./slices/SellerAccountSlice";
 import { CartSlice } from "./slices/CartSlice";
 
+/**
+ * @description a la funcion store se le esta asignado el vaor de la funcióñ configureStore que está
+ * recibiendo un objeto con la propiedad reducer y con los valores de los reducers que se van a utilizar en la aplicación web Crafty.
+ * El store permite acceder al estado global del Proyecto, suscribirse a los cambios y despachar acciones para actualizar dicho estado
+ * @param {Object} reducer
+ * @returns {Object} store
+ * @example
+ */
 
 export const store = configureStore({
     reducer: {

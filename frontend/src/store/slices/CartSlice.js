@@ -1,5 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+/**
+ * @description Este slice está asociado al carrito de la aplicación web Crafty y recibe como estado inicial un objeto con las propiedades cartItems, total y counter. En estas propiedades se almacena el estado del carrito
+ * cartItems: array que almacena los productos que se añaden al carrito
+ * total: almacena el precio total de los productos que se añaden al carrito
+ * counter: almacena el número de productos que se añaden al carrito
+ * 
+ * 
+ * @param {Object} name
+ * @param {Object} initialState
+ * @param {Object} reducers
+ * @param {Object} extraReducers
+ * @returns {Object}
+ */
+
 export const CartSlice = createSlice({
     name: 'cart',
     initialState: {
