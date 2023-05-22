@@ -26,31 +26,11 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        try {
-            $category = new Category([
-                'name' => $request->get('name'),
-                'description' => $request->get('description'),
-            ]);
-            $category->save();
-            return response()->json(
-                [
-                    'status' => 'success',
-                    'message' => 'Categoria creada correctamente',
-                    'data' => $category
-                ]
-            );
-        } catch (\Exception $e) {
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => $e->getMessage()
-                ],
-                200
-            );
-        }
+    public function store(Request $request){
+
     }
+    
+    
 
     /**
      * Display the specified resource.
@@ -75,4 +55,5 @@ class CategoryController extends Controller
     {
         //
     }
-}
+
+}   

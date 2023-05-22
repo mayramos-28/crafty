@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\selleWithdrawalAccount;
+use App\Models\sellerWithdrawalAccount;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -17,7 +17,7 @@ class SellerWithDrawalAccountController extends Controller
         if($request->has('sellerId') && $request->get('sellerId') != ''){
             $where[] = ['sellerId', '=', $request->get('sellerId')];
         }
-        $sellerWithDrawalAccount = selleWithdrawalAccount::where($where)->get();
+        $sellerWithDrawalAccount = sellerWithdrawalAccount::where($where)->get();
         return response()->json(
             [
                 'status' => 'success',
@@ -42,7 +42,7 @@ class SellerWithDrawalAccountController extends Controller
         // $table->timestamps();
 
 
-        $sellerWithDrawalAccount = new selleWithdrawalAccount([
+        $sellerWithDrawalAccount = new sellerWithdrawalAccount([
             'bankName' => $request->get('bankName'),
             'bankAccountNumber' => $request->get('bankAccountNumber'),
             'bankaccountOwner' => $request->get('bankaccountOwner'),
@@ -63,7 +63,7 @@ class SellerWithDrawalAccountController extends Controller
      */
     public function show(string $id)
     {
-        $sellerWithDrawalAccount = selleWithdrawalAccount::find($id);
+        $sellerWithDrawalAccount = sellerWithdrawalAccount::find($id);
        
         return response()->json(
             [
@@ -79,7 +79,7 @@ class SellerWithDrawalAccountController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $sellerWithDrawalAccount = selleWithdrawalAccount::find($id);
+        $sellerWithDrawalAccount = sellerWithdrawalAccount::find($id);
         if(!$sellerWithDrawalAccount){
             return response()->json(
                 [
@@ -108,7 +108,7 @@ class SellerWithDrawalAccountController extends Controller
      */
     public function destroy(string $id)
     {
-        $sellerWithDrawalAccount = selleWithdrawalAccount::find($id);
+        $sellerWithDrawalAccount = sellerWithdrawalAccount::find($id);
         if(!$sellerWithDrawalAccount){
             return response()->json(
                 [

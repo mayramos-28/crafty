@@ -52,10 +52,7 @@ class ProductController extends Controller
                 'message' => 'Producto creado correctamente',
                 'data' => $product]
         );
-        
-    
-        
-    }
+            }
 
     /**
      * Display the specified resource.
