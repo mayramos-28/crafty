@@ -28,3 +28,18 @@ export const createProduct = async(newProduct) => {
     });
     return response.data;
 }
+export const updateProduct = async(productId, product) => {
+    const response = await craftyApi({
+        method: 'PUT',
+        uri: `product/update/${productId}`,
+        body: product
+    });
+    return response.data;
+}    
+export const deleteProduct = async(productId) => {
+    const response = await craftyApi({
+        method: 'DELETE',
+        uri: `product/destroy/${productId}`
+    });
+    return response.data;
+}
