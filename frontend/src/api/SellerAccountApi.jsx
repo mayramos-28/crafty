@@ -9,3 +9,14 @@ export const getSellerAccounts = async (filter) =>{
 
     return response.data;
 }
+
+
+export const createAccountSeller = async (newAccountSeller) =>{
+    const response = await craftyApi({
+        method: 'POST',
+        uri: 'seller-with-drawal-account/store',
+        body: newAccountSeller
+    });
+
+    return response.data;
+};
