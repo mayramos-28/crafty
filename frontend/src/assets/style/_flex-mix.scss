@@ -1,0 +1,20 @@
+@mixin horizontal-vertical($justify, $align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+ 
+}
+
+@mixin horizontal-center-gap($direction, $justify, $value) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: wrap;
+  justify-content: $justify;
+  gap: $value;
+}
+@mixin horizontal-vertical-gap($justify, $align, $value) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  gap:  $value;
+}

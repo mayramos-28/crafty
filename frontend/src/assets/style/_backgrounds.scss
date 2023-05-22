@@ -1,0 +1,27 @@
+@mixin backgound-gradiant {
+  background: rgb(74, 209, 199);
+  background: linear-gradient(
+    90deg,
+    rgba(74, 209, 199, 0.36706799418986347) 0%,
+    rgba(9, 120, 121, 0.2830343807444853) 47%,
+    rgba(0, 255, 253, 0.8180483863467262) 100%
+  );
+}
+@mixin nav-background-gradiant {
+  background-color: rgb(0, 147, 233);
+  background-image: linear-gradient(
+    160deg,
+    rgb(0, 147, 233) 0%,
+    rgb(128, 208, 199) 50%,
+    rgb(44, 185, 207) 100%
+  );
+}
+
+// @mixin btn-background{
+//   background: rgb(28, 162, 175);
+//   background: linear-gradient(
+
+//     rgba(74, 209, 199) ,
+//     rgba(9, 120, 121) ,
+//   );
+// }

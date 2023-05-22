@@ -1,0 +1,17 @@
+@use "./flex-mix.scss" as alignament;
+@use "./backgrounds" as background;
+@use "./shadows" as shadow;
+
+.container-login {
+  padding: 20px;
+   @include background.backgound-gradiant;
+   @include shadow.shadow-login;
+   @include alignament.horizontal-vertical(center, center);
+   @include alignament.horizontal-center-gap(column, center, 0);
+ }
+
+ .container-form{
+   @include alignament.horizontal-center-gap(column, center, .5rem);
+ }
+
+

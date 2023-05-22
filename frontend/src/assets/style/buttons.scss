@@ -1,0 +1,40 @@
+@use "./colors";
+@use "./shadows" as shadow;
+
+@mixin buttons {
+  background-color: colors.$main-btn-color;
+  font-size: m-large;
+  font-weight: bolder;
+ 
+  color: colors.$title-color-white;
+  text-align: center;
+  width: 100%;
+
+  @extend .btn-hover;
+}
+
+.btn-hover:hover {
+  background-position: right center;
+  color: colors.$title-color-white;
+
+  @include shadow.shadow-btn;
+}
+
+.btn-login {
+  @include buttons;
+  transition: 4s;
+  border-radius: 10px;
+}
+.btn-preview {
+  @include buttons;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  height: 0;
+  transition: all 0.7s;
+  visibility: hidden;
+}
+
+.card:hover .btn-preview {
+  visibility: visible;
+  height: 50px;
+}
