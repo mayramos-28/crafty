@@ -37,7 +37,6 @@ class AddressesController extends Controller
      */
     public function store(Request $request)
     {
-
         $address = new Address([
             'street' => $request->get('street'),
             'number' => $request->get('number'),

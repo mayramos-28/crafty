@@ -27,27 +27,26 @@ class SellerController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {      
-            $seller = new Seller([
-                'bussinessId' => $request->get('bussinessId'),
-                'bussinessName' => $request->get('bussinessName'),
-                'bussinessType' => $request->get('bussinessType'),                               
-                'bussinessPhone' => $request->get('bussinessPhone'),
-                'bussinessEmail' => $request->get('bussinessEmail'),
-                'bussinessWebsite' => $request->get('bussinessWebsite'),              
-                'bussinessLogo' => $request->get('bussinessLogo'),
-                'bussinessDescription' => $request->get('bussinessDescription'), 
-                'userId' => $request->get('userId'),
-               
-            ]);
-            $seller->save();
-            return response()->json(
-                [
-                    'status' => 'success',
-                    'message' => 'Vendedor creado correctamente',
-                    'data' => $seller
-                ]
-            );
+    {
+        $seller = new Seller([
+            'businessId' => $request->get('businessId'),
+            'businessType' => $request->get('businessType'),
+            'businessPhone' => $request->get('businessPhone'),
+
+            'businessWebsite' => $request->get('businessWebsite'),
+            'businessLogo' => $request->get('businessLogo'),
+            'businessDescription' => $request->get('businessDescription'),
+            'userId' => $request->get('userId'),
+
+        ]);
+        $seller->save();
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Vendedor creado correctamente',
+                'data' => $seller
+            ]
+        );
     }
 
     /**
@@ -56,7 +55,7 @@ class SellerController extends Controller
     public function show(int $id)
     {
         $seller = Seller::find($id);
-        if(!$seller){
+        if (!$seller) {
             return response()->json(
                 [
                     'status' => 'error',
@@ -80,7 +79,7 @@ class SellerController extends Controller
     public function update(Request $request, int $id)
     {
         $seller = Seller::find($id);
-        if(!$seller){
+        if (!$seller) {
             return response()->json(
                 [
                     'status' => 'error',
@@ -89,14 +88,13 @@ class SellerController extends Controller
                 404
             );
         }
-        $seller->bussinessId = $request->get('bussinessId');
-        $seller->bussinessName = $request->get('bussinessName');
-        $seller->bussinessType = $request->get('bussinessType');
-        $seller->bussinessPhone = $request->get('bussinessPhone');
-        $seller->bussinessEmail = $request->get('bussinessEmail');
-        $seller->bussinessWebsite = $request->get('bussinessWebsite');
-        $seller->bussinessLogo = $request->get('bussinessLogo');
-        $seller->bussinessDescription = $request->get('bussinessDescription');
+        $seller->businessId = $request->get('businessId');
+        $seller->businessType = $request->get('businessType');
+        $seller->businessPhone = $request->get('businessPhone');
+
+        $seller->businessWebsite = $request->get('businessWebsite');
+        $seller->businessLogo = $request->get('businessLogo');
+        $seller->businessDescription = $request->get('businessDescription');
         $seller->userId = $request->get('userId');
         $seller->save();
         return response()->json(
@@ -114,7 +112,7 @@ class SellerController extends Controller
     public function destroy(int $id)
     {
         $seller = Seller::find($id);
-        if(!$seller){
+        if (!$seller) {
             return response()->json(
                 [
                     'status' => 'error',
@@ -128,7 +126,8 @@ class SellerController extends Controller
             [
                 'status' => 'success',
                 'message' => 'Vendedor eliminado correctamente'
-            ],200
+            ],
+            200
         );
     }
 }

@@ -6,14 +6,16 @@ use App\Models\CartItems;
 use App\Models\ShoppingCarts;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 
-class CartShopping extends Controller
+
+class CartShoppingController extends Controller
+
 {
-    public function index()
+    public function index(Request $request)
     {
-        $authUser = Auth::user();
-        $shoppingCart = ShoppingCarts::where('userId', $authUser->id)->with(CartItems::class)->get();
+        $where[] = ['userId', $request->get('userId')];
+
+        $shoppingCart = ShoppingCarts::where($where)->with(CartItems::class)->get();
 
         return response()->json(
             [
@@ -24,14 +26,10 @@ class CartShopping extends Controller
         );
     }
 
-    public function store()
+    public function store(Request $request)
     {
-
-        $authUser = Auth::user();
-
         $shoppingCart = new ShoppingCarts([
-            'userId' => $authUser->id,
-
+            'userId' =>  $request->get('userId')
         ]);
         $shoppingCart->save();
         return response()->json(
@@ -44,20 +42,28 @@ class CartShopping extends Controller
     }
     public function update(Request $request)
     {
-        $shppingCartid = $request->get('shoppingCartId');
+        $shppingCartid = $request->get('id');
 
-        $shoppingCart = ShoppingCarts::find($shppingCartid);
+        $shoppingCart = ShoppingCarts::find($shppingCartid) ?? new ShoppingCarts();
 
-        $shoppingCart->update([
+        $shoppingCart->fill([
             ...$request->all(),
-            'cartItems' => array_map(
-                static fn ($cartItem) =>  new CartItems($cartItem),
-                $request->get('cartItems')
-            )
         ]);
-
         $shoppingCart->save();
 
+        $cartItems = array_map(
+            static function ($cartItem) use($shoppingCart) {
+               $item =  new CartItems(
+                     [
+                          ...$cartItem,
+                          'shopping_cart_id' => $shoppingCart->id
+                     ]
+               );
+               return $item;
+            } ,
+            $request->get('cartItems')
+        );
+   
 
         return response()->json(
             [
