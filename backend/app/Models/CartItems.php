@@ -12,7 +12,7 @@ class CartItems extends Model
 
     public function ShoppingCart()
     {
-        return $this->belongsTo(ShoppingCart::class);
+        return $this->belongsTo(ShoppingCarts::class);
     }
 
     public function Product()

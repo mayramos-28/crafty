@@ -5,18 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ShoppingCarts extends Model
+class PaymentTypes extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
 
-    public function user()
+    public function User()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function cartItems()
-    {
-        return $this->hasMany(CartItems::class);
     }
 }
