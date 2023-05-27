@@ -37,67 +37,40 @@ body {
   }
 }
 
-.sing-out {
-  text-align: right;
-  color: colors.$text-color-green;
-  padding: 20px 0px 0 50px;
-  font-size: large;
-  font-weight: bolder;
-  cursor: pointer;
-  transition: 3s;
-  @extend .sing-out;
-}
-.sing-out:hover {
-  color: colors.$title-color-white;
-}
+
 .mainLayoutNav{
   background-color: colors.$title-color-green;
   color: colors.$title-color-white;
 }
+.font-link{
+  color: colors.$title-color-white;
+  font-weight: bolder;
+  font-size: 1.5rem;
 
+  cursor: pointer;
+  transition: 2s;
+ 
+}
+.font-link:hover{
+  text-decoration: underline;
+}
 .form-center-container {
 
   padding: 2rem;
 }
-.form-display{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
 
-}
 
 .crafty{
   color:colors.$color-footer-background;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: bolder;
 }
-.icon-style{
-  color: colors.$title-color-green;
-  padding: 20px;
-  font-weight: bolder;
-  width: 100%;
-  text-align: center;
-  font-weight: bolder;
- 
-}
-.icon-style:hover{
-  color: colors.$title-color-white;
-}
-// .info-box{
-//   border: 1px solid;
-//   height: 50%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
 
-// }
 
 .cardInfo{
   @include alignament.horizontal-center-gap(column, center, 3);
   width: 100%;
-  border: 1px solid red;
+
   
 }
 .perfil{
@@ -113,13 +86,50 @@ body {
   width: 100%;
   @include shadow.shadow-cards;
   // background-color:colors.$color-footer-background;
-  background-color: #ff7874;
+
   cursor: pointer;
  
 }
+.info-user{
+  margin: 20px;
+  padding: 20px;
+  @include shadow.shadow-cards;
+  @include alignament.center-content(row, center, center, .5rem);
+  
+
+}
+.info-card-seller{
+  margin: 20px;
+  padding: 20px;  
+  @include alignament.center-content(row, center, center, .5rem);
+}
+// .card-text-info{
+//   
+// }
 h2{
   color:colors.$title-color-green;
 }
 .carousel-items{
   height: 200px;
+}
+
+.icon-click{
+  cursor: pointer;
+  transition: 2s;
+}
+.seller{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;  
+  gap:2rem;
+  padding: 20px;
+}
+.dates-update{
+  display: flex;
+  flex-direction: column;  
+  align-items: center;  
+  gap:2rem;
+  padding: 20px;
 }

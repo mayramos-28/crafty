@@ -15,6 +15,9 @@ export const getProducts = async(filter) => {
 
     return response.data;
     }
+
+
+
 export const showProduct = async(productId) => {
     const response = await craftyApi({
         method: 'GET',

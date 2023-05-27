@@ -11,6 +11,18 @@ import { getProducts, showProduct, createProduct as createProductApi } from "../
  * 
  */
 
+export  const starHtml = (points, stars = 5) => {
+    const intPoints = Math.round(points);
+    const hasHalf = intPoints != points;
+
+    return Array.from({length: stars}).map((star, i) => {
+        return (
+            <i className={`bi bi-star ${i <= intPoints ? "text-warning" : "black"}`}></i>
+        );
+    });
+
+  };
+
 export const fetchProducts = createAsyncThunk(
     'product/fetchProducts',
     async (filter) =>  getProducts(filter)

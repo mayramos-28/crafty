@@ -22,7 +22,7 @@ export const PaymentsTypeComponent = ({ userId }) => {
     if (paymentsType.length === 0) {
         return (
             <div>
-                <p>No tienes métodos de pago activados</p>
+                <h3>No tienes métodos de pago activados</h3>
                 {userId && (<CreatePaymantComponent userId={userId}></CreatePaymantComponent>)}
 
             </div>)

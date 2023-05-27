@@ -30,26 +30,25 @@ export const MainLayout = () => {
     <div className=" flex-grow-1 ">
       <Navbar className="mainLayoutNav" expand="lg">
         <Container>
-          <Navbar.Brand href="/" className="crafty">Crafty</Navbar.Brand>
+          <Navbar.Brand href="/" className="crafty ">Crafty</Navbar.Brand>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
 
 
-              <Nav.Link href="/">Inicio</Nav.Link>
-              {isLogged && <Nav.Link href="/profile/my-area">Perfil</Nav.Link>}
-              {!isLogged && <Nav.Link href="/login">Login</Nav.Link>}
-              {!isLogged && <Nav.Link href="/register">Registro</Nav.Link>}
-
-              {isLogged ? <Navbar> <LogoutLink /></Navbar>
-                : null}
-              {isLogged ?
-                <div >
+            <Nav.Link href="/" className="font-link"> Inicio</Nav.Link>
+              {isLogged && <Nav.Link href="/profile/my-area" className="font-link">Perfil</Nav.Link>}
+              {!isLogged && <Nav.Link href="/login" className="font-link">Login</Nav.Link>}
+              {!isLogged && <Nav.Link href="/register" className="font-link">Registro</Nav.Link>}
+             
+              <Nav.Link href="#" className="font-link"><div >
                   <i className="bi bi-cart3"><Badge bg="secondary">{counter}</Badge><Nav.Link href="/purchasingProcess"></Nav.Link> </i>
-                </div> : null}
-
+                </div> </Nav.Link>
             </Nav>
+
+            {isLogged ?  <Nav.Link className="font-link"  ><LogoutLink /></Nav.Link>
+                : null}
           </Navbar.Collapse>
 
         </Container>

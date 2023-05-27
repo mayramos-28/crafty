@@ -4,26 +4,24 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./assets/style/index.css";
 import { MainLayout } from "./layout/MainLayout";
 import { FooterLayout } from "./layout/FooterLayout";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { fetchShoppingCart } from "./store/slices/CartSlice";
+import { fetchAuthUser } from "./store/slices/authUserSlice";
 
 
 function App() {
 
-  // const cartItems = useSelector((state) => state.cart.cartItems);
-
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, []);
-
-  // const handleBeforeUnload = () => {
-  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  // };
-
+   const dispatch = useDispatch();
+   const firstExecution = useRef(true);
+  useEffect(() => {
+    if (firstExecution.current) {
+      dispatch(fetchAuthUser());
+      dispatch(fetchShoppingCart());
+        firstExecution.current = false;
+    }
+}, [dispatch, firstExecution]);
+ 
   return (
     <>
       <div className="App d-flex flex-column">

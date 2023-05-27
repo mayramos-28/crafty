@@ -3,6 +3,8 @@ import { createAddress } from "../../store/slices/AddressSlice";
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Input } from "../forms/Input";
+import { reducer as addressReducer } from "../../store/slices/AddressSlice";
+
 
 export const AddressCreateComponent = ({ userId }) => {
 
@@ -16,7 +18,7 @@ export const AddressCreateComponent = ({ userId }) => {
         zipCode: ''
     });
     const handleSubmit = async (e) => {
-     
+
         e.preventDefault();
         debugger;
         dispatch(createAddress({ ...formData, userId }));
@@ -27,72 +29,70 @@ export const AddressCreateComponent = ({ userId }) => {
 
     return (
         <>
-            <div className="container-fluid d-flex justify-content-center h-100 flex-grow-1">
-                <div className="form-center-container">
-                    <Form name="form" onSubmit={handleSubmit} className="form-display">
-                        <Form.Label>Nueva Dirección</Form.Label>
-                        <Input
-                            key="formData.street"
-                            label="Calle"
-                            type="text"
-                            name="street"
-                            value={formData.street}
-                            onChange={handleChange}
-                        >
-                        </Input>
+            <Form className="form-control" onSubmit={handleSubmit} >
+                <Form.Label>Nueva Dirección</Form.Label>
+                <Input
+                    key="formData.street"
+                    label="Calle"
+                    type="text"
+                    name="street"
+                    value={formData.street}
+                    onChange={handleChange}
+                    placeholder=""
+                >
+                </Input>
 
-                        <Input
-                            key="formData.number"
-                            label="Número"
-                            type="text"
-                            name="number"
-                            value={formData.number}
-                            onChange={handleChange}
-                        >
-                        </Input>
-                        <Input
-                            key="formData.zipCode"
-                            label="Código Postal"
-                            type="text"
-                            name="zipCode"
-                            value={formData.zipCode}
-                            onChange={handleChange}>
+                <Input
+                    key="formData.number"
+                    label="Número"
+                    type="number"
+                    name="number"
+                    value={formData.number}
+                    onChange={handleChange}
+                >
+                </Input>
+                <Input
+                    key="formData.zipCode"
+                    label="Código Postal"
+                    type="text"
+                    name="zipCode"
+                    value={formData.zipCode}
+                    onChange={handleChange}>
 
-                        </Input>
-                        <Input
-                            key="formData.city"
-                            label="Ciudad"
-                            type="text"
-                            name="city"
-                            value={formData.city}
-                            onChange={handleChange}>
-                        </Input>
-                        <Input
-                            key="formData.state"
-                            label="Comunidad Autónoma"
-                            type="text"
-                            name="state"
-                            value={formData.state}
-                            onChange={handleChange}>
-                        </Input>
-                        <Input
-                            key="imageData.country"
-                            label="Pais"
-                            type="text"
-                            name="country"
-                            value={formData.country}
-                            onChange={handleChange}>
-                        </Input>
-
+                </Input>
+                <Input
+                    key="formData.city"
+                    label="Ciudad"
+                    type="text"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}>
+                </Input>
+                <Input
+                    key="formData.state"
+                    label="Comunidad Autónoma"
+                    type="text"
+                    name="state"
+                    value={formData.state}
+                    onChange={handleChange}>
+                </Input>
+                <Input
+                    key="imageData.country"
+                    label="Pais"
+                    type="text"
+                    name="country"
+                    value={formData.country}
+                    onChange={handleChange}>
+                </Input>
 
 
-                        <Button variant="primary" type="submit" className="form-btn">
-                            Guardar Dirección
-                        </Button>
 
-                    </Form>
-                </div>
-            </div>
+                <Button variant="primary" type="submit" className=" btn-icon">
+                    <i class="bi bi-save "></i>
+                </Button>
+
+            </Form>
+
         </>
     )
 };

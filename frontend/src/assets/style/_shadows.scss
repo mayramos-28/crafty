@@ -9,7 +9,7 @@
 }
 @mixin shadow-btn {
   border-radius: 26px;
-  background: colors.$hover-btn-color;
+  background: colors.$color-footer-background;
   box-shadow: 22px 22px 44px colors.$color-shadows-beig,
     -22px -22px 44px colors.$title-color-white;
 }

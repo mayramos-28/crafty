@@ -3,21 +3,21 @@ import { getAddress as getAddressApi, createAddress as createAddresApi, updateAd
 
 export const fetchAddress = createAsyncThunk(
     'product/fetchAddress',
-    async (filter) =>   getAddressApi(filter)
+    async (filter) => getAddressApi(filter)
 );
 export const createAddress = createAsyncThunk(
     'product/createAddress',
-    async (newAddress) =>   createAddresApi(newAddress)
+    async (newAddress) => createAddresApi(newAddress)
 );
 export const updateAddress = createAsyncThunk(
     'product/updateAddress',
-    async (addressId, address) =>  updateAddressApi(addressId, address)
+    async (address) => updateAddressApi(address)
 );
 export const deleteAddress = createAsyncThunk(
     'product/deleteAddress',
-    async (addressId) =>   deleteAddressApi(addressId)
-    );
-    
+    async (addressId) => deleteAddressApi(addressId)
+);
+
 const AddresAdaptaer = createEntityAdapter({});
 
 export const AddressSlice = createSlice({
@@ -26,7 +26,8 @@ export const AddressSlice = createSlice({
         loading: false,
         error: null,
     }),
-    reducers: {},
+    reducers: {
+    },
     extraReducers: {
         [fetchAddress.pending]: (state, action) => {
             state.loading = true;
@@ -59,11 +60,28 @@ export const AddressSlice = createSlice({
             state.loading = false
             state.error = action.error.message
             return state;
+        },
+        [updateAddress.pending]: (state, action) => {
+            state.loading = true;
+            return state;
+        },
+        [updateAddress.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.error = null;
+            AddresAdaptaer.updateOne(state, action.payload);
+            return state;
+        }
+        ,
+        [updateAddress.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+            return state;
         }
     },
 });
 
-export const { selectAll: selectAllAddress } = AddresAdaptaer.getSelectors(state => state.address);
+export const { selectAll: selectAllAddress, updateOne: updateOneAddress} = AddresAdaptaer.getSelectors(state => state.address);
 export const selectAddressError = state => state.address.error;
 export const selectAddressLoading = state => state.address.loading;
 export const AddressReducer = AddressSlice.reducer;
+

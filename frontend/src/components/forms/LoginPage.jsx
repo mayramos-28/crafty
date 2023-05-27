@@ -4,7 +4,7 @@ import { setUser } from "../../store/slices/login";
 import { Input } from "./Input.jsx";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Spinner } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -26,39 +26,53 @@ export const LoginPage = () => {
     dispatch(setUser({ ...user, [name]: value }));
   };
   const isLogged = localStorage.getItem("token") !== null;
-  
+
   if (isLogged) {
     return <Navigate to="/profile/my-area" />;
   }
-  return (
-    <div className="container-fluid d-flex justify-content-center">
-      <div className="form-center-container ">
+  if (isLoading) {
+    return (
+        <div className='d-flex justify-content-center align-content-center'>
 
-        <Form name="form" onSubmit={handleSubmit} className="form-display container-login">
-          <Form.Label>Inicio de sesión</Form.Label>
-          <Input
-            label="Email"
-            type="email"
-            name="email"
-            value={user.email}
-            onChange={handleInputChange}
-          />
-          <Input
-            label="Contraseña"
-            type="password"
-            name="password"
-            value={user.password}
-            onChange={handleInputChange}
-          />
-          <Button variant="primary" type="submit" className="btn-login">
-            Iniciar sesión
-          </Button>
-        </Form>
-        {isLoading && <Spinner />}
-        {error && <div className="alert alert-danger">{error}</div>}
-        {success && <div className="alert alert-success">{success}</div>}
+            <Spinner animation="border" variant="info" as="div" role="status" style={{ fontWeight: '80rem' }} />
+        </div>)
+}
+return (
+    <>
+
+      <Row className='d-flex justify-content-center flex-column align-content-center py-2'>
+        <Col sm={11} md={4} lg={3}>
+        <Form className="form-control" onSubmit={handleSubmit}>
+        <Form.Label>Inicio de sesión</Form.Label>
+        <Input
+          label="Email"
+          type="email"
+          name="email"
+          value={user.email}
+          onChange={handleInputChange}
+        />
+        <Input
+          label="Contraseña"
+          type="password"
+          name="password"
+          value={user.password}
+          onChange={handleInputChange}
+        />
+        <Button variant="primary" type="submit" className="btn-login">
+          Iniciar sesión
+        </Button>
+      </Form>
+      <div>
+        
+        {error && <div className='error'>
+          <p>{error} </p>
+        </div>}
+        {success && <div className="success">{success}</div>}
       </div>
-    </div>
+        </Col>
+      </Row>
+    </>
+
   );
 
 

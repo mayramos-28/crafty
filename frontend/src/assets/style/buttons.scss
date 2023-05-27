@@ -16,7 +16,6 @@
 .btn-hover:hover {
   background-position: right center;
   color: colors.$title-color-white;
-
   @include shadow.shadow-btn;
 }
 
@@ -24,17 +23,12 @@
   @include buttons;
   transition: 4s;
   border-radius: 10px;
-}
-.btn-preview {
-  @include buttons;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  height: 0;
-  transition: all 0.7s;
-  visibility: hidden;
+  
 }
 
-.card:hover .btn-preview {
-  visibility: visible;
-  height: 50px;
+
+
+.btn-icon{
+  background-color:colors.$title-color-green;
+  transition: 2s;
 }

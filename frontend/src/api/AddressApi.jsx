@@ -22,10 +22,10 @@ export const createAddress = async (newAddress) =>{
 
     return response.data;
 };
-export const updateAddress = async (addressId, address) =>{
+export const updateAddress = async ( address) =>{
     const response = await craftyApi({
         method: 'PUT',
-        uri: `address/update/${addressId}`,
+        uri: `address/update/${address.id}`,
         body: address
     });
 

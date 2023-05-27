@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
-import { selectProductById, fetchShowProduct } from "./../store/slices/ProductSlice";
+import { selectProductById, fetchShowProduct, starHtml } from "./../store/slices/ProductSlice";
 import { Card, Container } from "react-bootstrap";
 import imgByDefault from "./../assets/image/by-default.jpg";
 import { craftyFileUrl } from "../api/FileApi";
@@ -21,8 +21,8 @@ export const ProductDetailPage = () => {
 
     }, [dispatch, firstExecution]);
 
-
-    // const product = llamada a la api con el id del producto
+    const ratingStart = starHtml(product?.rating);
+    
 
     return (
         <Container className="py-5 flex-grow-1">
@@ -33,6 +33,9 @@ export const ProductDetailPage = () => {
                     <h2>{product?.price} €</h2>
                     <p>Stock: {product?.stock}</p>
                     <p> {product?.description}</p>
+                   
+                    <span> {starHtml(product?.rating)}</span>   
+                    <span> / {product?.rating}</span>   
 
                 </div>
                 <div className="col-lg-8 col-md-6 col-sm-12">

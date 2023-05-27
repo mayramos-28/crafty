@@ -21,10 +21,11 @@ export const RegistrationPage = () => {
     dispatch(setUser({ ...user, [name]: value }));
   };
 
+  if(isLoading) return (<Spinner animation="border" variant="primary" />)
+
   return (
-    <div className="container-fluid d-flex justify-content-center h-100">
-      <div className="form-center-container">       
-        <Form name="form" onSubmit={handleSubmit} className="form-display container-login">
+    
+        <Form className="conrm-control container-login" onSubmit={handleSubmit} >
         <Form.Label>Formulario de Registro</Form.Label>
           <Input
             key="registerName"
@@ -71,11 +72,8 @@ export const RegistrationPage = () => {
             Registrarme
           </Button>
         </Form>
-        {isLoading && <Spinner />}
-        {error && <div className="alert alert-danger">{error}</div>}
-        {success && <div className="alert alert-success">{success}</div>}
-    
-      </div>     
-    </div>
+        
+        
+      
   );
 };

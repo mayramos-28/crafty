@@ -7,7 +7,7 @@ import { createProduct } from "../../store/slices/ProductSlice";
 
 
 
-export const ProductForms = ({sellerId}) => {
+export const ProductForms = ({ sellerId }) => {
     const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({
@@ -40,79 +40,78 @@ export const ProductForms = ({sellerId}) => {
 
     return (
         <>
-            <div className="container-fluid d-flex justify-content-center h-100 flex-grow-1">
-                <div className="form-center-container">
-                    <Form name="form" onSubmit={handleSubmit} className="form-display">
-                        <Form.Label>Nuevo Producto</Form.Label>
-                        <Input
-                            key="formData.name"
-                            label="Nombre de producto"
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                        >
-                        </Input>
 
-                        <Input
-                            key="formData.description"
-                            label="Descripción"
-                            type="text"
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                        >
-                        </Input>
-                        <Input
-                            key="formData.price"
-                            label="Precio"
-                            type="number"
-                            name="price"
-                            value={formData.price}
-                            onChange={handleChange}>
+            <Form className="form-control py-3" onSubmit={handleSubmit} >
 
-                        </Input>
-                        <Input
-                            key="formData.stock"
-                            label="Stock"
-                            type="number"
-                            name="stock"
-                            value={formData.stock}
-                            onChange={handleChange}>
-                        </Input>
-                        <Input
-                            key="formData.categoryId"
-                            label="Categoría de Producto"
-                            type="text"
-                            name="categoryId"
-                            value={formData.categoryId}
-                            onChange={handleChange}>
-                        </Input>
-                        <Input
-                            key="imageData.attached"
-                            label="url de la imagen de Producto"
-                            type="url"
-                            name="attached"
-                            value={imageData.attached}
-                            onChange={handleChangeImage}>
-                        </Input>
-                        <Input
-                            key="imageData.description"
-                            label="Descripción de la imagen"
-                            type="text"
-                            name="description"
-                            value={imageData.description}
-                            onChange={handleChangeImage}>
-                        </Input>
+                <Input
+                    key="formData.name"
+                    label="Nombre de producto"
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                >
+                </Input>
+
+                <Input
+                    key="formData.description"
+                    label="Descripción"
+                    type="text"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                >
+                </Input>
+                <Input
+                    key="formData.price"
+                    label="Precio"
+                    type="number"
+                    name="price"
+                    value={formData.price}
+                    onChange={handleChange}>
+
+                </Input>
+                <Input
+                    key="formData.stock"
+                    label="Stock"
+                    type="number"
+                    name="stock"
+                    value={formData.stock}
+                    onChange={handleChange}>
+                </Input>
+                <Input
+                    key="formData.categoryId"
+                    label="Categoría de Producto"
+                    type="text"
+                    name="categoryId"
+                    value={formData.categoryId}
+                    onChange={handleChange}>
+                </Input>
+                <Input
+                    key="imageData.attached"
+                    label="url de la imagen de Producto"
+                    type="url"
+                    name="attached"
+                    value={imageData.attached}
+                    onChange={handleChangeImage}>
+                </Input>
+                <Input
+                    key="imageData.description"
+                    label="Descripción de la imagen"
+                    type="text"
+                    name="description"
+                    value={imageData.description}
+                    onChange={handleChangeImage}>
+                </Input>
 
 
-                        <Button variant="primary" type="submit" className="form-btn">
-                            Guardar Producto
-                        </Button>
+                <Button variant="primary" type="submit" className="btn-icon">
+                    <i class="bi bi-save "></i>
+                </Button>
 
-                    </Form>
-                </div>
-            </div>
+            </Form>
+
+
 
 
         </>

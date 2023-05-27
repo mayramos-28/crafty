@@ -56,4 +56,5 @@ export const SellerAccountSlice = createSlice({
 export const { selectAll: selectAllSellerAccount } = SellerAccountAdapter.getSelectors(state => state.sellerAccount);
 export const selectSellerAccountError = state => state.sellerAccount.error;
 export const selectSellerAccountLoading = state => state.sellerAccount.loading;
+
 export const SellerAccountReducer = SellerAccountSlice.reducer;

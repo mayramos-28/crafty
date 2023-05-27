@@ -7,10 +7,10 @@ import { createPaymentType } from "../../store/slices/PaymentType";
 export const CreatePaymantComponent = ({ userId }) => {
     const dispatch = useDispatch();
     const [formData, setFormData] = useState({
-        'type': '',
-        'cardNumber': '',
-        'ExpirationDate': '',
-        'cvv': '',
+        type: '',
+        cardNumber: '',
+        expirationDate: '',
+        cvv: '',
 
     });
     const handleSubmit = async (e) => {
@@ -23,55 +23,56 @@ export const CreatePaymantComponent = ({ userId }) => {
 
     return (
         <>
-         <div className="container-fluid d-flex justify-content-center h-100 flex-grow-1">
-                <div className="form-center-container">
-                    <Form name="form" onSubmit={handleSubmit} className="form-display">
-                        <Form.Label>Nuevo método de pago</Form.Label>
-                        <Input
-                            key="formData.type"
-                            label="Tipo de tarjeta"
-                            type="text"
-                            name="type"
-                            value={formData.type}
-                            onChange={handleChange}
-                        >
-                        </Input>
+            <Form className="form-control" onSubmit={handleSubmit} >
+                <Form.Label>Nuevo método de pago</Form.Label>
+                <Input
+                    key="formData.type"
+                    label="Tipo de tarjeta"
+                    type="text"
+                    name="type"
+                    value={formData.type}
+                    onChange={handleChange}
+                    placeholder="Crédito, Débito, etc"
 
-                        <Input
-                            key="formData.cardNumber"
-                            label="Número de tarjeta"
-                            type="text"
-                            name="cardNumber"
-                            value={formData.cardNumber}
-                            onChange={handleChange}
-                        >
-                        </Input>
-                        <Input
-                            key="formData.ExpirationDate"
-                            label="Caducidad"
-                            type="date"
-                            name="ExpirationDate"
-                            value={formData.ExpirationDate}
-                            onChange={handleChange}>
+                >
+                </Input>
 
-                        </Input>
-                        <Input
-                            key="formData.cvv"
-                            label="Ciudad"
-                            type="text"
-                            name="cvv"
-                            value={formData.cvv}
-                            onChange={handleChange}>
-                        </Input>
-                        
+                <Input
+                    key="formData.cardNumber"
+                    label="Número de tarjeta"
+                    type="text"
+                    name="cardNumber"
+                    value={formData.cardNumber}
+                    onChange={handleChange}
+                    placeholder="4940190000370787"
+                >
+                </Input>
+                <Input
+                    key="formData.expirationDate"
+                    label="Caducidad"
+                    type="date"
+                    name="expirationDate"
+                    value={formData.expirationDate}
+                    onChange={handleChange}>
 
-                        <Button variant="primary" type="submit" className="form-btn">
-                            Guardar Tarjeta
-                        </Button>
+                </Input>
+                <Input
+                    key="formData.cvv"
+                    label="CVV"
+                    type="text"
+                    name="cvv"
+                    value={formData.cvv}
+                    onChange={handleChange}>
+                </Input>
 
-                    </Form>
-                </div>
-            </div>
+
+                <Button variant="primary" type="submit" className="btn-icon">
+                    <i class="bi bi-save "></i>
+                </Button>
+
+            </Form>
+
+
         </>
     );
 };

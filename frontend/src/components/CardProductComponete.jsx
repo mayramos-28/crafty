@@ -3,8 +3,9 @@ import { craftyFileUrl } from "../api/FileApi";
 import FirsetImage from "./../assets/image/carousel/modelado-alta-vista-arcilla-torno-alfarero.jpg";
 import Card from 'react-bootstrap/Card';
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart } from "../store/slices/CartSlice";
+import { addItemToCart, addToCart, removeFromCart } from "../store/slices/CartSlice";
 import { useEffect } from "react";
+import { starHtml } from "../store/slices/ProductSlice";
 
 
 
@@ -16,15 +17,16 @@ export const CardProductComponent = ({ props, linkTo }) => {
 
 
     const handleAddToCart = () => {
-        const productItem = { productId: id, name, price, qty: 1 };
-        dispatch(addToCart(productItem));
+        const productItem = { productId: id, name: name, price, quantity: 1 };
+        // dispatch(addToCart(productItem));
+        //dispatch(addItemToCart(productItem));
     };
 
     const handleRemoveFromCart = () => {
         dispatch(removeFromCart(id));
     };
 
-
+    const ratingStart = starHtml(props?.rating);
 
 
     return (
@@ -35,10 +37,15 @@ export const CardProductComponent = ({ props, linkTo }) => {
 
 
                     <Card.Link href={linkTo} className="d-flex justify-content-center fs-4" >Ver {props.name}</Card.Link>
+                     
+                     
                     <Card.Text className="d-flex justify-content-center gap-4 fs-4">
-                        <i className="bi bi-cart-plus" onClick={() => handleAddToCart()}>  </i>
+                        <i className="bi bi-cart-plus " onClick={() => handleAddToCart()}>  </i>
                         <i className="bi bi-cart-dash" onClick={() => handleRemoveFromCart()}></i>
                     </Card.Text>
+
+                         <Card className=" d-flex flex-row justify-content-center">{starHtml(props?.rating)}</Card>
+          
 
                 </Card.Body>
             </Card>

@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { getShoppingCart, updateShoppingCart as updateShoppingCartApi, createShoppingCart as createShoppingCartApi } from "../../api/shoppingCartApi";
 
 /**
  * @description Este slice está asociado al carrito de la aplicación web Crafty y recibe como estado inicial un objeto con las propiedades cartItems, total y counter. En estas propiedades se almacena el estado del carrito
@@ -14,14 +15,39 @@ import { createSlice } from "@reduxjs/toolkit";
  * @returns {Object}
  */
 
-export const CartSlice = createSlice({
-    name: 'cart',
-    initialState: {
-        cartItems: [],
-        total: 0,
-        counter:0,
+export const fetchShoppingCart = createAsyncThunk(
+    'shoppingCart/fetchShoppingCart',
+    async (_, {getState}) => {
+        const userId = getState().authUser.authUser.user.id;
+        return await getShoppingCart({ userId });
+    }
+);
 
+// export const addItemToCart = createAsyncThunk(
+//     'shoppingCart/updateShoppingCart',
+//     async (item, { getState }) => {
+//         debugger;
+//         const { cart } = getState().cart;
+//         const userId = getState().authUser.authUser.user.id;
+//         const cartUpdated = { ...cart, userId, cartItems: [...cart.cartItems || [], item] }
+//         return await updateScreateSellerhoppingCartApi(cartUpdated);
+//     });
+
+export const createShoppingCart = createAsyncThunk(
+    'shoppingCart/createShoppingCart',
+    async (filter) => createShoppingCartApi(filter)
+);
+
+
+export const CartSlice = createSlice({
+    name: 'cartShopping',
+    initialState: {
+        loading: false,
+        error: null,
+        cart: {},
+        counter: 0,
     },
+
     reducers: {
         addToCart: (state, action) => {
             const newProduct = action.payload;
@@ -40,9 +66,9 @@ export const CartSlice = createSlice({
         removeFromCart: (state, action) => {
             const item = state.cartItems.find((x) => x.productId === action.payload);
             if (item) {
-              state.totalItems -= item.qty; 
-              state.cartItems = state.cartItems.filter((x) => x.productId !== action.payload);
-              state.total = state.cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+                state.totalItems -= item.qty;
+                state.cartItems = state.cartItems.filter((x) => x.productId !== action.payload);
+                state.total = state.cartItems.reduce((a, c) => a + c.qty * c.price, 0);
             }
         },
         clearCart: (state, action) => {
@@ -55,8 +81,9 @@ export const CartSlice = createSlice({
             const total = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
             state.cartItems = cartItems;
             state.total = total;
-          },
-        
+        },
+
     },
+
 });
-export const { addToCart, removeFromCart, clearCart, loadCartItems} = CartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, loadCartItems } = CartSlice.actions;

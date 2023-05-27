@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAddress, getAddress, selectAddressError, selectAddressLoading, selectAllAddress } from "../../store/slices/AddressSlice";
 import { useEffect, useRef, useState } from "react";
 import { AddressCreateComponent } from "./createAddressComponet";
-import { Button, Collapse } from "react-bootstrap";
+import { Button, Card, Col, Collapse, Row } from "react-bootstrap";
+import { AddressUpdateComponent } from "./AddressUpdateComponent";
 
 export const AddressComponent = ({ userId }) => {
 
@@ -27,7 +28,7 @@ export const AddressComponent = ({ userId }) => {
     return (
       <>
         <div>
-          <p>No tienes direcciones guardadas</p>
+          <h3>No tienes direcciones guardadas</h3>
           {userId && (<AddressCreateComponent userId={userId}></AddressCreateComponent>)}
         </div>
       </>
@@ -35,9 +36,95 @@ export const AddressComponent = ({ userId }) => {
   }
 
   return (
-    <div>
-      <h1>Mis Direcciones</h1>
-      <div>
+
+
+    <>
+      <h3>Mis Direcciones</h3>
+      <Row className="gap-3">
+{/* 
+     
+        <Col sm={12} md={12} xl={12} className="d-flex justify-content-center flex-wrap flex-row gap-2" >
+
+          <Row>
+            {Object.keys(address ?? {}).map((key) => {
+              if (typeof address[key] === 'object' && address[key] !== null) {
+                return (
+
+                  <Col>
+
+                    <Card border="primary" style={{ width: '18rem' }}>
+
+                      <Card.Body>
+
+                        <Card.Text>
+
+                          {Object.keys(address[key]).map((innerKey) => (
+                            <li key={innerKey}>
+                              {innerKey}: {address[key][innerKey]}
+                            </li>
+                          ))}
+
+                        </Card.Text>
+                      </Card.Body>
+
+
+                    </Card>
+
+
+                  </Col>
+
+
+                );
+              } 
+            })}
+
+
+          </Row> */}
+
+          <Col>
+          <AddressUpdateComponent userId={userId}></AddressUpdateComponent>
+          </Col>
+
+
+
+       
+
+        <Col sm={12} md={12} xl={12} className="d-flex flex-column justify-content-center" >
+
+
+          <Button className={open ? "d-none btn-icon" : "d-block btn-icon"}
+            onClick={() => setOpen(!open)}
+            aria-controls="example-collapse-text"
+            aria-expanded={open}
+
+          >
+            Crear Direccion
+          </Button>
+          <Collapse in={open}>
+            <div id="example-collapse-text">
+
+              {userId && (<AddressCreateComponent userId={userId}></AddressCreateComponent>)}
+
+
+            </div>
+          </Collapse>
+
+          <Button
+            className={open ? "d-block btn-icon" : "d-none btn-icon"}
+            onClick={() => setOpen(!open)}
+            aria-controls="example-collapse-text"
+            aria-expanded={open}
+          >
+            <i class="bi bi-x-circle"></i>
+          </Button>
+        </Col>
+
+
+      </Row>
+
+
+
+      {/* <div>
         <ul>
           {Object.keys(address ?? {}).map((key) => {
             if (typeof address[key] === 'object' && address[key] !== null) {
@@ -62,40 +149,10 @@ export const AddressComponent = ({ userId }) => {
             }
           })}
         </ul>
-      </div>
-      
-      <div className="d-flex flex-column w-100 ">
-
-        <Button className={open ? "d-none" : "d-block"}
-          onClick={() => setOpen(!open)}
-          aria-controls="example-collapse-text"
-          aria-expanded={open}
-          size="lg"
-        >
-          Crear Direccion
-        </Button>
-        <Collapse in={open}>
-          <div id="example-collapse-text">
-
-          {userId && (<AddressCreateComponent userId={userId}></AddressCreateComponent>)}
+      </div> */}
 
 
-          </div>
-        </Collapse>
-
-        <Button
-          className={open ? "d-block" : "d-none"}
-          onClick={() => setOpen(!open)}
-          aria-controls="example-collapse-text"
-          aria-expanded={open}
-
-          size="lg"
-        >
-          Ocultar formulario
-        </Button>
-      </div>
-     
-    </div>
+    </>
   )
 }
 

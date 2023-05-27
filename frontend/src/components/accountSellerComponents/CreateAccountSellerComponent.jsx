@@ -25,48 +25,45 @@ export const CreateAccountSellerComponent = ({ sellerId }) => {
 
     return (
         <>
-            <div className="container-fluid d-flex justify-content-center h-100 flex-grow-1">
-                <div className="form-center-container">
-                    <Form name="form" onSubmit={handleSubmit} className="form-display">
-                        <Form.Label>Actualizar cuenta de pago</Form.Label>
-                        <Input
-                            key="formData.bankName"
-                            label="Banco"
-                            type="text"
-                            name="bankName"
-                            value={formData.bankName}
-                            onChange={handleChange}
-                        >
-                        </Input>
 
-                        <Input
-                            key="formData.bankAccountNumber"
-                            label="Número de cuenta"
-                            type="text"
-                            name="bankAccountNumber"
-                            value={formData.bankAccountNumber}
-                            onChange={handleChange}
-                        >
-                        </Input>
-                        <Input
-                            key="formData.bankaccountOwner"
-                            label="Caducidad"
-                            type="text"
-                            name="bankaccountOwner"
-                            value={formData.bankaccountOwner}
-                            onChange={handleChange}>
+            <Form className="form-control" onSubmit={handleSubmit} >
+                <Input
+                    key="formData.bankName"
+                    label="Banco"
+                    type="text"
+                    name="bankName"
+                    value={formData.bankName}
+                    onChange={handleChange}
+                >
+                </Input>
 
-                        </Input>
+                <Input
+                    key="formData.bankAccountNumber"
+                    label="Número de cuenta"
+                    type="text"
+                    name="bankAccountNumber"
+                    value={formData.bankAccountNumber}
+                    onChange={handleChange}
+                >
+                </Input>
+                <Input
+                    key="formData.bankaccountOwner"
+                    label="Caducidad"
+                    type="text"
+                    name="bankaccountOwner"
+                    value={formData.bankaccountOwner}
+                    onChange={handleChange}>
+
+                </Input>
 
 
 
-                        <Button variant="primary" type="submit" className="form-btn">
-                            Guardar Cuenta
-                        </Button>
+                <Button variant="primary" type="submit" className="btn-icon">
+                    <i class="bi bi-save "></i>
+                </Button>
 
-                    </Form>
-                </div>
-            </div>
+            </Form>
+
         </>
     )
 };

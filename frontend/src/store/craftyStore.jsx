@@ -10,6 +10,7 @@ import { PaymentTypeReducer } from "./slices/PaymentType";
 import { OrderReducer } from "./slices/OrderSlice";
 import { SellerAccountReducer } from "./slices/SellerAccountSlice";
 import { CartSlice } from "./slices/CartSlice";
+import { SellerReducer } from "./slices/SellerSlice";
 
 /**
  * @description a la funcion store se le esta asignado el vaor de la funcióñ configureStore que está
@@ -23,7 +24,8 @@ import { CartSlice } from "./slices/CartSlice";
 export const store = configureStore({
     reducer: {
         register: registerUserSlice.reducer,
-        login: loginUsersSlice.reducer,        
+        login: loginUsersSlice.reducer, 
+        seller: SellerReducer,      
         category: CategoryReducer,
         product: ProductReducer,
         authUser: authUserSlice.reducer,
