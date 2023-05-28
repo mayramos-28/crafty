@@ -1,5 +1,5 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { getProducts, showProduct, createProduct as createProductApi } from "../../api/productsApi";
+import { getProducts, showProduct, createProduct as createProductApi, updateProduct as updateProductApi, deleteProduct as deleteProductApi } from "../../api/productsApi";
 /**
  * @description La funcion fetchProducts recibe el vaor de la función createAsyncThunk de Redux-Toolkit que recibe
  * como parametros el nombre de la acción  'product/fetchProducts'  y una función asincrona que recibe como parametro los datos del filtro de busqueda de productos
@@ -11,31 +11,40 @@ import { getProducts, showProduct, createProduct as createProductApi } from "../
  * 
  */
 
-export  const starHtml = (points, stars = 5) => {
+export const starHtml = (points, stars = 5) => {
     const intPoints = Math.round(points);
     const hasHalf = intPoints != points;
 
-    return Array.from({length: stars}).map((star, i) => {
+    return Array.from({ length: stars }).map((star, i) => {
         return (
             <i className={`bi bi-star ${i <= intPoints ? "text-warning" : "black"}`}></i>
         );
     });
 
-  };
+};
 
 export const fetchProducts = createAsyncThunk(
     'product/fetchProducts',
-    async (filter) =>  getProducts(filter)
+    async (filter) => await getProducts(filter)
 );
 
 export const fetchShowProduct = createAsyncThunk(
     'product/fetchOneProduct',
-    async (productId) =>  showProduct(productId)
+    async (productId) => await showProduct(productId)
 );
 
 export const createProduct = createAsyncThunk(
     'product/createProduct',
-    async (newProduct) =>  createProductApi(newProduct)
+    async (newProduct) => await createProductApi(newProduct)
+);
+
+export const updateProduct = createAsyncThunk(
+    'product/updateProduct',
+    async (product) => await updateProductApi(product)
+);
+export const deleteProduct = createAsyncThunk(
+    'product/deleteProduct',
+    async (productId) => await deleteProductApi(productId)
 );
 
 const productAdapter = createEntityAdapter({});
@@ -92,7 +101,7 @@ const ProductSlice = createSlice({
         [createProduct.fulfilled]: (state, action) => {
             state.loading = false;
             state.error = null;
-            
+
             productAdapter.addOne(state, action.payload);
             return state;
         },
@@ -100,16 +109,46 @@ const ProductSlice = createSlice({
             state.loading = false
             state.error = action.error.message
             return state;
-        }
+        },
+        [updateProduct.pending]: (state, action) => {
+            state.loading = true;
+            return state;
+        },
+        [updateProduct.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.error = null;
+            productAdapter.upsertOne(state, action.payload);
+            return state;
+        },
+        [updateProduct.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+            return state;
+        },
+        [deleteProduct.pending]: (state, action) => {
+            state.loading = true;
+            return state;
+        },
+        [deleteProduct.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.error = null;   
+            return state;
+        },
+        [deleteProduct.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+            return state;
+        },
+
 
     }
 
 });
 
 export const {
-    selectAll: selectAllProducts, 
+    selectAll: selectAllProducts,
     selectById: selectProductById
-    
+
 } = productAdapter.getSelectors(state => state.product);
 export const selectProductError = state => state.product.error;
 export const selectProductLoading = state => state.product.loading;

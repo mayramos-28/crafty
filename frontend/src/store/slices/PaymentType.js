@@ -32,8 +32,9 @@ export const createPaymentType = createAsyncThunk(
 */
 export const updatePaymentType = createAsyncThunk(
     'product/updatePaymentType',
-    async (paymentTypeId, paymentType) =>  updatePaymentTypeApi(paymentTypeId, paymentType)
+    async (paymentType) =>  updatePaymentTypeApi( paymentType)
 );
+
 export const deletePaymentType = createAsyncThunk(
     'product/deletePaymentType',
     async (paymentTypeId) =>   deletePaymentTypeApi(paymentTypeId)
@@ -92,7 +93,7 @@ export const PaymentTypeSlice = createSlice({
         [updatePaymentType.fulfilled]: (state, action) => {
             state.loading = false;
             state.error = null;
-            PaymentTypeAdapter.upsertOne(state, action.payload);
+            PaymentTypeAdapter.updateOne(state, action.payload);
             return state;
         },
         [updatePaymentType.rejected]: (state, action) => {
@@ -119,7 +120,7 @@ export const PaymentTypeSlice = createSlice({
 
     },
 });
-export const { selectAll: selectAllPaymentType } = PaymentTypeAdapter.getSelectors(state => state.paymentType);
+export const { selectAll: selectAllPaymentType, updateOne: updateOnePayment } = PaymentTypeAdapter.getSelectors(state => state.paymentType);
 export const selectPaymentTypeError = state => state.paymentType.error;
 export const selectPaymentTypeLoading = state => state.paymentType.loading;
 export const PaymentTypeReducer = PaymentTypeSlice.reducer;

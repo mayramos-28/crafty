@@ -1,15 +1,30 @@
 // VendedorSlice.js
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createSeller } from "../../api/SellerApi";
+import { createSeller, updateSeller as updateSellerApi, showSeller as showSellerApi } from "../../api/SellerApi";
 
 export const addSeller = createAsyncThunk(
   'seller/addSeller',
-  async (sellerData) => {
-    const response = await createSeller(sellerData);
-    return response.data;
-  }
+  async (sellerData) =>createSeller(sellerData)
+   
+ 
 );
+
+export const updateSeller = createAsyncThunk(
+  'seller/updateSeller',
+  async (sellerData) => await updateSellerApi(sellerData)
+  
+
+);
+
+export const showSeller= createAsyncThunk(
+  'seller/showSeller',
+  async (sellerId) =>  await showSellerApi(sellerId)//
+    
+ 
+);
+
+
 
 export const SellerSlice = createSlice({
   name: 'seller',
@@ -17,6 +32,7 @@ export const SellerSlice = createSlice({
     loading: false,
     error: null,
     success: false,
+    seller:{}
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -32,7 +48,41 @@ export const SellerSlice = createSlice({
       .addCase(addSeller.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
-      });
+      })
+      .addCase(updateSeller.pending, (state) => {
+        state.loading = true;
+      }
+      )
+      .addCase(updateSeller.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+        state.success = true;
+      }
+      )
+      .addCase(updateSeller.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      }
+      )
+      .addCase(showSeller.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(showSeller.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.success = true;      
+        state.seller = action.payload
+      })
+      .addCase(showSeller.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+
+    
+      ;
+
+
+
   },
 });
 

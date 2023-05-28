@@ -1,5 +1,5 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { getSellerAccounts, createAccountSeller as createAccountSellerApi } from "../../api/SellerAccountApi";
+import { getSellerAccounts, createAccountSeller as createAccountSellerApi, updateAccountSeller as updateAccountSellerApi } from "../../api/SellerAccountApi";
 
 export const fetchSellerAccount = createAsyncThunk(
     'product/fetchSellerAccount',
@@ -9,6 +9,10 @@ export const createAccountSeller = createAsyncThunk(
     'product/createAccountSeller',
     async (newAccountSeller) => createAccountSellerApi(newAccountSeller)
 
+);
+export const updateAccountSeller = createAsyncThunk(
+    'product/updateAccountSeller',
+    async (accountSeller) => updateAccountSellerApi(accountSeller)
 );
 const SellerAccountAdapter = createEntityAdapter({});
 export const SellerAccountSlice = createSlice({
@@ -49,7 +53,24 @@ export const SellerAccountSlice = createSlice({
             state.loading = false
             state.error = action.error.message
             return state;
-        }   
+        },
+        [updateAccountSeller.pending]: (state, action) => {
+            state.loading = true;
+            return state;
+        }
+        ,
+        [updateAccountSeller.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.error = null;
+            SellerAccountAdapter.upsertOne(state, action.payload);
+            return state;
+        }
+        ,   
+        [updateAccountSeller.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+            return state;
+        }
     },
 });
 

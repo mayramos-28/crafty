@@ -1,21 +1,42 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {updateUser as updateUserApi} from "../../api/UserApi";
 
-export const updateUserEmail= createAsyncThunk(
+export const updateUser= createAsyncThunk(
     'user/updateUser',
-    async (email) => {
-        const response = await updateUser(email);
+    async (user) => {
+        const response = await updateUserApi(user);
         return response.data;
     }
 );
 
-const userAdapter = createEntityAdapter({});
+
 
 export const UserSlice = createSlice({
     name: 'user',
-    initialState: userAdapter.getInitialState({ 
+    initialState:{
+        name: '',
+        email: '',
         loading: false,
         error: null,
-    }),
+    }
+    ,
     reducers: {},
-    extraReducers: {},
+    extraReducers: {
+        [updateUser.pending]: (state, action) => {
+            state.loading = true;
+        }
+        ,
+        [updateUser.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.error = null;
+        }
+        ,
+        [updateUser.rejected]: (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        }
+    },
 });
+
+export const selectUserLoading = (state) => state.user.loading;
+export const selectUserError = (state) => state.user.error;
