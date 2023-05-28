@@ -26,10 +26,10 @@ export const createPaymentType = async (newPaymentType) =>{
     return response.data;
 };
 
-export const updatePaymentType = async (paymentTypeId, paymentType) =>{
+export const updatePaymentType = async (paymentType) =>{
     const response = await craftyApi({
         method: 'PUT',
-        uri: `payments-type/update/${paymentTypeId}`,
+        uri: `payments-type/update/${paymentType.id}`,
         body: paymentType
     });
 

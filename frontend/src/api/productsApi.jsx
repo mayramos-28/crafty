@@ -36,10 +36,10 @@ export const createProduct = async(newProduct) => {
     });
     return response.data;
 }
-export const updateProduct = async(productId, product) => {
+export const updateProduct = async(product) => {
     const response = await craftyApi({
         method: 'PUT',
-        uri: `product/update/${productId}`,
+        uri: `product/update/${product.id}`,
         body: product
     });
     return response.data;

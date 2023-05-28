@@ -30,7 +30,6 @@ export const createShoppingCart = async(filter) => {
     return response.data;
 }
 export const updateShoppingCart = async(item) => {
-    debugger;
     const response = await craftyApi({
         method: 'PUT',
         uri: `shopping-cart/update`,

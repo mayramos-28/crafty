@@ -26,3 +26,13 @@ export const createAccountSeller = async (newAccountSeller) =>{
 
     return response.data;
 };
+
+export const updateAccountSeller = async (accountSeller) =>{
+    const response = await craftyApi({
+        method: 'PUT',
+        uri: `seller-with-drawal-account/update/${accountSeller.id}`,
+        body: accountSeller
+    });
+
+    return response.data;
+};
