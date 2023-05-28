@@ -12,16 +12,15 @@ import { fetchAuthUser } from "./store/slices/authUserSlice";
 
 function App() {
 
-   const dispatch = useDispatch();
-   const firstExecution = useRef(true);
+  const dispatch = useDispatch();
+  const firstExecution = useRef(true);
   useEffect(() => {
     if (firstExecution.current) {
-      dispatch(fetchAuthUser());
-      dispatch(fetchShoppingCart());
-        firstExecution.current = false;
+      dispatch(fetchAuthUser()).then(() => { dispatch(fetchShoppingCart()) });
+      firstExecution.current = false;
     }
-}, [dispatch, firstExecution]);
- 
+  }, [dispatch, firstExecution]);
+
   return (
     <>
       <div className="App d-flex flex-column">
