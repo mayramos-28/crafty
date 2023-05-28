@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthUser } from "../store/slices/authUserSlice";
-import { Button, Card, Col, Collapse, Row } from "react-bootstrap";
+import { Card, Col, Collapse, Row } from "react-bootstrap";
 import { AddressComponent } from "../components/addressComponents/AddressComponent";
 import { PaymentsTypeComponent } from "../components/paymentComponents/PaymentsTypeComponent";
-import { Outlet } from "react-router-dom";
 import { UserInformationComponent } from "../components/userComponents/UserInformationComponent";
+
 
 export const UserInformationPage = () => {
     const [addresCollapse, setAddresCollapse,] = useState(false);
@@ -18,7 +18,8 @@ export const UserInformationPage = () => {
 
     const { authUser, isLoading, error } = useSelector((state) => state.authUser);
     const userId = authUser?.user?.id;
-    // const userInformation = authUser?.user;
+                          
+
 
 
     useEffect(() => {
@@ -33,7 +34,11 @@ export const UserInformationPage = () => {
         <div className="perfil gap-2 ">
 
             <h2 className="text-center">Mi perfil </h2>
+           
+           
             <UserInformationComponent authUser={authUser} ></UserInformationComponent>
+
+       
 
             <Row className="d-flex justify-content-space-between gap-2">
                 <Col sm={12} md={6} xl={6}>

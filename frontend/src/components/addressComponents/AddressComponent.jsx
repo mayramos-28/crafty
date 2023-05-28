@@ -41,45 +41,6 @@ export const AddressComponent = ({ userId }) => {
     <>
       <h3>Mis Direcciones</h3>
       <Row className="gap-3">
-{/* 
-     
-        <Col sm={12} md={12} xl={12} className="d-flex justify-content-center flex-wrap flex-row gap-2" >
-
-          <Row>
-            {Object.keys(address ?? {}).map((key) => {
-              if (typeof address[key] === 'object' && address[key] !== null) {
-                return (
-
-                  <Col>
-
-                    <Card border="primary" style={{ width: '18rem' }}>
-
-                      <Card.Body>
-
-                        <Card.Text>
-
-                          {Object.keys(address[key]).map((innerKey) => (
-                            <li key={innerKey}>
-                              {innerKey}: {address[key][innerKey]}
-                            </li>
-                          ))}
-
-                        </Card.Text>
-                      </Card.Body>
-
-
-                    </Card>
-
-
-                  </Col>
-
-
-                );
-              } 
-            })}
-
-
-          </Row> */}
 
           <Col>
           <AddressUpdateComponent userId={userId}></AddressUpdateComponent>

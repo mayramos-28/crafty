@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Col, Row, Spinner } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
-import { useEffect } from "react";
+
 
 
 export const LoginPage = () => {
@@ -40,10 +40,11 @@ export const LoginPage = () => {
 return (
     <>
 
-      <Row className='d-flex justify-content-center flex-column align-content-center py-2'>
+      <Row className='d-flex justify-content-center flex-column align-content-center h-100 py-5'>
         <Col sm={11} md={4} lg={3}>
-        <Form className="form-control" onSubmit={handleSubmit}>
-        <Form.Label>Inicio de sesión</Form.Label>
+          <h2>Inicio de sesión</h2>
+        <Form className="form-control py-5" onSubmit={handleSubmit}>
+      
         <Input
           label="Email"
           type="email"

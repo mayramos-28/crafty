@@ -5,7 +5,7 @@ import { fetchProducts, selectAllProducts, selectProductError, selectProductLoad
 import { Spinner } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 import { CardProductComponent } from "../components/CardProductComponete";
-import { loadCartItems } from "../store/slices/CartSlice";
+
 
 
 export const ProductsPage = () => {
@@ -23,7 +23,7 @@ export const ProductsPage = () => {
     useEffect(() => {
         if (firstExecution.current) {
             dispatch(fetchProducts({categoryId}))
-            dispatch(loadCartItems());
+            // dispatch(loadCartItems());
             firstExecution.current = false;
         }
     }, [dispatch, firstExecution]);
@@ -43,7 +43,7 @@ export const ProductsPage = () => {
                 <div className="align-product">
                     <div className="mainProducts d-flex justify-content-around py-4 px-4 row gap-2">
                         {
-                            Products.map((product) => (<CardProductComponent key={product.id} props={product}  linkTo={`/products/${product.id}`}  ></CardProductComponent>))
+                            Products.map((product) => (<CardProductComponent key={product.id} props={product}  linkTo={`/products/${product.id}`}   ></CardProductComponent>))
                         }
                     </div>
                 </div>

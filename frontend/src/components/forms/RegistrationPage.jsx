@@ -4,7 +4,8 @@ import { registerUserThunk } from "../../store/slices/register/registerThunk";
 import { Input } from "./Input.jsx";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Spinner } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
+import { Navigate } from "react-router-dom";
 
 export const RegistrationPage = () => {
   const dispatch = useDispatch();
@@ -21,12 +22,16 @@ export const RegistrationPage = () => {
     dispatch(setUser({ ...user, [name]: value }));
   };
 
-  if(isLoading) return (<Spinner animation="border" variant="primary" />)
+  if (isLoading) return (<Spinner animation="border" variant="primary" />)
+  if(success) return ( <Navigate to="/profile/my-area" />)
 
   return (
-    
-        <Form className="conrm-control container-login" onSubmit={handleSubmit} >
-        <Form.Label>Formulario de Registro</Form.Label>
+
+    <Row className='d-flex justify-content-center flex-column align-content-center py-5'>
+      <Col sm={11} md={4} lg={3}>
+        <h2>Formulario de Registro</h2>
+        <Form className="form-control " onSubmit={handleSubmit} >
+         
           <Input
             key="registerName"
             label="Nombre completo"
@@ -68,12 +73,14 @@ export const RegistrationPage = () => {
             onChange={handleInputChange}
           />
 
-          <Button  type="submit" className="btn-login">
+          <Button type="submit" className="btn-login">
             Registrarme
           </Button>
         </Form>
-        
-        
-      
+      </Col>
+    </Row>
+
+
+
   );
 };

@@ -20,6 +20,7 @@ import { LogoutLink } from "../components/LogoutComponete";
 import { CostumerPage } from "../page/CostumerPage";
 import { useSelector } from "react-redux";
 import { PurchasingProcessComponent } from "../components/purchasingProcessComponents/purchasingProcessComponent";
+import { ProductUpdateComponent } from "../components/ProductComponents/ProductUpdateComponent";
 
 export const MainLayout = () => {
 
@@ -59,11 +60,13 @@ export const MainLayout = () => {
           <Route exact path="/register" Component={RegistrationPage} />
           <Route exact path="/products" Component={ProductsPage} />
           <Route exact path="/products/:productId" Component={ProductDetailPage} />
+          
 
           <Route path="profile" Component={ProfilePage} >
             <Route exact path="my-area" Component={UserInformationPage} />
             <Route exact path="purchases" Component={CostumerPage} />
             <Route exact path="sales" Component={SellerPage} />
+            <Route exact path="product/edit/:productId" Component={ProductUpdateComponent} />
             <Route exact path="inicio" Component={HomePage} />
           </Route>
           <Route path="/purchasingProcess" Component={PurchasingProcessComponent} />

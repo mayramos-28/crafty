@@ -11,6 +11,7 @@ import { OrderReducer } from "./slices/OrderSlice";
 import { SellerAccountReducer } from "./slices/SellerAccountSlice";
 import { CartSlice } from "./slices/CartSlice";
 import { SellerReducer } from "./slices/SellerSlice";
+import { UserSlice } from "./slices/UserSlice";
 
 /**
  * @description a la funcion store se le esta asignado el vaor de la funcióñ configureStore que está
@@ -34,7 +35,8 @@ export const store = configureStore({
         paymentType: PaymentTypeReducer,
         order: OrderReducer,
         sellerAccount:SellerAccountReducer,
-        cart: CartSlice.reducer
+        cart: CartSlice.reducer,
+        user: UserSlice.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

@@ -6,11 +6,12 @@ import ThirdImage from "./../assets/image/carousel/cerca-diseno-dibujo-zapatero-
 export const MainCarousel = () => {
 return(
     <>
+   
     <Carousel className="Maincarousel">
 
         <Carousel.Item interval={2000}>
         <img
-          className="d-block w-100 img-carousel img-fluid. "
+          className="d-block w-100 img-carousel img-fluid"
           src={FirsetImage}
           alt="modelado-alta-vista-arcilla-torno-alfarero"
         />
@@ -22,7 +23,7 @@ return(
         </Carousel.Item>
       <Carousel.Item interval={2000}>
         <img
-          className="d-block w-100 img-carousel img-fluid." 
+          className="d-block w-100 img-fluid" 
           src={SecondImage}
           alt="Second slide"
         />
@@ -33,7 +34,7 @@ return(
       </Carousel.Item >
       <Carousel.Item interval={2000}>
         <img
-          className="d-block w-100 img-carousel img-fluid."
+          className="d-block w-100 img-fluid"
           src={ThirdImage}
           alt="Third slide"
         />

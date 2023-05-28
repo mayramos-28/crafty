@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSellerAccount, selectAllSellerAccount } from "../../store/slices/SellerAccountSlice";
 import { CreateAccountSellerComponent } from "./CreateAccountSellerComponent";
 import { Button, Card, Collapse } from "react-bootstrap";
+import { AccountSellerUpdateComponent } from "./AccountSellerUpdateComponent";
 
 export const AccountSellerComponent = ({ sellerId }) => {
     const dispatch = useDispatch();
@@ -28,20 +29,10 @@ export const AccountSellerComponent = ({ sellerId }) => {
     return (
         <>
             <h4>Mi cuenta de pago</h4>
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
-                <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
-                    <Card.Text>
-                        Some quick example text to build on the card title and make up the
-                        bulk of the card's content.
-                    </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-            </Card>
+            <AccountSellerUpdateComponent sellerId={sellerId}></AccountSellerUpdateComponent>
 
         {/* Cambiar cuenta de pago */}
-        <Card className="card-perfil">
+        {/* <Card className="card-perfil">
                         <Card.Body>
 
                             <Card.Text className="text-center ">
@@ -50,7 +41,7 @@ export const AccountSellerComponent = ({ sellerId }) => {
                                     aria-controls="example-collapse-text"
                                     aria-expanded={open}
                                     size="lg">
-                                    <i class="bi bi-bag-plus  icon-style" >  Añadir Producto </i>
+                                    <i class="bi bi-bag-plus  icon-style" >  Añadir cuenta de pago </i>
                                 </div>
                                 <div className={open ? "d-block" : "d-none"}
                                     onClick={() => setOpen(!open)}
@@ -62,7 +53,7 @@ export const AccountSellerComponent = ({ sellerId }) => {
                                 </div>
                                 <Collapse in={open}>
                                     <div id="example-collapse-text">
-                                        <h2>Añadir nuevo producto en venta</h2>
+                                        <h2>Añadir nuevo </h2>
                                         {sellerId && (<CreateAccountSellerComponent sellerId={sellerId}></CreateAccountSellerComponent>)}
 
                                     </div>
@@ -79,7 +70,7 @@ export const AccountSellerComponent = ({ sellerId }) => {
 
 
                         </Card.Body>
-                    </Card>
+                    </Card> */}
         </>
     )
 

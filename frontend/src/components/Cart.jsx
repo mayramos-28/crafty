@@ -7,11 +7,11 @@ export const Cart = () => {
     const total = useSelector(state => state.cart.total);
 
     const handleRemove = (productId) => {
-        dispatch(removeFromCart(productId));
+       
     };
 
     const handleClearCart = () => {
-        dispatch(clearCart());
+        
     };
 
     return (
