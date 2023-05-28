@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductFile;
+use App\Models\Seller;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -110,14 +111,7 @@ class ProductController extends Controller
      */
     public function destroy(int $productId)
     {
-        $product = Product::find($productId);
-        if(!$product){
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => 'Producto no encontrado'],404
-            );
-        }
+        $product = Product::find($productId);        
         $product->delete();
         return response()->json(
             [
@@ -125,5 +119,7 @@ class ProductController extends Controller
                 'message' => 'Producto eliminado correctamente'],200
         );
     }
+
+   
 
 }

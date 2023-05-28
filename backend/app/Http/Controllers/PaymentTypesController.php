@@ -72,21 +72,7 @@ class PaymentTypesController extends Controller
     public function update(Request $request, int $id)
     {
         $paymentTypes = PaymentTypes::find($id);
-        if(!$paymentTypes){
-           return response()->json(
-                [
-                    'status' => 'error',
-                    'message' => 'Método de pago no encontrado',
-                
-                ]
-            );
-        }
-        $paymentTypes->type = $request->get('type');
-        $paymentTypes->cardNumber = $request->get('cardNumber');
-        $paymentTypes->expirationDate = $request->get('expirationDate');
-        $paymentTypes->cvv = $request->get('cvv');
-        $paymentTypes->userId = $request->get('userId');
-        $paymentTypes->save();
+        $paymentTypes->update($request->all());
 
         return response()->json(
             [

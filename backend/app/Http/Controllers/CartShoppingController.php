@@ -15,12 +15,12 @@ class CartShoppingController extends Controller
     {
         $where[] = ['userId', $request->get('userId')];
 
-        $shoppingCart = ShoppingCarts::where($where)->with(CartItems::class)->get();
+        $shoppingCart = ShoppingCarts::where($where)->with('cartItems')->get();
 
         return response()->json(
             [
                 'status' => 'success',
-                'data' => $shoppingCart
+                'data' => $shoppingCart[0] ?? null
             ],
             200
         );
@@ -43,27 +43,36 @@ class CartShoppingController extends Controller
     public function update(Request $request)
     {
         $shppingCartid = $request->get('id');
+        $shoppingCart = ShoppingCarts::find($shppingCartid);
 
-        $shoppingCart = ShoppingCarts::find($shppingCartid) ?? new ShoppingCarts();
+        if (!$shoppingCart) {
+            $shoppingCart =  new ShoppingCarts(['userId' => $request->get('userId')]);
+            $shoppingCart->save();
+        }
 
-        $shoppingCart->fill([
-            ...$request->all(),
-        ]);
-        $shoppingCart->save();
+        $cartItems = $request->get('cart_items');
+        array_walk(
+            $cartItems,
+            static function ($cartItem) use ($shoppingCart) {
 
-        $cartItems = array_map(
-            static function ($cartItem) use($shoppingCart) {
-               $item =  new CartItems(
-                     [
-                          ...$cartItem,
-                          'shopping_cart_id' => $shoppingCart->id
-                     ]
-               );
-               return $item;
-            } ,
-            $request->get('cartItems')
+                $item = isset($cartItem['id'])
+                    ? CartItems::find($cartItem['id'])
+                    : new CartItems(['shopping_carts_id' => $shoppingCart->id]);
+
+
+                $item->quantity = $cartItem['quantity'];
+                $item->productId = $cartItem['productId'];
+                $item->name = $cartItem['name'];
+                $item->price = $cartItem['price'];
+
+                $item->save();
+            }
+
         );
-   
+
+
+        [$shoppingCart] = ShoppingCarts::where('id', $shoppingCart->id)->with('cartItems')->get();
+
 
         return response()->json(
             [

@@ -54,8 +54,12 @@ class SellerController extends Controller
      */
     public function show(int $id)
     {
-        $seller = Seller::find($id);
-        if (!$seller) {
+    
+
+
+
+        $seller = Seller::where(['id' => $id])->with('user')->get();
+        if (!$seller) { 
             return response()->json(
                 [
                     'status' => 'error',
@@ -67,7 +71,7 @@ class SellerController extends Controller
         return response()->json(
             [
                 'status' => 'success',
-                'data' => $seller
+                'data' => $seller[0] ?? null
             ],
             200
         );
@@ -91,7 +95,6 @@ class SellerController extends Controller
         $seller->businessId = $request->get('businessId');
         $seller->businessType = $request->get('businessType');
         $seller->businessPhone = $request->get('businessPhone');
-
         $seller->businessWebsite = $request->get('businessWebsite');
         $seller->businessLogo = $request->get('businessLogo');
         $seller->businessDescription = $request->get('businessDescription');
