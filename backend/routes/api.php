@@ -11,6 +11,7 @@ use App\Http\Controllers\PaymentTypesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\SellerWithDrawalAccountController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
 use App\Models\OrderType;
 use Illuminate\Http\Request;
@@ -37,13 +38,12 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/user', [AuthController::class, 'getUser'])->middleware('auth:sanctum');
 });
-Route::group(['prefix' => 'user'], function (){    
+Route::group(['prefix' => 'user'], function () {
     Route::put('/update/{id}', [UserController::class, 'update']);
-   
 });
 
 
-Route::group(['prefix' => 'seller'], function (){
+Route::group(['prefix' => 'seller'], function () {
     Route::get('/index', [SellerController::class, 'index']);
     Route::get('/show/{id}', [SellerController::class, 'show']);
     Route::post('/store', [SellerController::class, 'store']);
@@ -51,7 +51,7 @@ Route::group(['prefix' => 'seller'], function (){
     Route::delete('/destroy/{id}', [SellerController::class, 'destroy']);
 });
 
-Route::group(['prefix'=> 'product'], function(){
+Route::group(['prefix' => 'product'], function () {
     Route::get('/index', [ProductController::class, 'index']);
     Route::get('/show/{id}', [ProductController::class, 'show']);
     Route::post('/store', [ProductController::class, 'store']);
@@ -59,9 +59,9 @@ Route::group(['prefix'=> 'product'], function(){
     Route::delete('/destroy/{id}', [ProductController::class, 'destroy']);
 });
 
-Route::group(['prefix'=> 'category'], function(){
+Route::group(['prefix' => 'category'], function () {
     Route::get('/index', [CategoryController::class, 'index']);
-    Route::get('/show/{id}', [CategoryController::class, 'show']);   
+    Route::get('/show/{id}', [CategoryController::class, 'show']);
 });
 
 Route::group(['prefix' => 'file'], function () {
@@ -85,10 +85,10 @@ Route::group(['prefix' => 'payments-type'], function () {
     Route::get('/show/{id}', [PaymentTypesController::class, 'show']);
     Route::post('/store', [PaymentTypesController::class, 'store']);
     Route::put('/update/{id}', [PaymentTypesController::class, 'update']);
-    Route::delete('/destroy/{id}', [PaymentTypesController::class, 'destroy']);    
+    Route::delete('/destroy/{id}', [PaymentTypesController::class, 'destroy']);
 });
 
-Route::group(['prefix'=>'seller-with-drawal-account'], function (){
+Route::group(['prefix' => 'seller-with-drawal-account'], function () {
     Route::get('/index', [SellerWithDrawalAccountController::class, 'index']);
     Route::get('/show/{id}', [SellerWithDrawalAccountController::class, 'show']);
     Route::post('/store', [SellerWithDrawalAccountController::class, 'store']);
@@ -96,17 +96,22 @@ Route::group(['prefix'=>'seller-with-drawal-account'], function (){
     Route::delete('/destroy/{id}', [SellerWithDrawalAccountController::class, 'destroy']);
 });
 
-Route::group(['prefix'=>'order'], function (){
+Route::group(['prefix' => 'order'], function () {
     Route::get('/index', [OrdersController::class, 'index']);
     Route::get('/show/{id}', [OrdersController::class, 'show']);
-    Route::post('/store', [OrdersController::class, 'store']);
-    Route::put('/update/{id}', [OrdersController::class, 'update']);
-    Route::delete('/destroy/{id}', [OrdersController::class, 'destroy']);
+    Route::post('/store', [OrdersController::class, 'store']);  
+ 
 });
 
 
-    Route::group(['prefix'=> 'shopping-cart'], function(){
-        Route::get('/index', [CartShoppingController::class, 'index']);    
-        Route::post('/store', [CartShoppingController::class, 'store']);
-        Route::put('/update', [CartShoppingController::class, 'update']);
-    });
+Route::group(['prefix' => 'shopping-cart'], function () {
+    Route::get('/index', [CartShoppingController::class, 'index']);
+    Route::post('/store', [CartShoppingController::class, 'store']);
+    Route::put('/update', [CartShoppingController::class, 'update']);
+});
+
+
+Route::group(['prefix' => 'stripe'], function () {
+    Route::post('/payment', [StripeController::class, 'createPayment']);
+    Route::post('/payment/process', [StripeController::class, 'process']);
+});
