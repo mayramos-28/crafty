@@ -43,25 +43,39 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-
-        $orderDetails = array_map(static function (array $detail) {
-            return new OrderDetail($detail);
-        }, request()->get('details'));
+  
 
         $order = new Order([
-            'userId' => $request->get('userId'),
-            'sellerId' => $request->get('sellerId'),
-            'type' => $request->get('type'),
-            'date' => $request->get('date'),
+            'userId' => $request->get('userId'),           
             'total' => $request->get('total'),
-            'invoiceNumber' => $request->get('invoiceNumber'),
-            'ShippingAddress' => $request->get('ShippingAddress'),
-            'details' => new OrderDetail($request->get('details')),
+            'state' => $request->get('state'),
+            'total'=> $request->get('total'),            
+            'addressId' => $request->get('addressId'),
+            //'details' => new OrderDetail($request->get('details')),
         ]);
 
-
+        $details = $request->get('cartItems');
+        //obtener el id de la orden creada
         $order->save();
-        $order->details()->saveMany($orderDetails);
+       
+        //guardar los detalles de la orden
+        array_walk(
+            $details,
+            static function ($detail) use ($order) {
+                $order->orderDetails()->save(
+                    new OrderDetail([
+                        'OrderId' => $order->id,
+                        'productId' => $detail['productId'],
+                        'quantity' => $detail['quantity'],
+                        'price' => $detail['price']
+                        
+                    ])
+                );
+            }
+        );
+
+        
+       [$order]= Order::where('id', $order->id)->with('orderDetails')->get();
 
         return response()->json(
             [
@@ -92,7 +106,7 @@ class OrdersController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $order = Order::find($id);    
+        $order = Order::find($id);
         $orderDetails = array_map(static function (array $detail) {
             return new OrderDetail($detail);
         }, request()->get('details'));
