@@ -78,6 +78,8 @@ export const CartSlice = createSlice({
             cart_items: []
         },
         counter: 0,
+        totalPrice: 0,
+       
     },
     reducers: {
     },
@@ -89,6 +91,8 @@ export const CartSlice = createSlice({
             state.loading = false;
             state.cart = action.payload;
             state.counter = action.payload.cart_items.reduce((previous, item) => previous + item.quantity, 0);
+            state.totalPrice = action.payload.cart_items.reduce((previous, item) => previous + item.quantity * item.price, 0);
+            
         },
         [fetchShoppingCart.rejected]: (state, action) => {
             state.loading = false;
@@ -106,3 +110,10 @@ export const CartSlice = createSlice({
         }
     }
 });
+
+export const selectAllCartItems = state => state.cart.cart.cart_items;
+export const selectCartCounter = state => state.cart.counter;
+export const selectCartTotalPrice = state => state.cart.totalPrice;
+export const selectCart = state => state.cart.cart;
+export const selectCartLoading = state => state.cart.loading;
+export const selectCartError = state => state.cart.error;

@@ -20,7 +20,9 @@ export const UserSlice = createSlice({
         error: null,
     }
     ,
-    reducers: {},
+    reducers: {
+       
+    },
     extraReducers: {
         [updateUser.pending]: (state, action) => {
             state.loading = true;

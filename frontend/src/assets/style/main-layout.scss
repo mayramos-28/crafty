@@ -169,3 +169,28 @@ body {
   resize: none;
   border: 1px solid grey;
 }
+
+.cart-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: .3em;
+
+}
+
+.process {
+  margin: 20px;
+
+}
+
+.process-component  {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+
+}
+

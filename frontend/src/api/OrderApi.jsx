@@ -7,6 +7,17 @@ import { craftyApi } from "./craftyApi";
     *  
  */
 
+export const createOrder = async (order) =>{
+    const response = await craftyApi({
+        method: 'POST',
+        uri: 'order/store',
+        body: order
+    });
+
+    return response.data;
+};
+
+
 export const getOrders = async (filter) =>{
     const response = await craftyApi({
         method: 'GET',

@@ -43,8 +43,8 @@ export const MainLayout = () => {
               {!isLogged && <Nav.Link href="/login" className="font-link">Login</Nav.Link>}
               {!isLogged && <Nav.Link href="/register" className="font-link">Registro</Nav.Link>}
              
-              <Nav.Link href="#" className="font-link"><div >
-                  <i className="bi bi-cart3"><Badge bg="secondary">{counter}</Badge><Nav.Link href="/purchasingProcess"></Nav.Link> </i>
+              <Nav.Link href="/purchasingProcess" className="font-link"><div >
+                  <i className="bi bi-cart3"><Badge bg="secondary">{counter}</Badge> </i>
                 </div> </Nav.Link>
             </Nav>
 
@@ -60,7 +60,7 @@ export const MainLayout = () => {
           <Route exact path="/register" Component={RegistrationPage} />
           <Route exact path="/products" Component={ProductsPage} />
           <Route exact path="/products/:productId" Component={ProductDetailPage} />
-          
+          <Route path="/purchasingProcess" Component={PurchasingProcessComponent} />
 
           <Route path="profile" Component={ProfilePage} >
             <Route exact path="my-area" Component={UserInformationPage} />
@@ -69,7 +69,7 @@ export const MainLayout = () => {
             <Route exact path="product/edit/:productId" Component={ProductUpdateComponent} />
             <Route exact path="inicio" Component={HomePage} />
           </Route>
-          <Route path="/purchasingProcess" Component={PurchasingProcessComponent} />
+          
 
           <Route path="/" Component={HomePage}></Route>
         </Routes>
