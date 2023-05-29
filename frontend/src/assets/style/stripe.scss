@@ -1,8 +1,5 @@
-#root {
-    display: flex;
-    align-items: center;
-  }
-  
+@use "./colors";
+
   body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 16px;
@@ -39,7 +36,7 @@
   
   /* Buttons and links */
   button {
-    background: #5469d4;
+    background:colors.$color-btn-pay-background;
     font-family: Arial, sans-serif;
     color: #ffffff;
     border-radius: 4px;

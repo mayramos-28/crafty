@@ -23,7 +23,7 @@ export const AccountSellerFormComponent = ({ account, onSubmit }) => {
             }) => (
 
                 <Form className="form-control" onSubmit={handleSubmit} >
-                <Form.Label>Método de pago</Form.Label>
+                
                 <Input                 
                     key="formData.bankName"
                     label="Banco"
@@ -59,7 +59,7 @@ export const AccountSellerFormComponent = ({ account, onSubmit }) => {
                
 
                 <Button variant="primary" type="submit" className="btn-icon">
-                    <i class="bi bi-save "></i>
+                    <i className="bi bi-save " style={{ fontSize: '1.5rem' }}></i>
                 </Button>
 
             </Form>

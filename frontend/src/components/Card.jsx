@@ -1,12 +1,11 @@
-import { Button } from "react-bootstrap";
 import { craftyFileUrl } from "../api/FileApi";
 import FirsetImage from "./../assets/image/carousel/modelado-alta-vista-arcilla-torno-alfarero.jpg";
 import Card from 'react-bootstrap/Card';
 import Nav from 'react-bootstrap/Nav';
-import { NavLink, Navigate, Outlet, Route } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 
-export const CardComponent = ({ props, linkTo }) => {
+export const CardComponent = ({ props, linkTo, edit }) => {
 
 
     return (
@@ -20,8 +19,8 @@ export const CardComponent = ({ props, linkTo }) => {
                     </Card.Text>
                     <Card.Link href={linkTo} className="d-flex justify-content-center fs-4" >Ver {props.name}</Card.Link>
                     <Card.Text className="btn-ico">
-                        {props.productId &&  <Nav.Link as={NavLink} to={`/profile/product/edit/${props.id}`}><i className="bi bi-pencil-square"></i></Nav.Link>}
-                       
+                        {edit && <Nav.Link as={NavLink} to={`/profile/product/edit/${props.id}`}><i className="bi bi-pencil-square"></i></Nav.Link>}
+                                         
 
                     </Card.Text>
 

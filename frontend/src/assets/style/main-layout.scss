@@ -13,6 +13,7 @@ body,
 #root,
 .App {
   height: 100%;
+  width: 100%;
 
 }
 
@@ -46,13 +47,11 @@ body {
 }
 
 .font-link {
-  color: colors.$title-color-white;
+  color:white;
   font-weight: bolder;
   font-size: 1.5rem;
-
   cursor: pointer;
-  transition: 2s;
-
+  transition: .5s;
 }
 
 .font-link:hover {
@@ -60,23 +59,17 @@ body {
 }
 
 .form-center-container {
-
   padding: 2rem;
 }
-
 
 .crafty {
   color: colors.$color-footer-background;
   font-size: 2.5rem;
   font-weight: bolder;
 }
-
-
 .cardInfo {
   @include alignament.horizontal-center-gap(column, center, 3);
   width: 100%;
-
-
 }
 
 .perfil {
@@ -90,13 +83,10 @@ body {
 
 }
 
-.card-perfil {
-  width: 100%;
+.card-perfil { 
   @include shadow.shadow-cards;
   // background-color:colors.$color-footer-background;
-
   cursor: pointer;
-
 }
 
 .info-user {
@@ -104,7 +94,6 @@ body {
   padding: 20px;
   @include shadow.shadow-cards;
   @include alignament.center-content(row, center, center, .5rem);
-
 
 }
 
@@ -114,19 +103,10 @@ body {
   @include alignament.center-content(row, center, center, .5rem);
 }
 
-// .card-text-info{
-//   
-// }
-
-.carousel-items {
-  height: 200px;
-}
-
 .icon-click {
   cursor: pointer;
   transition: 2s;
 }
-
 .seller {
   display: flex;
   flex-direction: row;
@@ -136,7 +116,6 @@ body {
   gap: 2rem;
   padding: 20px;
 }
-
 .dates-update {
   display: flex;
   flex-direction: column;
@@ -144,53 +123,52 @@ body {
   gap: 2rem;
   padding: 20px;
 }
+.icon-check {
+  color: colors.$title-color-green;
+}
+.icon-uncheck {
+  color: colors.$color-footer-background;
+}
 
-
+.icon-create {
+  background-color: colors.$color-footer-background;
+}
+.text-payment-process {
+  color: colors.$color-btn-pay-background;
+  text-align: center;
+  font-size: 2rem;
+}
 
 .comment {
-
   width: 100%;
   height: auto;
 }
-
-
-
 .comment-text-area {
-
   width: 100%;
   height: auto;
 }
-
 .textinput {
-
   width: 100%;
   min-height: 75px;
   outline: none;
   resize: none;
   border: 1px solid grey;
 }
-
 .cart-items {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: .3em;
-
 }
 
 .process {
   margin: 20px;
-
+  @include alignament.horizontal-vertical(center, start)
 }
 
-.process-component  {
-  
+.process-component {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-
-
 }
-

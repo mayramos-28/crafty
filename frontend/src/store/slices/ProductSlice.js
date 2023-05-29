@@ -71,7 +71,7 @@ const ProductSlice = createSlice({
         [fetchProducts.fulfilled]: (state, action) => {
             state.loading = false;
             state.error = null;
-            productAdapter.setAll(state, action.payload);
+            productAdapter.addMany(state, action.payload);
             return state;
         },
         [fetchProducts.rejected]: (state, action) => {

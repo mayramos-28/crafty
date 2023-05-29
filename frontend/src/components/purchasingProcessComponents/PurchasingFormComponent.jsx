@@ -10,12 +10,12 @@ import { Col, Row } from "react-bootstrap";
 export const  PurchasingFormComponent = ({order}) =>{
 
     const stripe = useStripe();
-    const elements = useElements();
-  
+    const elements = useElements();  
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-  
+    
+
     useEffect(() => {
       if (!stripe) {
         return;
@@ -32,7 +32,7 @@ export const  PurchasingFormComponent = ({order}) =>{
       stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
         switch (paymentIntent.status) {
           case "succeeded":
-            setMessage("Pago realizado con exito!");
+            setMessage("Pago se está procesando!");
             break;
           case "processing":
             setMessage("Tu pago se está procesando.");
@@ -61,7 +61,9 @@ export const  PurchasingFormComponent = ({order}) =>{
         elements,
         confirmParams: {
           
-          return_url: "http://localhost:3000",
+          return_url: "http://localhost:3000/purchasingProcess/result",
+          
+
         },
       });
   
@@ -82,8 +84,8 @@ export const  PurchasingFormComponent = ({order}) =>{
     return (
     <Row>
         <Col sm={11}>
-        <h2>Pago</h2>
-        <form id="payment-form" className="form-control my-5 py-3 " onSubmit={handleSubmit}>
+        <h2 className="text-payment-process">Completa tu pago</h2>
+        <form id="payment-form" className="form-control" onSubmit={handleSubmit}>
         <LinkAuthenticationElement
           id="link-authentication-element"
           //onChange={(e) => setEmail(e.target.value)}

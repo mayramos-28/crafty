@@ -3,8 +3,8 @@ import { Button, Form } from "react-bootstrap";
 import { Input } from "../forms/Input";
 import { Formik } from 'formik';
 
-export const PaymentFormComponent = ({ paymentType, onSubmit }) => {
-   console.log(paymentType, 'en payment form component');
+export const PaymentFormComponent = ({ paymentType, onSubmit, btnValue }) => {
+  
     return (
         <>
         <Formik key={paymentType?.id}
@@ -66,7 +66,7 @@ export const PaymentFormComponent = ({ paymentType, onSubmit }) => {
 
 
                 <Button variant="primary" type="submit" className="btn-icon">
-                    <i class="bi bi-save "></i>
+                    <i className="bi bi-save "> {btnValue}</i>
                 </Button>
 
             </Form>

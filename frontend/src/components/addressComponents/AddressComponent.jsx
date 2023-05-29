@@ -46,14 +46,10 @@ export const AddressComponent = ({ userId }) => {
           <AddressUpdateComponent userId={userId}></AddressUpdateComponent>
           </Col>
 
-
-
-       
-
         <Col sm={12} md={12} xl={12} className="d-flex flex-column justify-content-center" >
 
 
-          <Button className={open ? "d-none btn-icon" : "d-block btn-icon"}
+          <Button className={open ? "d-none icon-create" : "d-block  icon-create"}
             onClick={() => setOpen(!open)}
             aria-controls="example-collapse-text"
             aria-expanded={open}
@@ -71,12 +67,12 @@ export const AddressComponent = ({ userId }) => {
           </Collapse>
 
           <Button
-            className={open ? "d-block btn-icon" : "d-none btn-icon"}
+            className={open ? "d-block icon-create" : "d-none icon-create"}
             onClick={() => setOpen(!open)}
             aria-controls="example-collapse-text"
             aria-expanded={open}
           >
-            <i class="bi bi-x-circle"></i>
+            <i className="bi bi-x-circle"></i>
           </Button>
         </Col>
 

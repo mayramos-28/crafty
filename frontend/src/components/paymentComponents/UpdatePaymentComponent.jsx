@@ -29,6 +29,9 @@ export const UpdatePaymentComponent = ({ userId }) => {
     if (error) {
         return <div>Error: {error}</div>;
     }
+    if(paymentsType.length === 0){
+        return <div> No tienes metodos de pago guardados</div>;
+    }
 
     return (
         <div className="dates-update">

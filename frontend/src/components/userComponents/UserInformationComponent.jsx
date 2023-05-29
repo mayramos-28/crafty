@@ -14,13 +14,12 @@ export const UserInformationComponent = ({ authUser }) => {
 
     return (
         <>
-            <Row className='gap-2 d-flex justify-content-center'>
-                <Col sm={12} md={6} xl={4}>
-
+            <div className='col-sm-12 col-md-8 col-lg-5 '>
+                
                     {user && (<UserUpdateComponent user={user}></UserUpdateComponent>)}
 
-                </Col>
-            </Row>
+             
+            </div>
 
         </>
     );

@@ -14,7 +14,7 @@ export const LogoutLink = () => {
     return (
        
         <NavDropdown.Item to="#" onClick={handleLogout}>
-            <i class="bi bi-box-arrow-left"></i>
+            <i className="bi bi-box-arrow-left"></i>
         </NavDropdown.Item>
     );
 

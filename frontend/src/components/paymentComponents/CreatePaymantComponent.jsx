@@ -21,6 +21,7 @@ export const CreatePaymantComponent = ({ userId }) => {
 
             <PaymentFormComponent key={paymentType.id}
                 paymentType={paymentType}
+                btnValue={'Guardar'}
                 onSubmit={(values) => {
                     dispatch(createPaymentType(values));
                 }}

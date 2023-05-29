@@ -1,6 +1,6 @@
 import { Elements, CardElement } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Breadcrumb, Col, Form, Row } from 'react-bootstrap';
 import { PurchasingFormComponent } from './PurchasingFormComponent';
 import { GetShoppingCartComponent } from './GetShoppingCartComponent';
 import React from 'react';
@@ -21,7 +21,6 @@ export class PurchasingProcessComponent extends React.Component {
         };
 
     }
-
     componentDidMount() {
 
 
@@ -29,7 +28,7 @@ export class PurchasingProcessComponent extends React.Component {
 
     onProcessCart = (order) => {
         this.setState({ ...this.state, order: order });
-        CreatePaymentIntent({orderId : order.id})
+        CreatePaymentIntent({ orderId: order.id })
             .then((data) => this.setState({ clientSecret: data.clientSecret }));
     }
 
@@ -44,6 +43,14 @@ export class PurchasingProcessComponent extends React.Component {
         return (
             <div >
                 <Row className=' process'>
+                    <Breadcrumb>
+                        <Breadcrumb.Item href="/">Categorias</Breadcrumb.Item>
+                        <Breadcrumb.Item href="/profile/my-area">
+                            mi perfil
+                        </Breadcrumb.Item>
+                        
+                    </Breadcrumb>
+                    
                     <Col sm={11} md={8} lg={6} className='process-component '>
                         <GetShoppingCartComponent onProcessOrder={(order) => this.onProcessCart(order)} />
                     </Col>
@@ -54,9 +61,7 @@ export class PurchasingProcessComponent extends React.Component {
 
                         {options.clientSecret && (
                             <Elements options={options} stripe={stripePromise}>
-
                                 <PurchasingFormComponent />
-
                             </Elements>
                         )}
                     </Col>

@@ -1,14 +1,13 @@
-import { LoginPage } from "./../components/forms/LoginPage";
+
 import { Route, Routes } from "react-router-dom";
 import {
   Badge,
-  Button,
   Container,
   Nav,
   Navbar,
 
 } from "react-bootstrap";
-import { RegistrationPage } from "../components/forms/RegistrationPage";
+import { RegistrationPage } from "../page/RegistrationPage";
 import { HomePage } from "../page/HomePage";
 import { ProfilePage } from "../page/ProfilePage";
 import { ProductsPage } from "../page/ProductsPage";
@@ -21,6 +20,10 @@ import { CostumerPage } from "../page/CostumerPage";
 import { useSelector } from "react-redux";
 import { PurchasingProcessComponent } from "../components/purchasingProcessComponents/purchasingProcessComponent";
 import { ProductUpdateComponent } from "../components/ProductComponents/ProductUpdateComponent";
+import { PaymentResultComponent } from "../components/purchasingProcessComponents/PaymentResultComponent";
+import { LoginPage } from "../page/LoginPage";
+import { UserOrdersPage } from "../page/UserOrdersPage";
+
 
 export const MainLayout = () => {
 
@@ -38,38 +41,42 @@ export const MainLayout = () => {
             <Nav className="me-auto">
 
 
-            <Nav.Link href="/" className="font-link"> Inicio</Nav.Link>
+              <Nav.Link href="/" className="font-link"> Inicio</Nav.Link>
               {isLogged && <Nav.Link href="/profile/my-area" className="font-link">Perfil</Nav.Link>}
               {!isLogged && <Nav.Link href="/login" className="font-link">Login</Nav.Link>}
               {!isLogged && <Nav.Link href="/register" className="font-link">Registro</Nav.Link>}
-             
-              <Nav.Link href="/purchasingProcess" className="font-link"><div >
-                  <i className="bi bi-cart3"><Badge bg="secondary">{counter}</Badge> </i>
-                </div> </Nav.Link>
+
+
+              {isLogged && counter > 0 && <Nav.Link href="/purchasingProcess" className="font-link"><div >
+                <i className="bi bi-cart3 ont-link"><Badge bg="secondary">{counter} <span>Comprar</span> </Badge> </i>
+              </div> </Nav.Link>}
             </Nav>
 
-            {isLogged ?  <Nav.Link className="font-link"  ><LogoutLink /></Nav.Link>
-                : null}
+
+            {isLogged ? <Nav.Link className="font-link"  ><LogoutLink /></Nav.Link>
+              : null}
           </Navbar.Collapse>
 
         </Container>
       </Navbar>
-      <section className="">
+      <section className="d-flex justify-content-center py-1">
         <Routes>
           <Route exact path="/login" Component={LoginPage} />
           <Route exact path="/register" Component={RegistrationPage} />
           <Route exact path="/products" Component={ProductsPage} />
           <Route exact path="/products/:productId" Component={ProductDetailPage} />
           <Route path="/purchasingProcess" Component={PurchasingProcessComponent} />
+          <Route path="/purchasingProcess/result" Component={PaymentResultComponent} />
+
 
           <Route path="profile" Component={ProfilePage} >
             <Route exact path="my-area" Component={UserInformationPage} />
-            <Route exact path="purchases" Component={CostumerPage} />
+            <Route exact path="purchases" Component={UserOrdersPage} />
             <Route exact path="sales" Component={SellerPage} />
             <Route exact path="product/edit/:productId" Component={ProductUpdateComponent} />
             <Route exact path="inicio" Component={HomePage} />
           </Route>
-          
+
 
           <Route path="/" Component={HomePage}></Route>
         </Routes>
@@ -77,4 +84,4 @@ export const MainLayout = () => {
     </div>
   );
 }
-// render={(props) => <ProductsPage {...props}  addToCart={addToCart} removeFromCart={removeFromCart} />} 
+

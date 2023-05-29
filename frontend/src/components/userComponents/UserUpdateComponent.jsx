@@ -30,7 +30,7 @@ export const UserUpdateComponent = ({ user }) => {
                     /* and other goodies */
                 }) => (
 
-                    <Form className="form-control" onSubmit={handleSubmit} >
+                    <Form className="form-control " onSubmit={handleSubmit} >
                         <h4>Mis datos de usuario</h4>
                         <Input
                             key="formData.name"
@@ -55,7 +55,7 @@ export const UserUpdateComponent = ({ user }) => {
                         >
                         </Input>
                         <Col className="d-flex justify-content-center"><Button variant="primary" type="submit" className="btn-icon gap-2">
-                            <i class="bi bi-save "></i> <span>  Actualziar datos</span>
+                            <i className="bi bi-save " style={{ fontSize: '1.5rem' }}></i> <span>  Actualziar datos</span>
                         </Button></Col>
 
 

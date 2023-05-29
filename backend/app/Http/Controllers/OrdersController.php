@@ -16,25 +16,15 @@ class OrdersController extends Controller
      */
     public function index(Request $request)
     {
-        $authUser = Auth::user();
-        $where = [];
-        if ($request->has('typeId')) {
-            $where['typeId'] = $request->input('typeId');
-        }
-        if ($request->has('buyerId')) {
-            if ($authUser->id != $request->input('buyerId')) {
-                throw new \Exception('No tienes permisos para ver esta información');
-            }
-            $where['buyerId'] = $request->input('buyerId');
-        }
-        if ($request->has('sellerId')) {
-            $where['sellerId'] = $request->input('sellerId');
-        }
+        
+        $user = $request->get('userId');
 
+        $where = ['userId' => $user]; 
+        $order= Order::where( $where )->with('orderDetails')->get();       
 
         return [
             'status' => 'success',
-            'data' => Order::where($where)->with(OrderDetail::class)->get()
+            'data' => $order
         ];
     }
 
@@ -51,7 +41,7 @@ class OrdersController extends Controller
             'state' => $request->get('state'),
             'total'=> $request->get('total'),            
             'addressId' => $request->get('addressId'),
-            //'details' => new OrderDetail($request->get('details')),
+            
         ]);
 
         $details = $request->get('cartItems');
@@ -66,6 +56,7 @@ class OrdersController extends Controller
                     new OrderDetail([
                         'OrderId' => $order->id,
                         'productId' => $detail['productId'],
+                        'name' => $detail['name'],
                         'quantity' => $detail['quantity'],
                         'price' => $detail['price']
                         
@@ -133,6 +124,22 @@ class OrdersController extends Controller
                 'data' => $order
             ]
         );
+    }
+
+    public function updateState(Request $request, int $id){
+
+        $order = Order::find($id);
+        $order->state = $request->get('state');
+        $order->save();
+
+        return response()->json(
+            [
+                'status' => 'success',
+                'message' => 'Estado actualizado correctamente',
+                'data' => $order
+            ]
+        );
+
     }
 
     /**

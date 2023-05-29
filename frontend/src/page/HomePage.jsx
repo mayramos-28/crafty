@@ -27,14 +27,16 @@ export const HomePage = () => {
     return (
 
         <>
-               <Row >
+            <Row >
                 <Col md={12}> <MainCarousel /> </Col>
                 <Col>
                     <Row className="gap-3 py-5 d-flex justify-content-center">
+                        <h2>Categorias</h2>
+
 
                         {categories.map((category) => (
-                            <Col  sm={11} md={4} lg={2}   className="d-flex justify-content-center">
-                            <CategoryCard key={category.id} props={category} linkTo={`/products?categoryId=${category.id}`}></CategoryCard>
+                            <Col sm={11} md={4} lg={3} className="d-flex justify-content-center">
+                                <CategoryCard key={category.id} props={category} linkTo={`/products?categoryId=${category.id}`}></CategoryCard>
                             </Col>
                         ))
                         }
@@ -43,18 +45,7 @@ export const HomePage = () => {
 
                 </Col>
             </Row>
-            <div className="mainPage flex-grow-1 ">
-                <div className="mainPage__carousel">
 
-
-                </div>
-                <div>
-                    <div className="">
-
-                    </div>
-                </div>
-
-            </div>
         </>
     );
 }

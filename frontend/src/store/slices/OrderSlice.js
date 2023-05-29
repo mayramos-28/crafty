@@ -1,5 +1,5 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { getOrders, createOrder as createOrderApi  } from "../../api/OrderApi";
+import { getOrders, createOrder as createOrderApi, updateState as updateStateApi  } from "../../api/OrderApi";
 
 export const fetchOrder = createAsyncThunk(
     'product/fetchOrder',
@@ -9,6 +9,12 @@ export const fetchOrder = createAsyncThunk(
 export const createOrder = createAsyncThunk(
     'product/createOrder',
     async (order) => await createOrderApi(order)
+);
+
+export const updateState = createAsyncThunk(
+    'product/updateState',
+    async (order, state) => await updateStateApi(order, state)
+
 );
 const OrderAdapter = createEntityAdapter({});
 export const OrderSlice = createSlice({

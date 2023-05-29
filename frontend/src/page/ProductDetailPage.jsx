@@ -7,14 +7,13 @@ import imgByDefault from "./../assets/image/by-default.jpg";
 import { craftyFileUrl } from "../api/FileApi";
 import { selectSellerById, showSeller } from "../store/slices/SellerSlice";
 import { addItemToCart, removeItemFromCart } from "../store/slices/CartSlice";
-import { SellerInformationPage } from "../components/sellerComponents/SellerInformationCardComponent";
-
 
 export const ProductDetailPage = () => {
     const firstExecution = useRef(true);
     const dispatch = useDispatch();
 
     const { productId } = useParams();
+
     const product = useSelector(state => selectProductById(state, productId))
     const sellerInformation = useSelector((state) => state.seller.seller);
 
@@ -23,15 +22,17 @@ export const ProductDetailPage = () => {
             dispatch(fetchShowProduct(productId))
             firstExecution.current = false;
         }
-
     }, [dispatch, firstExecution]);
 
 
     useEffect(() => {
+        console.log('productos', product)
         product && dispatch(showSeller(product.sellerId))
-
     }, [dispatch, product])
 
+
+
+    console.log('vendedor', sellerInformation)
 
     const ratingStart = starHtml(product?.rating);
 
@@ -47,9 +48,9 @@ export const ProductDetailPage = () => {
 
     };
 
-
     return (
         <Container className="py-5 flex-grow-1">
+            
 
             <Row className="d-flex justify-content-center">
                 <Col sm={11} md={6} lg={6}>
@@ -57,20 +58,21 @@ export const ProductDetailPage = () => {
                         <Col sm={11} md={12} lg={12} >
                             <h1 className="text-capitalize">{product?.name}</h1>
 
-                            <span style={{ fontSize: '3rem' }} > {product?.price} €</span><br />
-                            <span style={{ fontSize: '2rem', color: 'red' }} >Stock: {product?.stock}</span>
-                            <p className="py-2" style={{ fontSize: '2rem' }}> {product?.description}</p>
+                            <span style={{ fontSize: '2rem' }} > {product?.price} €</span><br />
+                            <span style={{ fontSize: '1.5rem', color: 'red' }} >Stock: {product?.stock}</span>
+                            <p className="py-2" style={{ fontSize: '1.5rem' }}> {product?.description}</p>
                         </Col>
-                        <Col className="text-center" style={{ fontSize: '3rem' }}>
-                            <span className="" > {starHtml(product?.rating)}</span>
+                        <Col className="text-center" style={{ fontSize: '2rem' }}>
+                            <span className="" > {ratingStart}</span>
                             <span> / {product?.rating}</span>
                         </Col>
                     </Row>
 
 
                     <Card.Text className="d-flex justify-content-center gap-4 fs-4">
-                        <i className="bi bi-cart-plus " style={{ fontSize: '5rem', color: 'green' }} onClick={() => handleAddToCart()}>  </i>
-                        <i className="bi bi-cart-dash" style={{ fontSize: '5rem', color: 'red' }} onClick={() => handleRemoveFromCart()}></i>
+                        <i className="bi bi-cart-plus icon-click icon-check" style={{ fontSize: '3rem' }} onClick={() => handleAddToCart()}>  </i>
+                        <i className="bi bi-cart-dash icon-click icon-uncheck" style={{ fontSize: '3rem' }} onClick={() => handleRemoveFromCart()}></i>
+
                     </Card.Text>
                     <Card.Text>
                     </Card.Text>
@@ -84,10 +86,10 @@ export const ProductDetailPage = () => {
                     <Card.Img variant="top" src={craftyFileUrl(product?.imageId)} onError={(e) => { e.target.src = imgByDefault }} style={{}} className="py-2" fluid />
 
                 </Col>
-                <Col sm={11} md={12} lg={12}>
-                <SellerInformationPage sellerInformation={sellerInformation}></SellerInformationPage>
+                {/* <Col sm={11} md={12} lg={12}>
+                    <SellerInformationPage sellerInformation={sellerInformation}></SellerInformationPage>
                 </Col>
-
+ */}
 
             </Row>
 

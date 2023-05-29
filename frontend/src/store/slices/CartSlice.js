@@ -26,8 +26,7 @@ export const fetchShoppingCart = createAsyncThunk(
 export const addItemToCart = createAsyncThunk(
     'shoppingCart/addItemToCart',
     async (item, { getState }) => {
-        const { cart } = getState().cart;
-        debugger
+        const { cart } = getState().cart;        
         const userId = getState().authUser.authUser.user.id;
         let indexItemToCart = (cart.cart_items || []).findIndex(i => i.productId === item.productId);
 
@@ -48,20 +47,25 @@ export const removeItemFromCart = createAsyncThunk(
     async (item, { getState }) => {
         const { cart } = getState().cart;
         const userId = getState().authUser.authUser.user.id;
-        let indexItemToCart = (cart.cart_items || []).findIndex(i => i.productId === item.productId);
-
-        const itemToCart = indexItemToCart !== -1
-            ? {...cart.cart_items[indexItemToCart]}
-            : { ...item, quantity: 0 };
-
-        itemToCart.quantity--;
-
-        const newCartItems = [...cart.cart_items || []];
-        newCartItems[indexItemToCart === -1 ? 0 : indexItemToCart] = itemToCart;
-        const cartUpdated = { ...cart, userId, cart_items: newCartItems }
-        return await updateShoppingCartApi(cartUpdated);
-    }
+        const indexItemToCart = (cart.cart_items || []).findIndex(i => i.productId === item.productId);
+      
+        if (indexItemToCart !== -1) {
+          const itemToCart = { ...cart.cart_items[indexItemToCart] };
+          itemToCart.quantity--;
+      
+          const newCartItems = [...cart.cart_items || []];
+          if (itemToCart.quantity === 0) {
+            newCartItems.splice(indexItemToCart, 1); // Eliminar el producto de la cesta
+          } else {
+            newCartItems[indexItemToCart] = itemToCart; // Actualizar la cantidad del producto en la cesta
+          }
+      
+          const cartUpdated = { ...cart, userId, cart_items: newCartItems };
+          return await updateShoppingCartApi(cartUpdated);
+        }
+      }
 );
+
         
 export const createShoppingCart = createAsyncThunk(
     'shoppingCart/createShoppingCart',
@@ -108,6 +112,8 @@ export const CartSlice = createSlice({
             state.cart = action.payload;
             state.counter = action.payload.cart_items.reduce((previous, item) => previous + item.quantity, 0);
         }
+       
+
     }
 });
 

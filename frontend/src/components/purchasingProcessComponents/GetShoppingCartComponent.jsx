@@ -41,21 +41,20 @@ export const GetShoppingCartComponent = ({ onProcessOrder }) => {
         onProcessOrder && onProcessOrder(order);
     };
 
-    console.log("order", successOrder)
-
 
     if (cartItems.length === 0) {
         return (
-            <div>
+            <Row className="text-center">
                 <p>No tienes productos en el carrito</p>
-            </div>
+                <Button href="/">Ir a la tienda</Button>
+            </Row>
         )
     }
 
     return (
         <Row className="">
 
-            <h2>Cesta de compra</h2>
+            <h2 className="text-payment-process">Cesta de compra</h2>
 
             <Col sm={12} md={12} lg={12} className="gap-2">
 
@@ -78,7 +77,7 @@ export const GetShoppingCartComponent = ({ onProcessOrder }) => {
                                                                 <span>Precio: {item.price} € </span><br />
                                                                 <span>Cantidad: {item.quantity}</span><br />
 
-                                                                <span style={{ fontSize: '2rem', color: 'green' }} >Subtotal: {item.price * item.quantity} €</span><br />
+                                                                <span className="icon-check" style={{ fontSize: '1.5rem' }} >Subtotal: {item.price * item.quantity} €</span><br />
                                                             </Col>
                                                         </Row>
 
@@ -101,8 +100,8 @@ export const GetShoppingCartComponent = ({ onProcessOrder }) => {
                 })}
             </Col>
             <Col sm={12} md={12} lg={12} className="cart-items" >
-                <p style={{ fontSize: '2rem' }}>Total Productos: {count} </p>
-                <p style={{ fontSize: '2rem' }}>Total a pagar: {total} €</p>
+                <span style={{ fontSize: '1.5rem' }}>Total Productos: {count} </span>
+                <span style={{ fontSize: '1.5rem' }}>Total a pagar: {total} €</span>
             </Col>
 
 
@@ -112,15 +111,14 @@ export const GetShoppingCartComponent = ({ onProcessOrder }) => {
                 <GetShoppingAddressComponent onChangeAddress={setAddressId} userId={userId} canChange={!successOrder} />
             </Col>
 
-            {!successOrder && <Col className="d-flex justify-content-center" >
+            {!successOrder && <Col sm={12} md={12} lg={12} className="d-flex justify-content-center" >
                 <Button onClick={handelOrder} variant="primary" size="lg" className="my-3 d-flex justify-content-center w-50
                 " block>Confirmar Productos para pago</Button>
             </Col>}
-            {successOrder && <i class="bi bi-check-circle" style={{ fontSize: '2rem' }}  >Pedido confirmado</i>}
-
-
-
-
+            {successOrder && 
+            ( <><Col sm={12} md={12} lg={12} className="d-flex justify-content-center " >
+            <i className="bi bi-check-circle icon-check" style={{ fontSize: '1.5rem' }} >Pedido confirmado</i> 
+            </Col> </>)}
 
         </Row>
     );

@@ -2,8 +2,6 @@ import { useEffect, useRef } from "react";
 import { Col, Form, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAddress, selectAddressLoading, selectAllAddress } from "../../store/slices/AddressSlice";
-import { selectOrderSucess } from "../../store/slices/OrderSlice";
-
 
 export const GetShoppingAddressComponent = ({ onChangeAddress, userId, canChange }) => {
   const firstExecution = useRef(true);
@@ -19,10 +17,10 @@ export const GetShoppingAddressComponent = ({ onChangeAddress, userId, canChange
     }
   }, [firstExecution]);
 
-  console.log("order en direcciones", canChange)
   if (!canChange) {
-    return(
-          <i class="bi bi-check-circle" style={{ fontSize: '2rem' }}  >Direccion confirmada</i>
+    return (
+      <i class="bi bi-check-circle icon-check" style={{ fontSize: '1rem ' }} > <span> Direccion confirmada</span>
+      </i>
     )
 
   }

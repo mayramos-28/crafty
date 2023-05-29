@@ -4,10 +4,11 @@ import SecondImage from "./../assets/image/carousel/dibujo-habilidades-bricolaje
 import ThirdImage from "./../assets/image/carousel/cerca-diseno-dibujo-zapatero-masculino.jpg";
 
 export const MainCarousel = () => {
-return(
+  return (
     <>
-   
-    <Carousel className="Maincarousel">
+
+
+      {/* <Carousel className="Maincarousel">
 
         <Carousel.Item interval={2000}>
         <img
@@ -47,8 +48,8 @@ return(
       </Carousel.Item>
 
         
-    </Carousel>
+    </Carousel> */}
 
-        </>
-)
+    </>
+  )
 }

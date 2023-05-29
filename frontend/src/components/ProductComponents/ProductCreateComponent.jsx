@@ -23,7 +23,7 @@ export const ProductCreateComponent = ({ sellerId }) => {
 
 
     return (
-        <div className="dates-update">
+        <div className="">
 
             <ProductFormComponent
                 key={product}

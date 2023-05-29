@@ -10,14 +10,10 @@ export const PaymentsTypeComponent = ({ userId }) => {
 
 
     const [open, setOpen] = useState(false);
-
-
-
     return (
 
-
         <>
-            <h3>Mis Metodos de pago</h3>
+            
             <Row className="gap-3">
 
                 <Col>
@@ -27,7 +23,7 @@ export const PaymentsTypeComponent = ({ userId }) => {
                 <Col sm={12} md={12} xl={12} className="d-flex flex-column justify-content-center" >
 
 
-                    <Button className={open ? "d-none" : "d-block"}
+                    <Button className={open ? "d-none icon-create" : "d-block icon-create" }
                         onClick={() => setOpen(!open)}
                         aria-controls="example-collapse-text"
                         aria-expanded={open}
@@ -45,14 +41,14 @@ export const PaymentsTypeComponent = ({ userId }) => {
                     </Collapse>
 
                     <Button
-                        className={open ? "d-block" : "d-none"}
+                        className={open ? "d-block icon-create" : "d-none icon-create"}
                         onClick={() => setOpen(!open)}
                         aria-controls="example-collapse-text"
                         aria-expanded={open}
 
                         size="lg"
                     >
-                        Ocultar formulario
+                        Ocultar formulario para añadir métodos
                     </Button>
                 </Col>
 

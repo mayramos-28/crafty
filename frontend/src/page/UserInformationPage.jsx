@@ -7,6 +7,7 @@ import { Card, Col, Collapse, Row } from "react-bootstrap";
 import { AddressComponent } from "../components/addressComponents/AddressComponent";
 import { PaymentsTypeComponent } from "../components/paymentComponents/PaymentsTypeComponent";
 import { UserInformationComponent } from "../components/userComponents/UserInformationComponent";
+import { OrdersComponent } from "../components/OrdersComponent/OrdersComponet";
 
 
 export const UserInformationPage = () => {
@@ -18,9 +19,6 @@ export const UserInformationPage = () => {
 
     const { authUser, isLoading, error } = useSelector((state) => state.authUser);
     const userId = authUser?.user?.id;
-                          
-
-
 
     useEffect(() => {
         if (firstExecution.current) {
@@ -31,53 +29,17 @@ export const UserInformationPage = () => {
 
 
     return (
-        <div className="perfil gap-2 ">
-
+        <div className="perfil gap-1 w-100">
             <h2 className="text-center">Mi perfil </h2>
-           
-           
-            <UserInformationComponent authUser={authUser} ></UserInformationComponent>
-
-       
-
-            <Row className="d-flex justify-content-space-between gap-2">
-                <Col sm={12} md={6} xl={6}>
-                    <Card className="card-perfil">
-                        <Card.Body>
-                            <Card.Text className="text-center ">
-
-                                <div className={paymemnt ? "d-none" : "d-block"}
-                                    onClick={() => setPayment(!paymemnt)}
-                                    aria-controls="example-collapse-text"
-                                    aria-expanded={paymemnt}
-                                    size="lg"
-                                >
-                                    <i class="bi bi-wallet2 "  style={{ fontSize: '2rem', color:'rgb(104, 14, 14)'}}> Ver métodos de pago</i>
-                                </div>
+            <div className="d-flex justify-content-center">
+                <UserInformationComponent authUser={authUser} />
+            </div>
 
 
-                                <div className={paymemnt ? "d-block" : "d-none"}
-                                    onClick={() => setPayment(!paymemnt)}
-                                    aria-controls="example-collapse-text"
-                                    aria-expanded={paymemnt}
-                                    size="lg">
-                                    <i class="bi bi-x-lg"  style={{ fontSize: '2rem', color:'rgb(104, 14, 14)'}}></i>
+            <div className="row d-flex justify-content-center py-2">
 
-                                </div>
-
-                                <Collapse in={paymemnt}>
-                                    <div id="example-collapse-text">
-                                        {userId && <PaymentsTypeComponent userId={userId}></PaymentsTypeComponent>}
-
-                                    </div>
-                                </Collapse>
-                            </Card.Text>
-
-
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col className="">
+             
+                <div className="col-sm-12 col-md-8">
                     <Card className="card-perfil">
                         <Card.Body>
                             <Card.Text className="text-center ">
@@ -86,9 +48,9 @@ export const UserInformationPage = () => {
                                     onClick={() => setAddresCollapse(!addresCollapse)}
                                     aria-controls="example-collapse-text"
                                     aria-expanded={addresCollapse}
-                                    
+
                                 >
-                                    <i class="bi bi-geo-alt " style={{ fontSize: '2rem', color:'rgb(104, 14, 14)'}}> Ver Direciones  </i>
+                                    <i className="bi bi-geo-alt icon-check" style={{ fontSize: '2rem' }}> Ver Direcciones  </i>
                                 </div>
 
 
@@ -96,8 +58,8 @@ export const UserInformationPage = () => {
                                     onClick={() => setAddresCollapse(!addresCollapse)}
                                     aria-controls="example-collapse-text"
                                     aria-expanded={addresCollapse}
-                                    >
-                                    <i class="bi bi-x-lg "  style={{ fontSize: '2rem', color:'rgb(104, 14, 14)'}} ></i>
+                                >
+                                    <i className="bi bi-x-lg icon-check" style={{ fontSize: '2rem', color: 'rgb(104, 14, 14)' }} ></i>
 
                                 </div>
 
@@ -113,9 +75,9 @@ export const UserInformationPage = () => {
                             </Card.Text>
                         </Card.Body>
                     </Card>
-                </Col>
+                </div>
 
-            </Row>
+            </div>
 
 
         </div>

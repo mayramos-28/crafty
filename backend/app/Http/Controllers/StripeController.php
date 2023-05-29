@@ -17,23 +17,44 @@ class StripeController extends Controller
         // payment_intent=pi_3NCm62GLE1977v8x0ObpIoll
         // payment_intent_client_secret=pi_3NCm62GLE1977v8x0ObpIoll_secret_niZjPtHkBSZrgi1Wkv9nJ6x6Q
 
-
-
         $stripe = new \Stripe\StripeClient(getenv('STRIPE_SECRET_KEY'));
         $intent = $stripe->paymentIntents->retrieve(
-            request()->get('payment_intent'),
+            request()->get('paymentIntent'),
             []
         );
 
-        $paymentIsSucess = $intent->status == 'succeeded';
+        $paymentIsSucess = $intent->status === 'succeeded';
 
-        if() {
-            
+        if (!$paymentIsSucess) {
+            return response()->json([
+                'status' => 'error',
+                'data' => [
+                    'intent' => $intent,
+                ]
+            ]);
         }
+        //cambio el estado de la orden que se acaba de pagar
+        $orderId = $intent->metadata->orderId;
+        $order = Order::find($orderId);
+        $order->state = 'completed';
+        $order->save();
+
+        //elimino los items del carrito de compras del usuario que acaba de pagar
+        $shoppingCart = ShoppingCarts::where('userId', $order->userId)->first();       
+        $cartItems = $shoppingCart->cartItems;
+        foreach ($cartItems as $cartItem) {
+            $cartItem->delete();
+        }
+
+
+
 
         return response()->json([
             'status' => 'success',
-            'data' => $intent
+            'data' => [
+                'intent' => $intent,
+                'order' => $order
+            ]
         ]);
     }
 
@@ -50,14 +71,10 @@ class StripeController extends Controller
                 'enabled' => true,
 
             ],
-            // 'confirm' => true,
-            // 'return_url' => getenv('APP_URL') . '/api/stripe/payment/process',
-            // 'next_action' => [
-            //     'type' => 'redirect_to_url',
-            //     'redirect_to_url' => [
-            //         'return_url' => getenv('APP_URL') . '/api/stripe/payment/process',
-            //     ],
-            // ],
+            'metadata' => [
+                'orderId' => $order->id,
+            ]
+
         ]);
 
 

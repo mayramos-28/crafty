@@ -40,9 +40,9 @@ export const ProductFormComponent = ({ product, onSubmit, onDelete }) => {
                 /* and other goodies */
             }) => (
 
-                <Row className="d-flex justify-content-center py-2 my-2 w-100">
+                <div className="d-flex justify-content-center">
 
-                    <Col sm={12} md={12} lg={12}>
+                    <div>
                         <Form className="form-control" onSubmit={handleSubmit}>
                             <Input
                                 name="name"
@@ -54,10 +54,10 @@ export const ProductFormComponent = ({ product, onSubmit, onDelete }) => {
                                 onBlur={handleBlur}
                             />
 
-                            <div class="container">
-                                <div class="comment">
+                            <div className="container">
+                                <div className="comment">
                                     <label for="">Descripción del producto:</label><br />
-                                    <textarea class="textinput" placeholder="Comment" name="description" value={values.description} onChange={handleChange} onBlur={handleBlur} ></textarea>
+                                    <textarea className="textinput" placeholder="Comment" name="description" value={values.description} onChange={handleChange} onBlur={handleBlur} ></textarea>
                                 </div>
                             </div>
 
@@ -111,15 +111,15 @@ export const ProductFormComponent = ({ product, onSubmit, onDelete }) => {
                                 </Col>
                                 {onDelete && (<Col sm={11} md={6} lg={4} className="text-center">
                                     <Button variant="primary" type="submit" onClick={onDelete} className="bg-danger ">
-                                        <i class="bi bi-trash"></i>
+                                        <i className="bi bi-trash"></i>
                                     </Button></Col>)}
 
                             </Row>
 
 
                         </Form>
-                    </Col>
-                </Row>
+                    </div>
+                </div>
             )}
         </Formik>
 
