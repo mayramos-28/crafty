@@ -27,10 +27,10 @@ export const getOrders = async (filter) =>{
     return response.data;
 }
 
-export const updateState = async ({order, state}) =>{
+export const updateOrder = async ({order, state}) =>{
     const response = await craftyApi({
         method: 'PUT',
-        uri: `order/updateState/${order.id}`,        
+        uri: `order/update/${order.id}`,        
         body: {state}
     });
     return response.data;

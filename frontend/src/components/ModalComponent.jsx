@@ -1,26 +1,28 @@
-import { Navigate} from "react-router-dom";
-import { Button, Modal, Row } from "react-bootstrap";
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-export const ModalComponent = ( { title, message}) => {
-    return (
-        <div
-            className="modal show"
-            style={{ display: 'block', position: 'initial' }}
-        >
-            <Modal.Dialog>
-                <Modal.Header  >
-                    <Modal.Title className="h2">{title}</Modal.Title>
-                </Modal.Header>
+export function ModalComponent({ title, message, canShow}) {
+  const [show, setShow] = useState(canShow);
 
-                <Modal.Body>
-                    <p>{message}</p>
-                </Modal.Body>
+  const handleClose = () => setShow(false);
 
-                <Modal.Footer className="d-flex justify-content-center">
-                    <Button className="icon-create " variant="secondary" href="/">Ir a la tienda</Button>
-                    <Button className="icon-create " variant="primary" href="/profile/my-area">Ir a mi area de usuario</Button>
-                </Modal.Footer>
-            </Modal.Dialog>
-        </div>
-    )
-};
+  return (
+    <>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{message}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}

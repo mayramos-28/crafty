@@ -18,7 +18,6 @@ class OrdersController extends Controller
     {
         
         $user = $request->get('userId');
-
         $where = ['userId' => $user]; 
         $order= Order::where( $where )->with('orderDetails')->get();       
 
@@ -98,29 +97,13 @@ class OrdersController extends Controller
     public function update(Request $request, int $id)
     {
         $order = Order::find($id);
-        $orderDetails = array_map(static function (array $detail) {
-            return new OrderDetail($detail);
-        }, request()->get('details'));
-
-        $order = new Order([
-            'userId' => $request->get('userId'),
-            'sellerId' => $request->get('sellerId'),
-            'type' => $request->get('type'),
-            'date' => $request->get('date'),
-            'total' => $request->get('total'),
-            'invoiceNumber' => $request->get('invoiceNumber'),
-            'ShippingAddress' => $request->get('ShippingAddress'),
-            'details' => new OrderDetail($request->get('details')),
-        ]);
-
-
+        $order->state = $request->get('state');
         $order->save();
-        $order->details()->saveMany($orderDetails);
 
         return response()->json(
             [
                 'status' => 'success',
-                'message' => 'Orden actualizada correctamente',
+                'message' => 'Estado actualizado correctamente',
                 'data' => $order
             ]
         );

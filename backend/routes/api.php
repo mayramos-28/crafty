@@ -100,6 +100,7 @@ Route::group(['prefix' => 'order'], function () {
     Route::get('/index', [OrdersController::class, 'index']);
     Route::get('/show/{id}', [OrdersController::class, 'show']);
     Route::post('/store', [OrdersController::class, 'store']);  
+    Route::put('/update/{id}', [OrdersController::class, 'update']);
     Route::put('/updateState/{id}', [OrdersController::class, 'update']);
 
  

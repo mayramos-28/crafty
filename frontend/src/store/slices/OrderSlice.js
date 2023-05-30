@@ -1,5 +1,5 @@
 import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { getOrders, createOrder as createOrderApi, updateState as updateStateApi  } from "../../api/OrderApi";
+import { getOrders, createOrder as createOrderApi, updateOrder as updateOrderApi  } from "../../api/OrderApi";
 
 export const fetchOrder = createAsyncThunk(
     'product/fetchOrder',
@@ -11,9 +11,9 @@ export const createOrder = createAsyncThunk(
     async (order) => await createOrderApi(order)
 );
 
-export const updateState = createAsyncThunk(
-    'product/updateState',
-    async (order, state) => await updateStateApi(order, state)
+export const updateOrder = createAsyncThunk(
+    'product/update',
+    async (order, {state}) => await updateOrderApi(order, {state})
 
 );
 const OrderAdapter = createEntityAdapter({});
@@ -58,6 +58,23 @@ export const OrderSlice = createSlice({
         }
         ,
         [createOrder.rejected]: (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+            return state;
+        },
+        [updateOrder.pending]: (state, action) => {
+            state.loading = true;
+            return state;
+        }
+        ,
+        [updateOrder.fulfilled]: (state, action) => {
+            state.loading = false;
+            state.error = null;
+            state.sucess = true;
+            OrderAdapter.upsertOne(state, action.payload);
+            return state;
+        },
+        [updateOrder.rejected]: (state, action) => {
             state.loading = false
             state.error = action.error.message
             return state;

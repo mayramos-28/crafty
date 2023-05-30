@@ -36,7 +36,7 @@ class StripeController extends Controller
         //cambio el estado de la orden que se acaba de pagar
         $orderId = $intent->metadata->orderId;
         $order = Order::find($orderId);
-        $order->state = 'completed';
+        $order->state = 'pending';
         $order->save();
 
         //elimino los items del carrito de compras del usuario que acaba de pagar
@@ -45,9 +45,6 @@ class StripeController extends Controller
         foreach ($cartItems as $cartItem) {
             $cartItem->delete();
         }
-
-
-
 
         return response()->json([
             'status' => 'success',
@@ -61,8 +58,6 @@ class StripeController extends Controller
     public function createPayment(Request $request)
     {
         \Stripe\Stripe::setApiKey(getenv('STRIPE_SECRET_KEY'));
-
-
         $order = Order::find($request->get('orderId'));
         $paymentIntent = \Stripe\PaymentIntent::create([
             'amount' => $order->total * 100,
@@ -76,8 +71,6 @@ class StripeController extends Controller
             ]
 
         ]);
-
-
 
         return response()->json([
             'status' => 'success',

@@ -29,7 +29,7 @@ export const PaymentResultComponent = () => {
 
     return (
         <>
-            <ModalComponent title={title} message={message} />
+            {/* <ModalComponent title={title} message={message} show/> */}
         </>
     )
 }
