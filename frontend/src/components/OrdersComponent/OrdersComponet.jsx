@@ -1,4 +1,4 @@
-import { Spinner } from "react-bootstrap";
+import { Spinner, Table } from "react-bootstrap";
 
 
 export const OrdersComponent = ({ orders, loading, error}) => {
@@ -13,9 +13,96 @@ export const OrdersComponent = ({ orders, loading, error}) => {
 
     return (
         <>
-            <h3>Mis pedidos</h3>           
+            <h3>Mis pedidos</h3>      
+
+               <div>
+      <Table responsive="sm">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+          </tr>
+        </tbody>
+      </Table>
+      <Table responsive="md">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+            <th>Table heading</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+            <td>Table cell</td>
+          </tr>
+        </tbody>
+      </Table>
+      </div>     
          
-                {orders.map((order, i) => (
+                {/* {orders.map((order, i) => (
                     <div key={order.id}>
                         <ul className="list-group">
                             <li className="list-group-item">
@@ -34,7 +121,7 @@ export const OrdersComponent = ({ orders, loading, error}) => {
                                                          
                         
                     </div>
-                ))}
+                ))} */}
          
         
 
