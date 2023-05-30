@@ -1,5 +1,5 @@
 
-import { Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router-dom";
 import {
   Badge,
   Container,
@@ -10,28 +10,29 @@ import {
 import { RegistrationPage } from "../page/RegistrationPage";
 import { HomePage } from "../page/HomePage";
 import { ProfilePage } from "../page/ProfilePage";
-import { ProductsPage } from "../page/ProductsPage";
 import { ProductDetailPage } from "../page/ProductDetailPage";
+import { ProductsPage } from "../page/ProductsPage";
 import { UserInformationPage } from "../page/UserInformationPage";
-// import { ConsumerPage } from "../page/ConsumerPage";
 import { SellerPage } from "../page/SellerPage";
 import { LogoutLink } from "../components/LogoutComponete";
-import { CostumerPage } from "../page/CostumerPage";
 import { useSelector } from "react-redux";
 import { PurchasingProcessComponent } from "../components/purchasingProcessComponents/purchasingProcessComponent";
 import { ProductUpdateComponent } from "../components/ProductComponents/ProductUpdateComponent";
 import { PaymentResultComponent } from "../components/purchasingProcessComponents/PaymentResultComponent";
 import { LoginPage } from "../page/LoginPage";
 import { UserOrdersPage } from "../page/UserOrdersPage";
+import { useState } from "react";
 
 
-export const MainLayout = () => {
+export const MainLayout = ({menu}) => {
 
   const counter = useSelector((state) => state.cart.counter);
-  console.log('counter', counter)
   const isLogged = localStorage.getItem("token") !== null;
+  
+
+
   return (
-    <div className=" flex-grow-1 ">
+    <div className="d-flex flex-column flex-grow-1 ">
       <Navbar className="mainLayoutNav" expand="lg">
         <Container>
           <Navbar.Brand href="/" className="crafty ">Crafty</Navbar.Brand>
@@ -59,28 +60,59 @@ export const MainLayout = () => {
 
         </Container>
       </Navbar>
-      <section className="d-flex justify-content-center py-1">
-        <Routes>
-          <Route exact path="/login" Component={LoginPage} />
-          <Route exact path="/register" Component={RegistrationPage} />
-          <Route exact path="/products" Component={ProductsPage} />
-          <Route exact path="/products/:productId" Component={ProductDetailPage} />
-          <Route path="/purchasingProcess" Component={PurchasingProcessComponent} />
-          <Route path="/purchasingProcess/result" Component={PaymentResultComponent} />
+      <section className="d-flex flex-grow-1 py-1">
 
 
-          <Route path="profile" Component={ProfilePage} >
-            <Route exact path="my-area" Component={UserInformationPage} />
-            <Route exact path="purchases" Component={UserOrdersPage} />
-            <Route exact path="sales" Component={SellerPage} />
-            <Route exact path="product/edit/:productId" Component={ProductUpdateComponent} />
-            <Route exact path="inicio" Component={HomePage} />
-          </Route>
+        {
+          menu && (
+            <aside className="border col-2">
+              <ul className="list-group">
+              {
+                menu.map((item) => (
+                  <li className="list-group-item"><Nav.Link as={NavLink}  to={item.url}>{item.label}</Nav.Link></li>
+                ))
+              }
+              </ul>
+            </aside>
+
+          )
+        }
+
+        <main className="border col-10">
 
 
-          <Route path="/" Component={HomePage}></Route>
-        </Routes>
+
+          <Routes>
+            <Route exact path="/login" Component={LoginPage}  />
+            <Route exact path="/register" Component={RegistrationPage} />
+            <Route exact path="/products" Component={ProductsPage} />
+            <Route exact path="/products/:productId" Component={ProductDetailPage} />
+            <Route path="/purchasingProcess" Component={PurchasingProcessComponent} />
+            <Route path="/purchasingProcess/result" Component={PaymentResultComponent} />
+
+
+            <Route path="profile" Component={ProfilePage} >
+              <Route exact path="my-area" Component={UserInformationPage} />
+              <Route exact path="purchases" Component={UserOrdersPage} />
+              <Route exact path="sales" Component={SellerPage} />
+              <Route exact path="product/edit/:productId" Component={ProductUpdateComponent} />
+              <Route exact path="inicio" Component={HomePage} />
+            </Route>
+
+
+            <Route path="/" Component={HomePage}></Route>
+          </Routes>
+
+        </main>
+
       </section>
+      <footer className=" "  >
+          
+                <em className="">© 2023 Copyright; Crafty.SL</em> 
+                
+          
+     
+        </footer>
     </div>
   );
 }
