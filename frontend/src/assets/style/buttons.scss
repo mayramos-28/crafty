@@ -5,7 +5,7 @@
   background-color: colors.$main-btn-color;
   font-size: m-large;
   font-weight: bolder;
- 
+
   color: colors.$title-color-white;
   text-align: center;
   width: 100%;
@@ -14,21 +14,34 @@
 }
 
 .btn-hover:hover {
-  background-position: right center;
-  color: colors.$title-color-white;
-  @include shadow.shadow-btn;
+  background-color: colors.$title-color-green;
+  transition: 0.2s;
 }
 
 .btn-login {
   @include buttons;
   transition: 4s;
   border-radius: 10px;
-  
+
 }
 
 
 
-.btn-icon{
-  background-color:colors.$title-color-green;
+.btn-icon {
+  background-color: colors.$title-color-green;
   transition: 2s;
+}
+
+.btn-toggle-asside-menu {
+  width: 50px;
+  height: 50px;
+  padding: 6px 0px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.42857;
+  position: absolute !important;
+  right: 20px;
+  bottom: 20px;
+  z-index: 10000;
 }

@@ -2,8 +2,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchShowProduct, selectProductById } from "../../store/slices/ProductSlice";
-import { deleteProduct, updateProduct } from "../../api/productsApi";
+import { deleteProduct, fetchShowProduct, selectProductById } from "../../store/slices/ProductSlice";
+import { updateProduct } from "../../api/productsApi";
 
 import { fetchCategories, selectAllCategories } from "../../store/slices/categorySlice";
 import { ProductFormComponent } from "./ProductFormComponent";

@@ -16,10 +16,29 @@ class OrdersController extends Controller
      */
     public function index(Request $request)
     {
-        
-        $user = $request->get('userId');
-        $where = ['userId' => $user]; 
-        $order= Order::where( $where )->with('orderDetails')->orderBy('created_at', 'desc')->get();       
+        $where = [];
+        $seller= $request->get('sellerId');
+
+        if ($request->has('userId') && $request->get('userId') != '') {
+            $where[] = ['userId', '=', $request->get('userId')];
+            $order = Order::where($where)->with('orderDetails')->orderBy('created_at', 'desc')->get();
+        }
+
+        if ($request->has('sellerId') && $request->get('sellerId') != '') {                    
+            $order = Order::with(['orderDetails' => function ($query) use ($seller) {
+                    $query->whereHas('product', function ($query) use ($seller) {
+                        $query->where('sellerId',  $seller);
+                    });
+                }])
+                ->whereHas('orderDetails', function ($query) use ($seller) {
+                    $query->whereHas('product', function ($query) use ($seller) {
+                        $query->where('sellerId',  $seller);
+                    });
+                })
+                ->orderBy('created_at', 'desc')
+                ->get();
+        }
+
 
         return [
             'status' => 'success',
@@ -32,21 +51,21 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-  
+
 
         $order = new Order([
-            'userId' => $request->get('userId'),           
+            'userId' => $request->get('userId'),
             'total' => $request->get('total'),
             'state' => $request->get('state'),
-            'total'=> $request->get('total'),            
+            'total' => $request->get('total'),
             'addressId' => $request->get('addressId'),
-            
+
         ]);
 
         $details = $request->get('cartItems');
         //obtener el id de la orden creada
         $order->save();
-       
+
         //guardar los detalles de la orden
         array_walk(
             $details,
@@ -58,14 +77,14 @@ class OrdersController extends Controller
                         'name' => $detail['name'],
                         'quantity' => $detail['quantity'],
                         'price' => $detail['price']
-                        
+
                     ])
                 );
             }
         );
 
-        
-       [$order]= Order::where('id', $order->id)->with('orderDetails')->get();
+
+        [$order] = Order::where('id', $order->id)->with('orderDetails')->get();
 
         return response()->json(
             [
@@ -109,7 +128,8 @@ class OrdersController extends Controller
         );
     }
 
-    public function updateState(Request $request, int $id){
+    public function updateState(Request $request, int $id)
+    {
 
         $order = Order::find($id);
         $order->state = $request->get('state');
@@ -122,7 +142,6 @@ class OrdersController extends Controller
                 'data' => $order
             ]
         );
-
     }
 
     /**

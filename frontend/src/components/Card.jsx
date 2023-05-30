@@ -19,8 +19,8 @@ export const CardComponent = ({ props, linkTo, edit }) => {
                     </Card.Text>
                     <Card.Link href={linkTo} className="d-flex justify-content-center fs-4" >Ver {props.name}</Card.Link>
                     <Card.Text className="btn-ico">
-                        {edit && <Nav.Link as={NavLink} to={`/profile/product/edit/${props.id}`}><i className="bi bi-pencil-square"></i></Nav.Link>}
-                                         
+                        {edit && <Nav.Link as={NavLink} to={`/profile/seller/product/edit/${props.id}`}><i className="bi bi-pencil-square" style={{ fontSize: '1.5rem' }}></i></Nav.Link>}
+
 
                     </Card.Text>
 
@@ -29,7 +29,7 @@ export const CardComponent = ({ props, linkTo, edit }) => {
             </Card>
 
             <section className="h-90">
-                
+
                 <Outlet></Outlet>
             </section>
 

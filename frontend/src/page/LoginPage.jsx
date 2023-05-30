@@ -5,7 +5,7 @@ import { Input } from "../components/forms/Input.jsx";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Col, Row, Spinner } from "react-bootstrap";
-import { Navigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { LoginFormComponent } from "../components/forms/LoginFormComponent";
 
 export const LoginPage = () => {
@@ -14,12 +14,13 @@ export const LoginPage = () => {
     (state) => state.login
   );
 
+  const navigate = useNavigate();
 
   const isLogged = localStorage.getItem("token") !== null;
 
-  if (isLogged) {
-    return <Navigate to="/profile/my-area" />;
-  }
+  // if (isLogged) {
+  //   return <Navigate as={NavLink} to="/products" />;
+  // }
   if (isLoading) {
     return (
       <div className='d-flex justify-content-center align-content-center'>
@@ -30,7 +31,7 @@ export const LoginPage = () => {
   return (
     <>
 
-      <div className='col-sm-12 col-md-8 col-lg-5' >     
+      <div >     
 
         <LoginFormComponent
           key={user.id}
@@ -38,7 +39,7 @@ export const LoginPage = () => {
           labelValue={'Inicio de sesión'}
           user={user}
           onSubmit={values => {
-            dispatch(loginUserThunk(values));
+            dispatch(loginUserThunk(values)).then(() => { navigate('/products') });
           }}
         />
 

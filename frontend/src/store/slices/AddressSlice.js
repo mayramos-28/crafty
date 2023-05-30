@@ -25,6 +25,7 @@ export const AddressSlice = createSlice({
     initialState: AddresAdaptaer.getInitialState({
         loading: false,
         error: null,
+        success: null
     }),
     reducers: {
     },
@@ -36,6 +37,7 @@ export const AddressSlice = createSlice({
         [fetchAddress.fulfilled]: (state, action) => {
             state.loading = false;
             state.error = null;
+            state.success = true;
             AddresAdaptaer.setAll(state, action.payload);
             return state;
         },
@@ -52,7 +54,9 @@ export const AddressSlice = createSlice({
         [createAddress.fulfilled]: (state, action) => {
             state.loading = false;
             state.error = null;
+          
             AddresAdaptaer.addOne(state, action.payload);
+            state.success = true;
             return state;
         }
         ,
@@ -69,6 +73,7 @@ export const AddressSlice = createSlice({
             state.loading = false;
             state.error = null;
             AddresAdaptaer.updateOne(state, action.payload);
+            state.success = true;
             return state;
         }
         ,
@@ -83,5 +88,6 @@ export const AddressSlice = createSlice({
 export const { selectAll: selectAllAddress, updateOne: updateOneAddress} = AddresAdaptaer.getSelectors(state => state.address);
 export const selectAddressError = state => state.address.error;
 export const selectAddressLoading = state => state.address.loading;
+export const selectAddressSuccess = state => state.address.success;
 export const AddressReducer = AddressSlice.reducer;
 

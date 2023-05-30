@@ -20,7 +20,8 @@ body,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Domine", serif;
+  font-family: 'Roboto', sans-serif;
+  
 
 
   header {
@@ -30,13 +31,11 @@ body {
   }
 
   footer {
-
+    padding: 0 20px;
     color: colors.$title-color-green;
     font-weight: bolder;
     padding-top: 20px;
     background-color: colors.$color-footer-background;
-    @include background.nav-background-gradiant;
-    @include alignament.horizontal-vertical(center, end);
   }
 }
 
@@ -47,9 +46,9 @@ body {
 }
 
 .font-link {
-  color:white;
+  color:rgb(10, 68, 100);
   font-weight: bolder;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: .5s;
 }
@@ -175,3 +174,26 @@ body {
 li{
   list-style: none;
 }
+.address-layout{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: space-around;
+  gap: 1rem;
+  padding: 20px;
+}
+
+// table{
+//   display: block !important;
+//   overflow-x: scroll !important;
+//   // max-width: 70% !important;
+// }
+
+
+// .table-responsive{
+//   display: block !important;
+//   overflow-x: auto !important;
+//   max-width: 70% !important;
+//   margin: 0;
+// }

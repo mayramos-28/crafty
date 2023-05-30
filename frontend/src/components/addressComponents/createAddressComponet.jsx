@@ -1,98 +1,56 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createAddress } from "../../store/slices/AddressSlice";
-import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import { Input } from "../forms/Input";
-import { reducer as addressReducer } from "../../store/slices/AddressSlice";
+import { useEffect, useRef, useState } from "react";
+import { AddressFormComponent } from "./AddresFormComponente";
+import { fetchAuthUser } from "../../store/slices/authUserSlice";
+import { redirect, useNavigate } from "react-router-dom";
 
-
-export const AddressCreateComponent = ({ userId }) => {
-
+export const AddressCreateComponent = () => {
     const dispatch = useDispatch();
-    const [formData, setFormData] = useState({
-        street: '',
-        number: '',
-        city: '',
-        state: '',
-        country: '',
-        zipCode: ''
-    });
-    const handleSubmit = async (e) => {
+    const firstExecution = useRef(true);
+    const { authUser } = useSelector((state) => state.authUser);
+    const navigate = useNavigate();
 
-        e.preventDefault();
-        debugger;
-        dispatch(createAddress({ ...formData, userId }));
-    };
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const userId = authUser?.user?.id;
+    useEffect(() => {
+        if (firstExecution.current) {
+            dispatch(fetchAuthUser());
+            firstExecution.current = false;
+        }
+    }, [dispatch, firstExecution]);
+
+
+    const address = {
+        'street': '',
+        'number': '',
+        'city': '',
+        'state': '',
+        'country': '',
+        'zipCode': '',
+
+    }
 
     return (
         <>
-            <Form className="form-control" onSubmit={handleSubmit} >
-                <Form.Label>Nueva Dirección</Form.Label>
-                <Input
-                    key="formData.street"
-                    label="Calle"
-                    type="text"
-                    name="street"
-                    value={formData.street}
-                    onChange={handleChange}
-                    placeholder=""
-                >
-                </Input>
+            <div className="d-flex flex-wrap justify-content-center">
 
-                <Input
-                    key="formData.number"
-                    label="Número"
-                    type="number"
-                    name="number"
-                    value={formData.number}
-                    onChange={handleChange}
-                >
-                </Input>
-                <Input
-                    key="formData.zipCode"
-                    label="Código Postal"
-                    type="text"
-                    name="zipCode"
-                    value={formData.zipCode}
-                    onChange={handleChange}>
+                <div>
+                    <AddressFormComponent key={address.id}
+                        address={address}
+                        onSubmit={(values) => {
+                            dispatch(createAddress({ ...values, userId })).then(
+                                () => navigate("/profile/addresses")
+                            );
+                        }}
+                        label="Nueva Dirección"
+                        btn="Agregar"
+                    />
+                </div>
 
-                </Input>
-                <Input
-                    key="formData.city"
-                    label="Ciudad"
-                    type="text"
-                    name="city"
-                    value={formData.city}
-                    onChange={handleChange}>
-                </Input>
-                <Input
-                    key="formData.state"
-                    label="Comunidad Autónoma"
-                    type="text"
-                    name="state"
-                    value={formData.state}
-                    onChange={handleChange}>
-                </Input>
-                <Input
-                    key="imageData.country"
-                    label="Pais"
-                    type="text"
-                    name="country"
-                    value={formData.country}
-                    onChange={handleChange}>
-                </Input>
-
-
-
-                <Button variant="primary" type="submit" className=" btn-icon">
-                    <i className="bi bi-save " style={{ fontSize: '1.5rem' }}></i>
-                </Button>
-
-            </Form>
+            </div>
 
         </>
     )
+
+
 };

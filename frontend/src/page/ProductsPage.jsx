@@ -18,12 +18,12 @@ export const ProductsPage = () => {
     const dispatch = useDispatch();
     const firstExecution = useRef(true);
     const [searchParams, setSearchParams] = useSearchParams();
-    const [categoryId, setCategoryId] = useState(searchParams.get("categoryId"));
-    
+    const categoryId = searchParams.get("categoryId");
 
     const cartItems = useSelector((state) => state.cart.cartItems);
 
     useEffect(() => {
+        console.log(categoryId)
         categoryId && dispatch(fetchProducts({ categoryId }))
     }, [categoryId]);
 
@@ -38,7 +38,7 @@ export const ProductsPage = () => {
                 <div className="align-product">
                     <div className="mainProducts d-flex justify-content-around py-4 px-4 row gap-2">
                         {
-                            Products.map((product) => (<CardProductComponent key={product.id} props={product} linkTo={`/products/${product.id}`}   ></CardProductComponent>))
+                            Products.map((product) => (<CardProductComponent key= {product.id} props={product} linkTo={`/products/${product.id}`}   ></CardProductComponent>))
                         }
                     </div>
                  </div>

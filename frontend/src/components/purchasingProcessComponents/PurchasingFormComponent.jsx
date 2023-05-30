@@ -6,7 +6,7 @@ import {
   useElements
 } from "@stripe/react-stripe-js";
 import { Col, Row } from "react-bootstrap";
-
+import "./../../assets/style/stripe.css";
 export const  PurchasingFormComponent = ({order}) =>{
 
     const stripe = useStripe();

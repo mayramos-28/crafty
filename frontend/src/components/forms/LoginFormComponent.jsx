@@ -35,7 +35,7 @@ export const LoginFormComponent = ({ user, onSubmit, btnValue, labelValue }) => 
                     /* and other goodies */
                 }) => (
 
-                    <Form className="form-control " onSubmit={handleSubmit} >
+                    <Form className="" onSubmit={handleSubmit} >
                         <h4>{labelValue}</h4>
                         <div>
                             <Input

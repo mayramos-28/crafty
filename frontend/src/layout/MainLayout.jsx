@@ -22,68 +22,89 @@ import { PaymentResultComponent } from "../components/purchasingProcessComponent
 import { LoginPage } from "../page/LoginPage";
 import { UserOrdersPage } from "../page/UserOrdersPage";
 import { useState } from "react";
+import { AddressPage } from "../page/AddressPage";
+import { AddressCreateComponent } from "../components/addressComponents/createAddressComponet";
+import { SellerUpdateComponent } from "../components/sellerComponents/SellerUpdateComponent";
+import { ProductCreateComponent } from "../components/ProductComponents/ProductCreateComponent";
+import { AccountSellerFormComponent } from "../components/accountSellerComponents/AccountSellerFormComponent";
+import { ShowSellerProducts } from "../page/ShowSellerProducts";
+import { AccountSellerComponent } from "../components/accountSellerComponents/AccountSellerComponent";
+import { SellerOrdersPage } from "../page/SellerOrdersPage";
 
 
-export const MainLayout = ({menu}) => {
+export const MainLayout = ({ menu }) => {
 
   const counter = useSelector((state) => state.cart.counter);
   const isLogged = localStorage.getItem("token") !== null;
-  
+  const sellrMenu = [];
 
+  const [showMenu, setShowMenu] = useState(true);
+  const toggleMenu = () => setShowMenu(!showMenu);
 
   return (
     <div className="d-flex flex-column flex-grow-1 ">
-      <Navbar className="mainLayoutNav" expand="lg">
-        <Container>
-          <Navbar.Brand href="/" className="crafty ">Crafty</Navbar.Brand>
+      <Navbar className="mainLayoutNav" expand="sm">
 
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+        <div className="d-flex justify-content-between w-100 px-2">
 
+          <Navbar.Brand href="/" className="crafty flex-grow-1">Crafty</Navbar.Brand>
 
-              <Nav.Link href="/" className="font-link"> Inicio</Nav.Link>
-              {isLogged && <Nav.Link href="/profile/my-area" className="font-link">Perfil</Nav.Link>}
-              {!isLogged && <Nav.Link href="/login" className="font-link">Login</Nav.Link>}
-              {!isLogged && <Nav.Link href="/register" className="font-link">Registro</Nav.Link>}
+          <Navbar.Toggle aria-controls="basic-navbar-nav" style={{ maxWidth: "20%" }} />
+        </div>
 
 
-              {isLogged && counter > 0 && <Nav.Link href="/purchasingProcess" className="font-link"><div >
-                <i className="bi bi-cart3 ont-link"><Badge bg="secondary">{counter} <span>Comprar</span> </Badge> </i>
-              </div> </Nav.Link>}
-            </Nav>
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mx-auto px-5">
 
 
-            {isLogged ? <Nav.Link className="font-link"  ><LogoutLink /></Nav.Link>
-              : null}
-          </Navbar.Collapse>
+            <Nav.Link as={NavLink} to="/" className="font-link"> Inicio</Nav.Link>
+            {isLogged && <Nav.Link as={NavLink} to="/profile/my-area" className="font-link">Perfil</Nav.Link>}
+            {!isLogged && <Nav.Link as={NavLink} to="/login" className="font-link">Login</Nav.Link>}
+            {!isLogged && <Nav.Link as={NavLink} to="/register" className="font-link">Registro</Nav.Link>}
 
-        </Container>
+
+            {isLogged && counter > 0 && <Nav.Link as={NavLink} to="/purchasingProcess" className="font-link"><div >
+              <i className="bi bi-cart3 ont-link"><Badge bg="secondary">{counter} <span>Comprar</span> </Badge> </i>
+            </div> </Nav.Link>}
+          </Nav>
+
+
+          {isLogged ? <Nav.Link className="font-link"  ><LogoutLink /></Nav.Link>
+            : null}
+        </Navbar.Collapse>
       </Navbar>
       <section className="d-flex flex-grow-1 py-1">
 
 
+        {menu && (
+          <button type="button"
+            className="d-md-none btn-toggle-asside-menu"
+            onClick={toggleMenu}
+          >
+            {showMenu ? "<<" : ">>"}
+          </button>
+        )}
         {
-          menu && (
-            <aside className="border col-2">
+          menu && showMenu && (
+            <aside className="border col-6 col-md-3 col-lg-2 ">
               <ul className="list-group">
-              {
-                menu.map((item) => (
-                  <li className="list-group-item"><Nav.Link as={NavLink}  to={item.url}>{item.label}</Nav.Link></li>
-                ))
-              }
+                {
+                  menu.map((item) => (
+                    <li className="list-group-item btn-hover"><Nav.Link as={NavLink} to={item.url}>{item.label}</Nav.Link></li>
+                  ))
+                }
               </ul>
             </aside>
 
           )
         }
 
-        <main className="border col-10">
+        <main className="col d-flex justify-content-center py-3">
 
 
 
           <Routes>
-            <Route exact path="/login" Component={LoginPage}  />
+            <Route exact path="/login" Component={LoginPage} />
             <Route exact path="/register" Component={RegistrationPage} />
             <Route exact path="/products" Component={ProductsPage} />
             <Route exact path="/products/:productId" Component={ProductDetailPage} />
@@ -93,9 +114,24 @@ export const MainLayout = ({menu}) => {
 
             <Route path="profile" Component={ProfilePage} >
               <Route exact path="my-area" Component={UserInformationPage} />
+              <Route exact path="addresses" Component={AddressPage} />
+              <Route exact path="addresses/create" Component={AddressCreateComponent} />
               <Route exact path="purchases" Component={UserOrdersPage} />
-              <Route exact path="sales" Component={SellerPage} />
-              <Route exact path="product/edit/:productId" Component={ProductUpdateComponent} />
+
+
+
+              <Route path="seller" Component={SellerPage} >
+                {/* <Route exact path="profile/sales" Component={SellerPage} /> */}
+
+                <Route exact path="salesdata" Component={SellerUpdateComponent} />
+                <Route exact path="products/seller" Component={ShowSellerProducts} />
+                <Route exact path="product/edit/:productId" Component={ProductUpdateComponent} />
+                <Route exact path="newProduct" Component={ProductCreateComponent} />
+                <Route exact path="accounts" Component={AccountSellerComponent} />
+                <Route exact path="sales" Component={SellerOrdersPage} />
+
+                <Route exact path="" Component={SellerUpdateComponent} />
+              </Route>
               <Route exact path="inicio" Component={HomePage} />
             </Route>
 
@@ -107,12 +143,8 @@ export const MainLayout = ({menu}) => {
 
       </section>
       <footer className=" "  >
-          
-                <em className="">© 2023 Copyright; Crafty.SL</em> 
-                
-          
-     
-        </footer>
+        <em className="">© 2023 Copyright; Crafty.SL</em>
+      </footer>
     </div>
   );
 }

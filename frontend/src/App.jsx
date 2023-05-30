@@ -18,9 +18,7 @@ function App() {
   const dispatch = useDispatch();
   const firstExecution = useRef(true);
   const [menu, setMenu] = useState(null);
-
   const location = useLocation();
-  const [pathName, setPathName] = useState(location.pathname);
   const [isLoadingMenu, setIsLoadingMenu] = useState(true);
 
   useEffect(() => {
@@ -32,13 +30,12 @@ function App() {
 
 
   useEffect(() => {
-    if (firstExecution === false) {
-      return;
-    }
+    console.log('change location', location.pathname);
     setIsLoadingMenu(true);
     switch (true) {
-      case pathName === '/':
-      case pathName.startsWith('/products'):
+      case location.pathname === '/':
+      case location.pathname.startsWith('/products'):
+      case location.pathname.startsWith('/purchasingProcess'):
         dispatch(fetchCategories()).then(({ payload }) => {
           setMenu(payload.map((category) => (
             { label: category.name, url: `/products?categoryId=${category.id}` }
@@ -46,12 +43,12 @@ function App() {
           setIsLoadingMenu(false);
         });
         break;
-      case pathName.startsWith('/profile'):
+      case location.pathname.startsWith('/profile'):
         const userMenu = [
           { label: 'Mi perfil', url: '/profile/my-area' },
           { label: 'Mis direcciones', url: '/profile/addresses' },
           { label: 'Mis compras', url: '/profile/purchases' },
-          { label: 'Area de venta', url: '/profile/sales' },
+          { label: 'Area de venta', url: '/profile/seller' },
         ];
         setMenu(userMenu);
         setIsLoadingMenu(false);
@@ -63,7 +60,7 @@ function App() {
 
 
 
-  }, [dispatch, pathName]);
+  }, [dispatch, location.pathname, ]);
 
 
   return (

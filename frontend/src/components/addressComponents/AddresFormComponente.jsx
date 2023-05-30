@@ -4,8 +4,8 @@ import { Input } from "../forms/Input";
 import { Formik } from 'formik';
 
 
-export const AddressFormComponent = ({ address, onSubmit }) => {
-
+export const AddressFormComponent = ({ address, onSubmit, label, btn }) => {
+    
     return (
         <Formik key={address.id}
             initialValues={{ ...address }}
@@ -23,8 +23,8 @@ export const AddressFormComponent = ({ address, onSubmit }) => {
                 /* and other goodies */
             }) => (
 
-                <Form className="form-control" onSubmit={handleSubmit}>
-                    <Form.Label>Dirección en {values.city}</Form.Label>
+                <Form className="form-control my-2" onSubmit={handleSubmit}>
+                    <h4>{label} {values.city}</h4>
                     <Input
                         label="Calle"
                         type="text"
@@ -65,6 +65,7 @@ export const AddressFormComponent = ({ address, onSubmit }) => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
+
                     <Input
                         label="País"
                         type="text"
@@ -73,8 +74,9 @@ export const AddressFormComponent = ({ address, onSubmit }) => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
+
                     <Button variant="primary" type="submit" className="btn-icon">
-                        <i className="bi bi-save" style={{ fontSize: '1.5rem' }}></i>
+                        <i className="bi bi-save" style={{ fontSize: '1.5rem' }}><span> {btn} </span></i>
                     </Button>
                 </Form>
             )}

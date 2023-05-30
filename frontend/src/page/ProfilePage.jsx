@@ -11,16 +11,7 @@ export const ProfilePage = () => {
     return (
         <div className="w-100">
             <Nav variant="tabs" defaultActiveKey="/myArea">
-                <Nav.Item>
-                    <Nav.Link as={NavLink} to="/profile/my-area">Mi informacion</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link as={NavLink} to="/profile/purchases">Mis compras</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link as={NavLink} to="/profile/sales">Mi area de ventas
-                    </Nav.Link>
-                </Nav.Item>
+                
             </Nav>
 
 

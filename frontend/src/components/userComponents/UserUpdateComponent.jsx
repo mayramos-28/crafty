@@ -30,8 +30,8 @@ export const UserUpdateComponent = ({ user }) => {
                     /* and other goodies */
                 }) => (
 
-                    <Form className="form-control " onSubmit={handleSubmit} >
-                        <h4>Mis datos de usuario</h4>
+                    <Form className="form-control py-5 " onSubmit={handleSubmit} >
+                       
                         <Input
                             key="formData.name"
                             label="Nombre completo"

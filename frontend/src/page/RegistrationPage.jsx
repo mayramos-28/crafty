@@ -27,7 +27,7 @@ export const RegistrationPage = () => {
   return (
     <>
 
-      <div className='col-sm-12 col-md-8 col-lg-5' >
+      <div className='' >
 
         <RegisterFormComponent
           key={user.id}

@@ -1,35 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthUser } from "../store/slices/authUserSlice";
-import { CardComponent } from "../components/Card";
-import { fetchProducts, selectAllProducts, selectProductError, selectProductLoading } from "../store/slices/ProductSlice";
-import { Card, Col, Collapse, Row, Spinner } from "react-bootstrap";
-import { selectAllSellerAccount } from "../store/slices/SellerAccountSlice";
-import { AccountSellerComponent } from "../components/accountSellerComponents/AccountSellerComponent";
-import { SellerForm } from "../components/sellerComponents/SellerFormComponent";
-import { ProductCreateComponent } from "../components/ProductComponents/ProductCreateComponent";
+import { fetchProducts} from "../store/slices/ProductSlice";
+import {  Nav } from "react-bootstrap";
+
 import { SellerCreateComponent } from "../components/sellerComponents/SellerCreateComponent";
-import { SellerUpdateComponent } from "../components/sellerComponents/SellerUpdateComponent";
+import { NavLink, Outlet } from "react-router-dom";
 
 export const SellerPage = () => {
     const dispatch = useDispatch();
     const firstExecution = useRef(true);
-    const [productCollapse, setProductCollapse] = useState(false);
-    const [allProductsCollapse, SetAllProductsCollapse] = useState(false);
-    const [accounts, setAccounts] = useState(false);
-
-
     const { authUser, UserLoading, Usererror } = useSelector((state) => state.authUser);
-    const Products = useSelector(selectAllProducts);
-    const Producterror = useSelector(selectProductError);
-    const ProductLoading = useSelector(selectProductLoading);
-    const sellerAcounts = useSelector(selectAllSellerAccount);
-
-
+    
     const sellerId = authUser?.seller?.id;
     const userId = authUser?.user?.id;
     const user = authUser?.user;
-    const seller = authUser?.seller;
+
 
     useEffect(() => {
         if (firstExecution.current) {
@@ -38,17 +24,9 @@ export const SellerPage = () => {
         }
     }, [dispatch, firstExecution]);
 
-    useEffect(() => {
-        if (allProductsCollapse) {
-            dispatch(fetchProducts({ sellerId }))
-        }
-    }, [dispatch, allProductsCollapse]);
 
 
-
-
-
-    if (!sellerId) {
+    if ( !sellerId) {
         return (
             <>
                 <div>
@@ -62,7 +40,33 @@ export const SellerPage = () => {
 
     return (
         <>
-            <h2 className="text-center py-2 ">Mi perfil de vendedor</h2>
+            <div className="w-100">
+                <Nav variant="tabs" >
+                    <Nav.Item>
+                        <Nav.Link as={NavLink} to="/profile/seller">Mis datos de venta</Nav.Link>
+                    </Nav.Item>                    
+                    <Nav.Item>
+                        <Nav.Link as={NavLink} to="/profile/seller/newProduct">Añadir producto</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link as={NavLink} to="/profile/seller/products/seller">Mis productos</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link as={NavLink} to="/profile/seller/sales">Mis ventas</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link as={NavLink} to="/profile/seller/accounts">Cuentas de  cobro</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+
+
+                <section className="w-100 py-2">
+                    <Outlet></Outlet>
+                </section>
+
+
+            </div>
+            {/* <h2 className="text-center py-2 ">Mi perfil de vendedor</h2>
             <Row className="d-flex justify-content-center gap-2">
                 <Col sm={12} md={8} lg={9}>
                     {seller && (<SellerUpdateComponent seller={seller}></SellerUpdateComponent>)}
@@ -208,7 +212,7 @@ export const SellerPage = () => {
                         </Card.Body>
                     </Card>
                 </Col>
-            </div>
+            </div> */}
 
 
         </>

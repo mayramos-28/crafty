@@ -43,7 +43,7 @@ export const ProductFormComponent = ({ product, onSubmit, onDelete }) => {
                 <div className="d-flex justify-content-center">
 
                     <div>
-                        <Form className="form-control" onSubmit={handleSubmit}>
+                        <Form className="" onSubmit={handleSubmit}>
                             <Input
                                 name="name"
                                 label="Nombre del producto: "
@@ -91,11 +91,12 @@ export const ProductFormComponent = ({ product, onSubmit, onDelete }) => {
                                 onBlur={handleBlur}
                             />
                             <label htmlFor="">Categoria:</label>
-                            <Form.Select value={values.categoryId} onChange={handleChange}
+                            <Form.Select name="categoryId" onChange={handleChange}
                                 onBlur={handleBlur}>
 
                                 {categories.map((category) => (
-                                    <option value={category.id}>
+                                    <option value={category.id}
+                                    >
                                         {category.name} ({category.id})
                                     </option>
                                 ))}
@@ -106,13 +107,13 @@ export const ProductFormComponent = ({ product, onSubmit, onDelete }) => {
                             <Row className="d-flex justify-content-center gap-2 py-2">
                                 <Col sm={11} md={6} lg={4} className="text-center">
                                     <Button variant="primary" type="submit" className="btn-icon">
-                                        <i className="bi bi-save"></i>
+                                        <i className="bi bi-save" style={{ fontSize: '1.5rem' }}></i>
                                     </Button>
                                 </Col>
                                 {onDelete && (<Col sm={11} md={6} lg={4} className="text-center">
                                     <Button variant="primary" type="submit" onClick={onDelete} className="bg-danger ">
-                                        <i className="bi bi-trash"></i>
-                                    </Button></Col>)}
+                                        <i className="bi bi-trash" style={{ fontSize: '1.5rem' }}></i>
+                                 </Button></Col>)}
 
                             </Row>
 

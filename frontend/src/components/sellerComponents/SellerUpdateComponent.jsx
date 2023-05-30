@@ -5,35 +5,46 @@ import { selectSellerError, selectSellerLoading, updateSeller } from "../../stor
 import { SellerFormComponent } from "./SellerFormComponent";
 
 
-export const SellerUpdateComponent = ({seller}) => {
+export const SellerUpdateComponent = () => {
 
-    const dispatch = useDispatch();
-    const loading = useSelector(selectSellerLoading);
-    const error = useSelector(selectSellerError);
-    if (loading) {
-        return <div>Loading...</div>;
-      }
-    
-      if (error) {
-        return <div>Error: {error}</div>;
-      }
-    
+  const firstExecution = useRef(true);
+  const dispatch = useDispatch();
+  const loading = useSelector(selectSellerLoading);
+  const error = useSelector(selectSellerError);
+  const { authUser } = useSelector((state) => state.authUser);
+  const seller = authUser?.seller;
 
-      return (
-        <div className="">
-          <div>
-            <SellerFormComponent
-            key={seller.id}
-            seller={seller}
-            valueBtn='Actualizar'
-            labelForm='Mi información de vendedor'
-            onSubmit={(values) => {
-                dispatch(updateSeller({ ...values }));
-            }}
-            
-            />
-        </div>
+  useEffect(() => {
+    if (firstExecution.current) {
+      dispatch(fetchAuthUser());
+      firstExecution.current = false;
+    }
+  }, [dispatch, firstExecution]);
 
-        </div>
-      );
-    };
+  if (loading || !seller) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+
+  return (
+    <div className="">
+      <div>
+        <SellerFormComponent
+          key={seller.id}
+          seller={seller}
+          valueBtn='Actualizar'
+          labelForm='Mi información de vendedor'
+          onSubmit={(values) => {
+            dispatch(updateSeller({ ...values }));
+          }}
+
+        />
+      </div>
+
+    </div>
+  );
+};
