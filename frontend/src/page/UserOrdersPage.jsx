@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { fetchOrder, selectAllOrder, selectOrderLoading, selectOrderSucess, updateOrder } from "../store/slices/OrderSlice";
 
 import { fetchAuthUser } from "../store/slices/authUserSlice";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Table } from "react-bootstrap";
 import { ModalComponent } from "../components/ModalComponent";
 
 
@@ -24,58 +24,159 @@ export const UserOrdersPage = () => {
             .then(() => { dispatch(fetchOrder({ userId })); });
     }, [dispatch, userId]);
 
-    const handleUpdateState = async (order) => {
-        await dispatch(updateOrder({ order, state: 'cancelled' }));
+    const handleUpdateState = async (order, state) => {
+        await dispatch(updateOrder({ order, state }));
         setModalShow(true);
-        
-}
 
-if (loading) {
-    return <div className="w-100 d-flex justify-content-center"><Spinner style={{ fontWeight: '1rem' }} ></Spinner></div>;
-}
-if (error) {
-    return <div>{error}</div>;
-}
+    }
 
+    if (loading) {
+        return <div className="w-100 d-flex justify-content-center"><Spinner style={{ fontWeight: '1rem' }} ></Spinner></div>;
+    }
+    if (error) {
+        return <div>{error}</div>;
+    }
 
-return (
-    <>
-    { <ModalComponent canShow={modalShow} title={'Orden actualziada'} message={"orden actualizada correctamente!"}/>}
-    
-        <h3>Mis pedidos</h3>
-
-        {orders.map((order, i) => (
-
-
-            <>
-                <div key={order.id}>
-                    <ul className="list-group">
-                        <li className="list-group-item">
-                            {i + 1}  Total: {order.total} € - Fecha: {order.created_at}
-                            <ul>
-
-                                {order.order_details.map((detail) => (
-                                    <li key={detail.id}>
-                                        producto: {detail?.name} - cantidad: {detail.quantity} - {detail.price} €
-                                    </li>
-                                ))}
-                                <li>
-                                    {order.state !== 'cancelled' && <button className="w-25" onClick={() => handleUpdateState(order)}>Cancelar</button>}
-                                </li>
-
-                            </ul>
-                        </li>
+    return (
+        <>
+          <ModalComponent canShow={modalShow} title={'Orden actualizada'} message={"orden actualizada correctamente!"} />
+      
+          <h3>Mis pedidos</h3>
+      
+          <Table className="table-responsive">
+            <thead className="text-center">
+              <tr>
+                <th>#</th>
+                <th>Referencia</th>
+                <th>Total pedido</th>
+                <th>Productos</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody className="text-center">
+              {orders.map((order, index) => (
+                <tr key={order.id}>
+                  <td>{index + 1}</td>
+                  <td>{order.id}</td>
+                  <td>{order.total}</td>
+                  <td>
+                    <ul>
+                      {order.order_details.map((detail, index) => (
+                        <li key={index}>{detail.name}</li>
+                      ))}
                     </ul>
+                  </td>
+                  <td>
+                    <ul>
+                      {order.order_details.map((detail, index) => (
+                        <li key={index}>{detail.quantity}</li>
+                      ))}
+                    </ul>
+                  </td>
+                  <td>
+                    <ul>
+                      {order.order_details.map((detail, index) => (
+                        <li key={index}>{detail.price} €</li>
+                      ))}
+                    </ul>
+                  </td>
+                  <td>
+                    {order.state === 'completed' && (<span > Recibido</span>)}
+                    {order.state === 'cancelled' && (<span > Cancelado</span>)}
+                    {order.state === 'pending' && (
+                      <div className="d-flex gap-1">
+                        <button className="btn btn-danger mr-2" onClick={() => handleUpdateState(order, 'cancelled')}>
+                          Cancelar
+                        </button>
+                        <button className="btn btn-success" onClick={() => handleUpdateState(order, 'completed')}>
+                          Recibido
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </>
+      );
+      
 
 
-                </div>
-            </>
+    // return (
+    //     <>
+    //         {<ModalComponent canShow={modalShow} title={'Orden actualizada'} message={"orden actualizada correctamente!"} />}
+
+    //         <h3>Mis pedidos</h3>
+
+    //         {orders.map((order, i) => (
+    //             <>
+    //                 <Table className="table-responsive">
+    //                     <thead>
+    //                         <tr>
+    //                             <th>#</th>
+    //                             <th>Referencia</th>
+    //                             <th>Total pedido</th>
+    //                             <th>Productos</th>
+    //                             <th>Cantidad</th>
+    //                             <th>Precio</th>
+    //                             <th>Acciones</th>
+    //                         </tr>
+    //                     </thead>
+    //                     <tbody>
+    //                         {orders.map((order, index) => (
+    //                             <tr key={order.id}>
+    //                                 <td>{index + 1}</td>
+    //                                 <td>{order.id}</td>
+    //                                 <td>{order.total}</td>
+    //                                 <td>
+    //                                     <ul>
+    //                                         {order.order_details.map((detail, index) => (
+    //                                             <li key={index}>{detail.name}</li>
+    //                                         ))}
+    //                                     </ul>
+    //                                 </td>
+    //                                 <td>
+    //                                     <ul>
+    //                                         {order.order_details.map((detail, index) => (
+    //                                             <li key={index}>{detail.quantity}</li>
+    //                                         ))}
+    //                                     </ul>
+    //                                 </td>
+    //                                 <td>
+    //                                     <ul>
+    //                                         {order.order_details.map((detail, index) => (
+    //                                             <li key={index}>{detail.price} €</li>
+    //                                         ))}
+    //                                     </ul>
+    //                                 </td>
+    //                                 <td>
+    //                                     {order.state === 'pending' && (
+    //                                         <div className="d-flex">
+    //                                             <button className="btn btn-danger mr-2" onClick={() => handleUpdateState(order, 'cancelled')}>
+    //                                                 Cancelar
+    //                                             </button>
+    //                                             <button className="btn btn-success" onClick={() => handleUpdateState(order, 'completed')}>
+    //                                                 Recibido
+    //                                             </button>
+    //                                         </div>
+    //                                     )}
+    //                                 </td>
+    //                             </tr>
+    //                         ))}
+    //                     </tbody>
+    //                 </Table>
+
+    //             </>
+
+    //         ))
+    //         }
 
 
+           
 
-        ))}
-
-
-    </>
-)
+    //     </>
+    // )
 };
