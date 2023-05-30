@@ -19,7 +19,7 @@ class OrdersController extends Controller
         
         $user = $request->get('userId');
         $where = ['userId' => $user]; 
-        $order= Order::where( $where )->with('orderDetails')->get();       
+        $order= Order::where( $where )->with('orderDetails')->orderBy('created_at', 'desc')->get();       
 
         return [
             'status' => 'success',
