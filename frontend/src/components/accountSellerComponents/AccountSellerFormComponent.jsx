@@ -58,7 +58,7 @@ export const AccountSellerFormComponent = ({ account, onSubmit }) => {
                 </Input>
                
 
-                <Button variant="primary" type="submit" className="btn-icon">
+                <Button variant="primary" type="submit" >
                     <i className="bi bi-save " style={{ fontSize: '1.5rem' }}></i>
                 </Button>
 

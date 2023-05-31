@@ -27,86 +27,71 @@ export const SellerFormComponent = ({ seller, onSubmit, valueBtn, labelForm }) =
                     isSubmitting,
                     /* and other goodies */
                 }) => (
+                    <Form className="form-control " onSubmit={handleSubmit} >
+                        <h3>{labelForm}</h3>
+                        <Input
 
-                    <Row className='d-flex justify-content-center flex-column align-content-center py-2'>
-                        <Col sm={12} md={6} className=''>
+                            label="CIF"
+                            type="text"
+                            name="businessId"
+                            value={values.businessId}
 
-                            <Form className="form-control " onSubmit={handleSubmit} >
-                                <h3>{labelForm}</h3>
-                                <Input
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
 
-                                    label="CIF"
-                                    type="text"
-                                    name="businessId"
-                                    value={values.businessId}
-                                    
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
+                        <Input
 
-                                <Input
+                            label="Sector"
+                            type="text"
+                            name="businessType"
+                            value={values.businessType}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        <Input
 
-                                    label="Sector"
-                                    type="text"
-                                    name="businessType"
-                                    value={values.businessType}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <Input
+                            label="Número de teléfono"
+                            type="text"
+                            name="businessPhone"
+                            value={values.businessPhone}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        <Input
 
-                                    label="Número de teléfono"
-                                    type="text"
-                                    name="businessPhone"
-                                    value={values.businessPhone}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <Input
+                            label="Web de la empresa"
+                            type="text"
+                            name="businessWebsite"
+                            value={values.businessWebsite}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        <Input
 
-                                    label="Web de la empresa"
-                                    type="text"
-                                    name="businessWebsite"
-                                    value={values.businessWebsite}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <Input
+                            label="Logo"
+                            type="text"
+                            name="businessLogo"
+                            value={values.bussinessLogo}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        <Input
 
-                                    label="Logo"
-                                    type="text"
-                                    name="businessLogo"
-                                    value={values.bussinessLogo}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <Input
+                            label="Descripción de la empresa"
+                            type="text"
+                            name="businessDescription"
+                            value={values.businessDescription}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                        />
 
-                                    label="Descripción de la empresa"
-                                    type="text"
-                                    name="businessDescription"
-                                    value={values.businessDescription}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-
-
-                                <Button type="submit" className="btn-login">
-                                    {valueBtn}
-                                </Button>
-                            </Form>
-
-
-
-                        </Col>
-
-
-
-                    </Row>
+                        <Button type="submit" className="">
+                            {valueBtn}
+                        </Button>
+                    </Form>
                 )}
             </Formik>
-
-
         </>
     );
 };

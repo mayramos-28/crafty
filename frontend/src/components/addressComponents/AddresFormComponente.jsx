@@ -75,7 +75,7 @@ export const AddressFormComponent = ({ address, onSubmit, label, btn }) => {
                         onBlur={handleBlur}
                     />
 
-                    <Button variant="primary" type="submit" className="btn-icon">
+                    <Button variant="primary" type="submit" className="">
                         <i className="bi bi-save" style={{ fontSize: '1.5rem' }}><span> {btn} </span></i>
                     </Button>
                 </Form>

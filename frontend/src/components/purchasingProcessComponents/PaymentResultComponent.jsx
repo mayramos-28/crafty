@@ -8,6 +8,7 @@ export const PaymentResultComponent = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
     const paymentIntent = searchParams.get("payment_intent");
+    const [modalShow, setModalShow] = useState(false);
 
     const [order, setOrder] = useState(null)
 
@@ -16,6 +17,7 @@ export const PaymentResultComponent = () => {
             .then((response) => {
                 setOrder(response.order)
             });
+            setModalShow(true);
     }, [paymentIntent]);
     let title = "Pedido realizado con éxito!";
     let message = "Tu pedido se ha realizado con éxito, puedes ver el estado de tu pedido en tu area de usuario";
@@ -29,7 +31,7 @@ export const PaymentResultComponent = () => {
 
     return (
         <>
-            {/* <ModalComponent title={title} message={message} show/> */}
+            <ModalComponent canShow={modalShow} title={title} message={message} />
         </>
     )
 }

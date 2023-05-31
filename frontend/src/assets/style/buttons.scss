@@ -18,19 +18,13 @@
   transition: 0.2s;
 }
 
-.btn-login {
-  @include buttons;
-  transition: 4s;
-  border-radius: 10px;
-
-}
 
 
 
-.btn-icon {
-  background-color: colors.$title-color-green;
-  transition: 2s;
-}
+// .btn-icon {
+//   background-color: colors.$title-color-green;
+//   transition: 2s;
+// }
 
 .btn-toggle-asside-menu {
   width: 50px;
@@ -45,3 +39,15 @@
   bottom: 20px;
   z-index: 10000;
 }
+
+
+// .icon-check {
+//   color: colors.$title-color-green;
+// }
+// .icon-uncheck {
+//   color: colors.$color-footer-background;
+// }
+
+// .icon-create {
+//   background-color: colors.$color-footer-background;
+// }

@@ -44,77 +44,76 @@ export const UserOrdersPage = () => {
       <h3>Mis pedidos</h3>
 
 
-          {/* <div className="table-responsive"> */}
+      <div className="table-responsive">
+        <table className="table">
+          <thead className="text-center">
+            <tr>
+              <th>#</th>
+              <th>Referencia</th>
+              <th>Total pedido</th>
+              <th>Productos</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody className="text-center">
+            {orders.map((order, index) => {
+              if (order.state !== 'generated') {
+                return (
+                  <React.Fragment key={order.id}>
+                    <tr>
+                      <td>{index + 1}</td>
+                      <td>{order.id}</td>
+                      <td>{order.total}</td>
+                      <td>
+                        <ul>
+                          {order.order_details.map((detail, index) => (
+                            <li key={index}>{detail.name}</li>
+                          ))}
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          {order.order_details.map((detail, index) => (
+                            <li key={index}>{detail.quantity}</li>
+                          ))}
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          {order.order_details.map((detail, index) => (
+                            <li key={index}>{detail.price} €</li>
+                          ))}
+                        </ul>
+                      </td>
+                      <td>
+                        {order.state === 'completed' && <span>Recibido</span>}
+                        {order.state === 'cancelled' && <span>Cancelado</span>}
+                        {order.state === 'completed' && (<span > Recibido</span>)}
+                        {order.state === 'cancelled' && (<span > Cancelado</span>)}
+                        {order.state === 'pending' && (
+                          <div className="d-flex gap-1">
+                            <button className="btn btn-danger mr-2" onClick={() => handleUpdateState(order, 'cancelled')}>
+                              Cancelar
+                            </button>
+                            <button className="btn btn-success" onClick={() => handleUpdateState(order, 'completed')}>
+                              Recibido
+                            </button>
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  </React.Fragment>
+                );
+              } else {
+                return null;
+              }
+            })}
+          </tbody>
+        </table>
 
-          <table width={"70%"}>
-              <thead className="text-center">
-                <tr>
-                  <th>#</th>
-                  <th>Referencia</th>
-                  <th>Total pedido</th>
-                  <th>Productos</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody className="text-center">
-                {orders.map((order, index) => {
-                  if (order.state !== 'generated') {
-                    return (
-                      <React.Fragment key={order.id}>
-                        <tr>
-                          <td>{index + 1}</td>
-                          <td>{order.id}</td>
-                          <td>{order.total}</td>
-                          <td>
-                            <ul>
-                              {order.order_details.map((detail, index) => (
-                                <li key={index}>{detail.name}</li>
-                              ))}
-                            </ul>
-                          </td>
-                          <td>
-                            <ul>
-                              {order.order_details.map((detail, index) => (
-                                <li key={index}>{detail.quantity}</li>
-                              ))}
-                            </ul>
-                          </td>
-                          <td>
-                            <ul>
-                              {order.order_details.map((detail, index) => (
-                                <li key={index}>{detail.price} €</li>
-                              ))}
-                            </ul>
-                          </td>
-                          <td>
-                            {order.state === 'completed' && <span>Recibido</span>}
-                            {order.state === 'cancelled' && <span>Cancelado</span>}
-                            {order.state === 'completed' && (<span > Recibido</span>)}
-                            {order.state === 'cancelled' && (<span > Cancelado</span>)}
-                            {order.state === 'pending' && (
-                              <div className="d-flex gap-1">
-                                <button className="btn btn-danger mr-2" onClick={() => handleUpdateState(order, 'cancelled')}>
-                                  Cancelar
-                                </button>
-                                <button className="btn btn-success" onClick={() => handleUpdateState(order, 'completed')}>
-                                  Recibido
-                                </button>
-                              </div>
-                            )}
-                          </td>
-                        </tr>
-                      </React.Fragment>
-                    );
-                  } else {
-                    return null;
-                  }
-                })}
-              </tbody>
-            </table>
-
-          {/* </div> */}
+      </div>
     </>
   );
 };

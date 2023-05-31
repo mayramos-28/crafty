@@ -65,7 +65,7 @@ export const PaymentFormComponent = ({ paymentType, onSubmit, btnValue }) => {
                 </Input>
 
 
-                <Button variant="primary" type="submit" className="btn-icon">
+                <Button variant="primary" type="submit" >
                     <i className="bi bi-save "> {btnValue}</i>
                 </Button>
 

@@ -7,18 +7,8 @@
   padding-bottom: 20px;
   transition: 2s;
 }
-.title-hover:hover{
-  color:colors.$text-color-green;
-}
-.secondary-title {
-  color: colors.$title-color-green;
-  font-weight: bolder;
-}
-.text-img {
-  background-color: colors.$title-color-green;
-  color: colors.$title-color-white;
-}
+
 h2, h3, h4{
-  color:colors.$title-color-green;
+  color:rgb(35, 35, 222);
   text-align: center;
 }

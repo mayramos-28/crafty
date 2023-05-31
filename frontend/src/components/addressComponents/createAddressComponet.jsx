@@ -34,7 +34,7 @@ export const AddressCreateComponent = () => {
         <>
             <div className="d-flex flex-wrap justify-content-center">
 
-                <div>
+                <div className="w-75">
                     <AddressFormComponent key={address.id}
                         address={address}
                         onSubmit={(values) => {

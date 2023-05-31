@@ -14,7 +14,7 @@ root.render(
     <BrowserRouter>
     <Provider store={store}>
     
-       <App />
+       <App style={{width: "80% !important"}} />
       
     </Provider>   
     </BrowserRouter>

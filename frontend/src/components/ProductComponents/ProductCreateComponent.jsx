@@ -38,8 +38,6 @@ export const ProductCreateComponent = () => {
 
 
     return (
-        <div className="">
-
             <ProductFormComponent
                 product={product}
                 onSubmit={async (values) => {
@@ -47,15 +45,14 @@ export const ProductCreateComponent = () => {
                         attached: values.imageUrl,
                         description: values.description || ''
                     })))).payload;
-                   
+
 
                     dispatch(createProduct({ ...values, imageId: file.id }));
                 }}
-                
+                btn={'Crear'}
+
             />
 
-
-        </div>
 
     );
 

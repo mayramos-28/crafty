@@ -36,17 +36,24 @@ export const ProductsPage = () => {
                 </div>
 
                 <div className="align-product">
-                    <div className="mainProducts d-flex justify-content-around py-4 px-4 row gap-2">
+                    <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 g-md-6">
                         {
-                            Products.map((product) => (<CardProductComponent key= {product.id} props={product} linkTo={`/products/${product.id}`}   ></CardProductComponent>))
+                            Products.map((product) => (
+                                <div className="col">
+                                    <CardProductComponent key={product.id}
+
+                                        className={"h-100"}
+                                        props={product}
+                                        linkTo={`/products/${product.id}`}
+                                    /></div>))
                         }
                     </div>
-                 </div>
-                 {isLoading && <Spinner />}
-                 {error && <div className="alert alert-danger">{error}</div>}
-             </div>
+                </div>
+                {isLoading && <Spinner />}
+                {error && <div className="alert alert-danger">{error}</div>}
+            </div>
 
-         </>
+        </>
 
     )
 }

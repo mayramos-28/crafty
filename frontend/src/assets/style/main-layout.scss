@@ -122,16 +122,7 @@ body {
   gap: 2rem;
   padding: 20px;
 }
-.icon-check {
-  color: colors.$title-color-green;
-}
-.icon-uncheck {
-  color: colors.$color-footer-background;
-}
 
-.icon-create {
-  background-color: colors.$color-footer-background;
-}
 .text-payment-process {
   color: colors.$color-btn-pay-background;
   text-align: center;
@@ -183,6 +174,7 @@ li{
   gap: 1rem;
   padding: 20px;
 }
+
 
 // table{
 //   display: block !important;

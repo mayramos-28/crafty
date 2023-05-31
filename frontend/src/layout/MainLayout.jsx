@@ -30,6 +30,7 @@ import { AccountSellerFormComponent } from "../components/accountSellerComponent
 import { ShowSellerProducts } from "../page/ShowSellerProducts";
 import { AccountSellerComponent } from "../components/accountSellerComponents/AccountSellerComponent";
 import { SellerOrdersPage } from "../page/SellerOrdersPage";
+import { EditAddressPage } from "../page/EditAddressPage";
 
 
 export const MainLayout = ({ menu }) => {
@@ -54,7 +55,7 @@ export const MainLayout = ({ menu }) => {
 
 
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mx-auto px-5">
+          <Nav className="mx-auto px-5 align-items-center">
 
 
             <Nav.Link as={NavLink} to="/" className="font-link"> Inicio</Nav.Link>
@@ -62,15 +63,14 @@ export const MainLayout = ({ menu }) => {
             {!isLogged && <Nav.Link as={NavLink} to="/login" className="font-link">Login</Nav.Link>}
             {!isLogged && <Nav.Link as={NavLink} to="/register" className="font-link">Registro</Nav.Link>}
 
-
             {isLogged && counter > 0 && <Nav.Link as={NavLink} to="/purchasingProcess" className="font-link"><div >
               <i className="bi bi-cart3 ont-link"><Badge bg="secondary">{counter} <span>Comprar</span> </Badge> </i>
             </div> </Nav.Link>}
+
+            {isLogged ? <Nav.Link className="font-link" style={{ fontSize: "2rem" }} ><LogoutLink /></Nav.Link>
+              : null}
           </Nav>
 
-
-          {isLogged ? <Nav.Link className="font-link"  ><LogoutLink /></Nav.Link>
-            : null}
         </Navbar.Collapse>
       </Navbar>
       <section className="d-flex flex-grow-1 py-1">
@@ -81,7 +81,10 @@ export const MainLayout = ({ menu }) => {
             className="d-md-none btn-toggle-asside-menu"
             onClick={toggleMenu}
           >
-            {showMenu ? "<<" : ">>"}
+            {showMenu
+              ? <i class="bi bi-arrow-bar-left bi-bold bi-2xl"></i>
+              : <i class="bi bi-arrow-bar-right bi-bold bi-2xl"></i>
+            }
           </button>
         )}
         {
@@ -101,43 +104,39 @@ export const MainLayout = ({ menu }) => {
 
         <main className="col d-flex justify-content-center py-3">
 
+          <div className="container-fluid">
+            <Routes>
+              <Route exact path="/login" Component={LoginPage} />
+              <Route exact path="/register" Component={RegistrationPage} />
+              <Route exact path="/products" Component={ProductsPage} />
+              <Route exact path="/products/:productId" Component={ProductDetailPage} />
+              <Route path="/purchasingProcess" Component={PurchasingProcessComponent} />
+              <Route path="/purchasingProcess/result" Component={PaymentResultComponent} />
 
+              <Route path="profile" Component={ProfilePage} >
+                <Route exact path="my-area" Component={UserInformationPage} />
+                <Route exact path="addresses" Component={AddressPage} />
+                <Route exact path="addresses/edit/:addressId" Component={EditAddressPage} />
+                <Route exact path="addresses/create" Component={AddressCreateComponent} />
+                <Route exact path="purchases" Component={UserOrdersPage} />
 
-          <Routes>
-            <Route exact path="/login" Component={LoginPage} />
-            <Route exact path="/register" Component={RegistrationPage} />
-            <Route exact path="/products" Component={ProductsPage} />
-            <Route exact path="/products/:productId" Component={ProductDetailPage} />
-            <Route path="/purchasingProcess" Component={PurchasingProcessComponent} />
-            <Route path="/purchasingProcess/result" Component={PaymentResultComponent} />
+                <Route path="seller" Component={SellerPage} >
+                  <Route exact path="salesdata" Component={SellerUpdateComponent} />
+                  <Route exact path="products/seller" Component={ShowSellerProducts} />
+                  <Route exact path="product/edit/:productId" Component={ProductUpdateComponent} />
+                  <Route exact path="newProduct" Component={ProductCreateComponent} />
+                  <Route exact path="accounts" Component={AccountSellerComponent} />
+                  <Route exact path="sales" Component={SellerOrdersPage} />
 
-
-            <Route path="profile" Component={ProfilePage} >
-              <Route exact path="my-area" Component={UserInformationPage} />
-              <Route exact path="addresses" Component={AddressPage} />
-              <Route exact path="addresses/create" Component={AddressCreateComponent} />
-              <Route exact path="purchases" Component={UserOrdersPage} />
-
-
-
-              <Route path="seller" Component={SellerPage} >
-                {/* <Route exact path="profile/sales" Component={SellerPage} /> */}
-
-                <Route exact path="salesdata" Component={SellerUpdateComponent} />
-                <Route exact path="products/seller" Component={ShowSellerProducts} />
-                <Route exact path="product/edit/:productId" Component={ProductUpdateComponent} />
-                <Route exact path="newProduct" Component={ProductCreateComponent} />
-                <Route exact path="accounts" Component={AccountSellerComponent} />
-                <Route exact path="sales" Component={SellerOrdersPage} />
-
-                <Route exact path="" Component={SellerUpdateComponent} />
+                  <Route exact path="" Component={SellerUpdateComponent} />
+                </Route>
+                <Route exact path="inicio" Component={HomePage} />
               </Route>
-              <Route exact path="inicio" Component={HomePage} />
-            </Route>
 
 
-            <Route path="/" Component={HomePage}></Route>
-          </Routes>
+              <Route path="/" Component={HomePage}></Route>
+            </Routes>
+          </div>
 
         </main>
 

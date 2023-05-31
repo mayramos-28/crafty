@@ -67,7 +67,7 @@ export const LoginFormComponent = ({ user, onSubmit, btnValue, labelValue }) => 
 
 
 
-                        <Col className="d-flex justify-content-center"><Button variant="primary" type="submit" className="btn-icon gap-2">
+                        <Col className="d-flex justify-content-center"><Button variant="primary" type="submit" className="gap-2">
                             <i className="bi bi-save style={{ fontSize: '1.5rem' }}"></i> <span>{btnValue}</span>
                         </Button></Col>
 

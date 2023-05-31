@@ -30,6 +30,7 @@ export class PurchasingProcessComponent extends React.Component {
         this.setState({ ...this.state, order: order });
         CreatePaymentIntent({ orderId: order.id })
             .then((data) => this.setState({ clientSecret: data.clientSecret }));
+            
     }
 
     render() {
@@ -43,13 +44,7 @@ export class PurchasingProcessComponent extends React.Component {
         return (
             <div >
                 <Row className=' process'>
-                    <Breadcrumb>
-                        <Breadcrumb.Item href="/">Categorias</Breadcrumb.Item>
-                        <Breadcrumb.Item href="/profile/my-area">
-                            mi perfil
-                        </Breadcrumb.Item>
-                        
-                    </Breadcrumb>
+            
                     
                     <Col sm={11} md={8} lg={6} className='process-component '>
                         <GetShoppingCartComponent onProcessOrder={(order) => this.onProcessCart(order)} />

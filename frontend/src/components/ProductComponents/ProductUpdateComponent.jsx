@@ -44,7 +44,9 @@ export const ProductUpdateComponent = () => {
                 onSubmit={(values) => {
                     dispatch(updateProduct(values));
                 }}
+                btn={'Actualizar'}
             />
+
 
         </div>
 

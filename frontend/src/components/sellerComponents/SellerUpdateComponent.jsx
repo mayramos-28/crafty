@@ -31,7 +31,6 @@ export const SellerUpdateComponent = () => {
 
 
   return (
-    <div className="">
       <div>
         <SellerFormComponent
           key={seller.id}
@@ -44,7 +43,5 @@ export const SellerUpdateComponent = () => {
 
         />
       </div>
-
-    </div>
   );
 };

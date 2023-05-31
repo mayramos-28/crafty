@@ -54,7 +54,7 @@ export const UserUpdateComponent = ({ user }) => {
                             placeholder="       "
                         >
                         </Input>
-                        <Col className="d-flex justify-content-center"><Button variant="primary" type="submit" className="btn-icon gap-2">
+                        <Col className="d-flex justify-content-center"><Button variant="primary" type="submit" className="bgap-2">
                             <i className="bi bi-save " style={{ fontSize: '1.5rem' }}></i> <span>  Actualziar datos</span>
                         </Button></Col>
 

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
 
 
-export const ProductFormComponent = ({ product, onSubmit, onDelete }) => {
+export const ProductFormComponent = ({ product, onSubmit, onDelete, btn }) => {
     const dispatch = useDispatch();
 
     const categories = useSelector(selectAllCategories);
@@ -40,9 +40,6 @@ export const ProductFormComponent = ({ product, onSubmit, onDelete }) => {
                 /* and other goodies */
             }) => (
 
-                <div className="d-flex justify-content-center">
-
-                    <div>
                         <Form className="" onSubmit={handleSubmit}>
                             <Input
                                 name="name"
@@ -105,22 +102,20 @@ export const ProductFormComponent = ({ product, onSubmit, onDelete }) => {
 
 
                             <Row className="d-flex justify-content-center gap-2 py-2">
-                                <Col sm={11} md={6} lg={4} className="text-center">
-                                    <Button variant="primary" type="submit" className="btn-icon">
-                                        <i className="bi bi-save" style={{ fontSize: '1.5rem' }}></i>
+                                <Col  className="text-center">
+                                    <Button variant="success" type="submit" className="">
+                                        <i className="bi bi-save" style={{ fontSize: '1.5rem' }}> {btn}</i>
                                     </Button>
                                 </Col>
-                                {onDelete && (<Col sm={11} md={6} lg={4} className="text-center">
+                                {onDelete && (<Col className="text-center">
                                     <Button variant="primary" type="submit" onClick={onDelete} className="bg-danger ">
-                                        <i className="bi bi-trash" style={{ fontSize: '1.5rem' }}></i>
+                                        <i className="bi bi-trash" style={{ fontSize: '1.5rem' }}>Borrar</i>
                                  </Button></Col>)}
 
                             </Row>
 
 
                         </Form>
-                    </div>
-                </div>
             )}
         </Formik>
 
