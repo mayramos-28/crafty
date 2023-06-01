@@ -38,21 +38,26 @@ export const ProductCreateComponent = () => {
 
 
     return (
-            <ProductFormComponent
-                product={product}
-                onSubmit={async (values) => {
-                    const file = (await (dispatch(createFileProduct({
-                        attached: values.imageUrl,
-                        description: values.description || ''
-                    })))).payload;
+        <div className="row justify-content-center">
+
+            <div className=" col-12 col-sm-8 col-md-6" >
+
+                <ProductFormComponent
+                    product={product}
+                    onSubmit={async (values) => {
+                        const file = (await (dispatch(createFileProduct({
+                            attached: values.imageUrl,
+                            description: values.description || ''
+                        })))).payload;
 
 
-                    dispatch(createProduct({ ...values, imageId: file.id }));
-                }}
-                btn={'Crear'}
+                        dispatch(createProduct({ ...values, imageId: file.id }));
+                    }}
+                    btn={'Crear'}
 
-            />
-
+                />
+            </div>
+        </div>
 
     );
 

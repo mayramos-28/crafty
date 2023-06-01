@@ -90,8 +90,7 @@ export const UserOrdersPage = () => {
                       <td>
                         {order.state === 'completed' && <span>Recibido</span>}
                         {order.state === 'cancelled' && <span>Cancelado</span>}
-                        {order.state === 'completed' && (<span > Recibido</span>)}
-                        {order.state === 'cancelled' && (<span > Cancelado</span>)}
+               
                         {order.state === 'pending' && (
                           <div className="d-flex gap-1">
                             <button className="btn btn-danger mr-2" onClick={() => handleUpdateState(order, 'cancelled')}>

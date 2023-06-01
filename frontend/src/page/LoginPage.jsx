@@ -29,9 +29,9 @@ export const LoginPage = () => {
       </div>)
   }
   return (
-    <>
+    <div className="row justify-content-center">
 
-      <div >     
+      <div className=" col-12 col-sm-8 col-md-6 col-lg-4" >     
 
         <LoginFormComponent
           key={user.id}
@@ -45,7 +45,7 @@ export const LoginPage = () => {
 
 
       </div>
-    </>
+    </div>
 
   );
 

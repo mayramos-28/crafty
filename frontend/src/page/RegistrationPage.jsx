@@ -25,9 +25,9 @@ export const RegistrationPage = () => {
   if (success) return (<Navigate to="/profile/my-area" />)
 
   return (
-    <>
+    <div className="row justify-content-center">
 
-      <div className='' >
+      <div className=" col-12 col-sm-8 col-md-6 col-lg-5" >    
 
         <RegisterFormComponent
           key={user.id}
@@ -41,7 +41,7 @@ export const RegistrationPage = () => {
 
 
       </div>
-    </>
+    </div>
 
 
   );

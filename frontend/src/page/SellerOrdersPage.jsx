@@ -91,7 +91,7 @@ export const SellerOrdersPage = () => {
                         <td scope="col">
                           {order.state === 'completed' && <span>Recibido</span>}
                           {order.state === 'cancelled' && <span>Cancelado</span>}
-                          {order.state === 'pending' && (<span > Recibido</span>)}
+                          {order.state === 'pending' && (<span > Pendiente</span>)}
 
 
                         </td>

@@ -31,7 +31,8 @@ export const SellerUpdateComponent = () => {
 
 
   return (
-      <div>
+      <div className='d-flex justify-content-center align-content-center'> 
+         <div className=" col-12 col-sm-8 col-md-6" >  
         <SellerFormComponent
           key={seller.id}
           seller={seller}
@@ -42,6 +43,7 @@ export const SellerUpdateComponent = () => {
           }}
 
         />
+        </div>
       </div>
   );
 };
