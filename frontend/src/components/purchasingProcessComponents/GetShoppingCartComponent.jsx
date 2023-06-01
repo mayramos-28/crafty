@@ -37,7 +37,7 @@ export const GetShoppingCartComponent = ({ onProcessOrder }) => {
     }, [dispatch, firstExecution, cartItems?.productId]);
 
     const handelOrder = async () => {
-        const order = (await dispatch(createOrder({ cartItems, count, total, addressId, userId, state: 'pending' }))).payload;
+        const order = (await dispatch(createOrder({ cartItems, count, total, addressId, userId, state: 'generated' }))).payload;
         onProcessOrder && onProcessOrder(order);
     };
 
