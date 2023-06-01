@@ -1,4 +1,4 @@
-import {  useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { sendPaymentIntent } from "../../api/StripeApi";
 import { useEffect, useState } from "react";
 
@@ -9,29 +9,31 @@ export const PaymentResultComponent = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const paymentIntent = searchParams.get("payment_intent");
     const [modalShow, setModalShow] = useState(false);
-
+    const secondsToRedirect = 5;
+    const navigate = useNavigate();
     const [order, setOrder] = useState(null)
 
     useEffect(() => {
         paymentIntent && sendPaymentIntent({ paymentIntent })
             .then((response) => {
                 setOrder(response.order)
+                setTimeout(() => {navigate('/')}, secondsToRedirect * 1000);
             });
-            setModalShow(true);
     }, [paymentIntent]);
-    let title = "Pedido realizado con éxito!";
-    let message = "Tu pedido se ha realizado con éxito, puedes ver el estado de tu pedido en tu area de usuario";
-
-    if (!order) {
-        title = "Tu pedido no se ha realizado con éxito"
-        message = "Tu pedido se ha realizado con éxito, puedes ver el estado de tu pedido en tu area de usuario"
-    }
-
 
 
     return (
         <>
-            <ModalComponent canShow={modalShow} title={title} message={message} />
+            {
+                order && (
+                    <div>
+                        <h1 className="text-center">Pedido #{order.id} realizado con éxito!</h1>
+                        <p className="text-center">Tu pedido se ha realizado con éxito, puedes ver el estado de tu pedido en tu area de usuario</p>
+
+                        <p className="text-center">Serás redirigido en {secondsToRedirect} segundos.</p>
+                    </div>
+                )
+            }
         </>
     )
 }
