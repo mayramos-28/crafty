@@ -40,8 +40,8 @@ export const CardProductComponent = ({ props, linkTo, className }) => {
                 <Card.Link href={linkTo} className="my-3 text-reset text-decoration-none" ><h4 className="text-dark">Ver {props.name}</h4></Card.Link>
 
                 <Card.Text className="d-flex justify-content-center gap-4 fs-4">
-                    <i className="bi bi-cart-plus " onClick={() => handleAddToCart()}>  </i>
-                    <i className="bi bi-cart-dash" onClick={() => handleRemoveFromCart()}></i>
+                    <i className="bi bi-cart-plus" style={{cursor: "pointer"}} onClick={() => handleAddToCart()}>  </i>
+                    <i className="bi bi-cart-dash" style={{cursor: "pointer"}} onClick={() => handleRemoveFromCart()}></i>
                 </Card.Text>
 
                 <Card className=" d-flex flex-row justify-content-center">{starHtml(props?.rating)}</Card>
