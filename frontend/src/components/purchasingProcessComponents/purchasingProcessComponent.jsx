@@ -43,14 +43,14 @@ export class PurchasingProcessComponent extends React.Component {
 
         return (
             <div >
-                <Row className=' process'>
+                <Row className=' justify-content-center'>
             
                     
-                    <Col sm={11} md={8} lg={6} className='process-component '>
+                    <Col sm={11} md={8} lg={6} className=''>
                         <GetShoppingCartComponent onProcessOrder={(order) => this.onProcessCart(order)} />
                     </Col>
 
-                    <Col sm={11} md={6} lg={5} className='process-component ' >
+                    <Col sm={11} md={6} lg={5} className='' >
 
 
 
