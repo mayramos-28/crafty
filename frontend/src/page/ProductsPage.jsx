@@ -23,7 +23,6 @@ export const ProductsPage = () => {
     const cartItems = useSelector((state) => state.cart.cartItems);
 
     useEffect(() => {
-        console.log(categoryId)
         categoryId && dispatch(fetchProducts({ categoryId }))
     }, [categoryId]);
 
