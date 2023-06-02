@@ -82,8 +82,8 @@ export const MainLayout = ({ menu }) => {
             onClick={toggleMenu}
           >
             {showMenu
-              ? <i class="bi bi-arrow-bar-left bi-bold bi-2xl"></i>
-              : <i class="bi bi-arrow-bar-right bi-bold bi-2xl"></i>
+              ? <i className="bi bi-arrow-bar-left bi-bold bi-2xl"></i>
+              : <i className="bi bi-arrow-bar-right bi-bold bi-2xl"></i>
             }
           </button>
         )}
