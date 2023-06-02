@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -43,6 +45,10 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+        $this->renderable(static function (AuthenticationException $exception, $request) {
+
+            return response()->json(['message' => $exception->getMessage(), 'status' => 'error', 'trace' => $exception->getTrace()], 401);
         });
     }
 }
