@@ -7,6 +7,8 @@ import Button from "react-bootstrap/Button";
 import { Col, Row, Spinner } from "react-bootstrap";
 import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { LoginFormComponent } from "../components/forms/LoginFormComponent";
+import { fetchAuthUser } from "../store/slices/authUserSlice";
+import { fetchShoppingCart } from "../store/slices/CartSlice";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
@@ -31,7 +33,7 @@ export const LoginPage = () => {
   return (
     <div className="row justify-content-center">
 
-      <div className=" col-12 col-sm-8 col-md-6 col-lg-4" >     
+      <div className=" col-12 col-sm-8 col-md-6 col-lg-4" >
 
         <LoginFormComponent
           key={user.id}
@@ -39,7 +41,12 @@ export const LoginPage = () => {
           labelValue={'Inicio de sesión'}
           user={user}
           onSubmit={values => {
-            dispatch(loginUserThunk(values)).then(() => { navigate('/products') });
+            dispatch(loginUserThunk(values))
+              .then(async () => {
+                await dispatch(fetchAuthUser());
+                await dispatch(fetchShoppingCart());
+                navigate('/')
+              });
           }}
         />
 
