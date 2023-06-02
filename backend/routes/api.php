@@ -40,7 +40,7 @@ Route::group(['prefix' => 'auth'], function () {
 });
 Route::group(['prefix' => 'user'], function () {
     Route::put('/update/{id}', [UserController::class, 'update']);
-});
+})->middleware('auth:sanctum');
 
 
 Route::group(['prefix' => 'seller'], function () {
@@ -49,14 +49,14 @@ Route::group(['prefix' => 'seller'], function () {
     Route::post('/store', [SellerController::class, 'store']);
     Route::put('/update/{id}', [SellerController::class, 'update']);
     Route::delete('/destroy/{id}', [SellerController::class, 'destroy']);
-});
+})->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'product'], function () {
     Route::get('/index', [ProductController::class, 'index']);
     Route::get('/show/{id}', [ProductController::class, 'show']);
-    Route::post('/store', [ProductController::class, 'store']);
-    Route::put('/update/{id}', [ProductController::class, 'update']);
-    Route::delete('/destroy/{id}', [ProductController::class, 'destroy']);
+    Route::post('/store', [ProductController::class, 'store'])->middleware('auth:sanctum');
+    Route::put('/update/{id}', [ProductController::class, 'update'])->middleware('auth:sanctum');
+    Route::delete('/destroy/{id}', [ProductController::class, 'destroy'])->middleware('auth:sanctum');
 });
 
 Route::group(['prefix' => 'category'], function () {
@@ -69,8 +69,8 @@ Route::group(['prefix' => 'file'], function () {
     Route::get('/show/{id}', [FileController::class, 'show']);
     Route::get('/print/{id}', [FileController::class, 'print']);
     Route::post('/store', [FileController::class, 'store']);
-    Route::put('/update/{id}', [FileController::class, 'update']);
-    Route::delete('/destroy/{id}', [FileController::class, 'destroy']);
+    Route::put('/update/{id}', [FileController::class, 'update'])->middleware('auth:sanctum');
+    Route::delete('/destroy/{id}', [FileController::class, 'destroy'])->middleware('auth:sanctum');
 });
 
 Route::group(['prefix' => 'address'], function () {
@@ -79,14 +79,14 @@ Route::group(['prefix' => 'address'], function () {
     Route::post('/store', [AddressesController::class, 'store']);
     Route::put('/update/{id}', [AddressesController::class, 'update']);
     Route::delete('/destroy/{id}', [AddressesController::class, 'destroy']);
-});
+})->middleware('auth:sanctum');
 Route::group(['prefix' => 'payments-type'], function () {
     Route::get('/index', [PaymentTypesController::class, 'index']);
     Route::get('/show/{id}', [PaymentTypesController::class, 'show']);
     Route::post('/store', [PaymentTypesController::class, 'store']);
     Route::put('/update/{id}', [PaymentTypesController::class, 'update']);
     Route::delete('/destroy/{id}', [PaymentTypesController::class, 'destroy']);
-});
+})->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'seller-with-drawal-account'], function () {
     Route::get('/index', [SellerWithDrawalAccountController::class, 'index']);
@@ -94,7 +94,7 @@ Route::group(['prefix' => 'seller-with-drawal-account'], function () {
     Route::post('/store', [SellerWithDrawalAccountController::class, 'store']);
     Route::put('/update/{id}', [SellerWithDrawalAccountController::class, 'update']);
     Route::delete('/destroy/{id}', [SellerWithDrawalAccountController::class, 'destroy']);
-});
+})->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'order'], function () {
     Route::get('/index', [OrdersController::class, 'index']);
@@ -102,19 +102,17 @@ Route::group(['prefix' => 'order'], function () {
     Route::post('/store', [OrdersController::class, 'store']);  
     Route::put('/update/{id}', [OrdersController::class, 'update']);
     Route::put('/updateState/{id}', [OrdersController::class, 'update']);
-
- 
-});
+})->middleware('auth:sanctum');
 
 
 Route::group(['prefix' => 'shopping-cart'], function () {
     Route::get('/index', [CartShoppingController::class, 'index']);
     Route::post('/store', [CartShoppingController::class, 'store']);
     Route::put('/update', [CartShoppingController::class, 'update']);
-});
+})->middleware('auth:sanctum');
 
 
 Route::group(['prefix' => 'stripe'], function () {
     Route::post('/payment', [StripeController::class, 'createPayment']);
     Route::post('/payment/process', [StripeController::class, 'process']);
-});
+})->middleware('auth:sanctum');
