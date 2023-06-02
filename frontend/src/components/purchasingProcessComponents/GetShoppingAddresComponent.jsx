@@ -33,8 +33,8 @@ export const GetShoppingAddressComponent = ({ onChangeAddress, userId, canChange
       <Row>
 
         <Col>
-          <Form  >
-            <Form.Label>Elige una dirección para el envío</Form.Label>
+          <Form >
+            <Form.Label className="d-block">Elige una dirección para el envío:</Form.Label>
             {addresses.map((address) => {
               let addressData =
                 "calle: " +
