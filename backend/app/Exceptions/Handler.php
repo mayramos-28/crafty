@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler
         });
         $this->renderable(static function (AuthenticationException $exception, $request) {
 
-            return response()->json(['message' => $exception->getMessage(), 'status' => 'error', 'trace' => $exception->getTrace()], 401);
+            return response()->json(['message' => $exception->getMessage(), 'status' => 'error'], 401);
         });
     }
 }
