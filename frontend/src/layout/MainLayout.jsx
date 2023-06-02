@@ -78,7 +78,7 @@ export const MainLayout = ({ menu }) => {
 
         {menu && (
           <button type="button"
-            className="d-md-none btn-toggle-asside-menu"
+            className="btn-toggle-asside-menu"
             onClick={toggleMenu}
           >
             {showMenu
@@ -104,7 +104,7 @@ export const MainLayout = ({ menu }) => {
 
         <main className="col d-flex justify-content-center py-3">
 
-          <div className="container-fluid">
+          <div className="container-fluid g-xs-0">
             <Routes>
               <Route exact path="/login" Component={LoginPage} />
               <Route exact path="/register" Component={RegistrationPage} />
