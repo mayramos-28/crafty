@@ -10,15 +10,18 @@ export const craftyApi = async (
 ) => {
     const endpoint = `${CRAFTY_BASE_URL}/${uri}` + (query ? `?${new URLSearchParams(query)}` : '');
 
+    const token = localStorage.getItem('token');
     const response = await fetch(endpoint, {
         method: method,
+        // credentials: "same-origin",
         headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
         body: typeof body === 'object' ? JSON.stringify(body) : body
     });
     const data = await response.json();
-    if (response.status  < 200 || response.status >= 300) {
+    if (response.status < 200 || response.status >= 300) {
         throw new Error(data.message);
     }
     return data;

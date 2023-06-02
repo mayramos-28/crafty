@@ -1,62 +1,34 @@
 import { craftyApi } from "./craftyApi";
 
-/**
- * @description En este archivo se definen las funciones que se encargan de realizar las peticiones a la API de Crafty relacionadas con la entidad User.
- * @param {*} filter 
- * @returns 
- */
-
-const url = 'http://localhost:8080/api/auth';
-
 export const registerUserApi = async (Registerdata) => {
-
-  const response = await fetch(`${url}/register`, {
+  const response = await craftyApi({
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(Registerdata)
+    uri: 'auth/register',
+    body: Registerdata
   });
-  const data = await response.json();
 
-  if (response.status !== 200) {
-    throw new Error(data.message);
-  }
-
-  return data.message;
+  return response.message;
 };
 
 export const loginUserApi = async (logindata) => {
-  const response = await fetch(`${url}/login`, {
+  const response = await craftyApi({
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(logindata)
+    uri: 'auth/login',
+    body: logindata
   });
-  const data = await response.json();
 
-  if (response.status !== 200) {
-    throw new Error(data.message);
-  }
-  localStorage.setItem('token', data.token);
+  localStorage.setItem('token', response.token);
 
-  return data.message;
+  return response.message;
 }
 
 export const getAuthUsers = async () => {
-  const response = await fetch(`${url}/user`, {
+  const response = await craftyApi({
     method: 'GET',
-    headers: {
-      'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      // 'cors' : 'no-cors',
-      // 'credentials': 'include'
-    }
+    uri: 'auth/user'
   });
-  const data = await response.json();
-  return data;
+
+  return response;
 }
 
 
