@@ -31,7 +31,7 @@ export const ShowSellerProducts = () => {
     if(products.length === 0){
         return(
             <div>
-                <h3>No tienes productos en venta</h3> $where[] = ['sellerId', '=', $request->get('sellerId')];                
+                <h3>No tienes productos en venta</h3>                
 
             </div>)
     }
