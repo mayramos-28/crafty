@@ -22,9 +22,9 @@
 - [Formik](https://formik.org/)
 - [Stripe](https://stripe.com/)
 - [Laravel](https://laravel.com/)
-- [Docker]
+- [Docker](https://www.docker.com/)
 - [Boostrap](https://getbootstrap.com/)
-- [Sass].(https://sass-lang.com/)
+- [Sass](https://sass-lang.com/).
 
 ## Features
 
