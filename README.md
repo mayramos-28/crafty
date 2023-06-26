@@ -19,9 +19,9 @@
 <!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
 
 - [React](https://reactjs.org/)
-- [Formik].(https://formik.org/)
-- [Stripe].(https://stripe.com/)
-- [Laravel].(https://laravel.com/)
+- [Formik](https://formik.org/)
+- [Stripe](https://stripe.com/)
+- [Laravel](https://laravel.com/)
 - [Docker]
 - [Boostrap](https://getbootstrap.com/)
 - [Sass].(https://sass-lang.com/)
